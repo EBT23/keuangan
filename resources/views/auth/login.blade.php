@@ -2,74 +2,44 @@
 <!-- start loader -->
 @section('content')
 
-<div id="pageloader-overlay" class="visible incoming">
-    <div class="loader-wrapper-outer">
-        <div class="loader-wrapper-inner">
-            <div class="loader"></div>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
     </div>
-</div>
-<!-- end loader -->
-
-<!-- Start wrapper-->
-<div class="loader-wrapper">
-    <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
-<div class="card card-authentication1 mx-auto my-5">
-    <div class="card-body">
-        <div class="card-content p-2">
-            <div class="text-center">
-                <img src="assets/images/logo-icon.png" alt="logo icon">
+    <!-- Spinner End -->
+    <!-- Sign In Start -->
+    <div class="container-fluid">
+        <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <a href="index.html" class="">
+                            <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                        </a>
+                        <h3>Sign In</h3>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                        <label for="email">Email address</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                       <a href="">Forgot Password</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
+                    <p class="text-center mb-0">Don't have an Account? <a href=">Sign Up</a></p>
+                </div>
             </div>
-            <div class="card-title text-uppercase text-center py-3">Sign In</div>
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputUsername" class="sr-only">Username</label>
-                    <div class="position-relative has-icon-right">
-                        <input type="text" id="exampleInputUsername" class="form-control input-shadow" placeholder="Enter Username">
-                        <div class="form-control-position">
-                            <i class="icon-user"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword" class="sr-only">Password</label>
-                    <div class="position-relative has-icon-right">
-                        <input type="password" id="exampleInputPassword" class="form-control input-shadow" placeholder="Enter Password">
-                        <div class="form-control-position">
-                            <i class="icon-lock"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-6">
-                        <div class="icheck-material-white">
-                            <input type="checkbox" id="user-checkbox" checked="" />
-                            <label for="user-checkbox">Remember me</label>
-                        </div>
-                    </div>
-                    <div class="form-group col-6 text-right">
-                        <a href="reset-password.html">Reset Password</a>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-light btn-block">Sign In</button>
-            </form>
         </div>
     </div>
-    <div class="card-footer text-center py-3">
-        <p class="text-warning mb-0">Do not have an account? <a href="register.html"> Sign Up here</a></p>
-    </div>
+    <!-- Sign In End -->
 </div>
-
-<!--Start Back To Top Button-->
-<a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
-<!--End Back To Top Button-->
-
 
 <!--wrapper-->
 @endsection

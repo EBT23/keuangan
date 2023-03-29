@@ -2,67 +2,65 @@
 
 @section('content')
 
-<!-- start loader -->
-<div id="pageloader-overlay" class="visible incoming">
-    <div class="loader-wrapper-outer">
-        <div class="loader-wrapper-inner">
-            <div class="loader"></div>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
     </div>
-</div>
-<div class="card card-authentication1 mx-auto my-4">
-    <div class="card-body">
-        <div class="card-content p-2">
-            <div class="text-center">
-                <img src="assets/images/logo-icon.png" alt="logo icon">
+    <!-- Spinner End -->
+
+
+    <!-- Sign Up Start -->
+    <div class="container-fluid">
+        <form action="{{ route('register.post') }}" method="post">
+        <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+            @csrf
+            <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                    <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            {{-- <a href="index.html" class="">
+                                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+                            </a> --}}
+                            <h3>Sign Up</h3>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="jhondoe">
+                            <label for="nama">nama</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="jhondoe">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="posisi" name="posisi"
+                                aria-label="Floating label select example">
+                                <option selected>-Pilih-</option>
+                           @foreach ($posisi as $d )
+                           <option value="{{ $d->id }}">{{ $d->nama_posisi }}</option>
+                           @endforeach
+                            </select>
+                            <label for="posisi">Pilih Posisi</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                            <label for="password" nam >Password</label>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            </div>
+                            <a href="">Forgot Password</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign Up</button>
+                        <p class="text-center mb-0">Already have an Account? <a href="{{ route('login') }}">Sign In</a></p>
+                    </div>
+                </div>
             </div>
-            <div class="card-title text-uppercase text-center py-3">Sign Up</div>
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputName" class="sr-only">Name</label>
-                    <div class="position-relative has-icon-right">
-                        <input type="text" id="exampleInputName" class="form-control input-shadow" placeholder="Enter Your Name">
-                        <div class="form-control-position">
-                            <i class="icon-user"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmailId" class="sr-only">Email ID</label>
-                    <div class="position-relative has-icon-right">
-                        <input type="text" id="exampleInputEmailId" class="form-control input-shadow" placeholder="Enter Your Email ID">
-                        <div class="form-control-position">
-                            <i class="icon-envelope-open"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword" class="sr-only">Password</label>
-                    <div class="position-relative has-icon-right">
-                        <input type="text" id="exampleInputPassword" class="form-control input-shadow" placeholder="Choose Password">
-                        <div class="form-control-position">
-                            <i class="icon-lock"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="icheck-material-white">
-                        <input type="checkbox" id="user-checkbox" checked="" />
-                        <label for="user-checkbox">I Agree With Terms & Conditions</label>
-                    </div>
-                </div>
-                <button type="button" class="btn btn-light btn-block waves-effect waves-light">Sign Up</button>
         </form>
-        </div>
     </div>
-    <div class="card-footer text-center py-3">
-        <p class="text-warning mb-0">Already have an account? <a href="login.html"> Sign In here</a></p>
-    </div>
+    <!-- Sign Up End -->
 </div>
-
-<!--Start Back To Top Button-->
-<a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
-<!--End Back To Top Button-->
-
 @endsection

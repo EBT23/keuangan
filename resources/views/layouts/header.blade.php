@@ -1,65 +1,21 @@
-<!--Start topbar header-->
-<header class="topbar-nav">
-    <nav class="navbar navbar-expand fixed-top">
-        <ul class="navbar-nav mr-auto align-items-center">
-            <li class="nav-item">
-                <a class="nav-link toggle-menu" href="javascript:void();">
-                    <i class="icon-menu menu-icon"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <form class="search-bar">
-                    <input type="text" class="form-control" placeholder="Enter keywords">
-                    <a href="javascript:void();"><i class="icon-magnifier"></i></a>
-                </form>
-            </li>
-        </ul>
-
-        <ul class="navbar-nav align-items-center right-nav-link">
-            <li class="nav-item dropdown-lg">
-                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
-                    <i class="fa fa-envelope-open-o"></i></a>
-            </li>
-            <li class="nav-item dropdown-lg">
-                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
-                    <i class="fa fa-bell-o"></i></a>
-            </li>
-            <li class="nav-item language">
-                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();"><i class="fa fa-flag"></i></a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
-                    <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
-                    <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
-                    <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-                    <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li class="dropdown-item user-details">
-                        <a href="javaScript:void();">
-                            <div class="media">
-                                <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
-                                <div class="media-body">
-                                    <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
-                                    <p class="user-subtitle">mccoy@example.com</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
-                    <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
-                    <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
-                    <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-</header>
-<!--End topbar header-->
+<nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+    <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+        <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+    </a>
+    <a href="#" class="sidebar-toggler flex-shrink-0">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="navbar-nav align-items-center ms-auto">
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                <span class="d-none d-lg-inline-flex">John Doe</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                <a href="#" class="dropdown-item">My Profile</a>
+                <a href="#" class="dropdown-item">Settings</a>
+                <a href="#" class="dropdown-item">Log Out</a>
+            </div>
+        </div>
+    </div>
+</nav>
