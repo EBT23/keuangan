@@ -16,14 +16,14 @@
                         class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                 </div>
                 <div class="ms-3">
-                    <h6 class="mb-0">{{ Auth::user()->nama }}</h6>
                     <span>Admin</span>
                 </div>
             </div>
-            @if (Auth::user()->role_id == 1)
             <div class="navbar-nav w-100">
                 <a href="{{ route('index') }}" class="nav-item nav-link ">
                     <i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                <a href="{{ route('karyawan') }}" class="nav-item nav-link">
+                    <i class="fa fa-th me-2"></i>Karyawan</a>
                 <a href="{{ route('pemasukan') }}" class="nav-item nav-link">
                     <i class="fa fa-th me-2"></i>Pemasukkan</a>
                 <a href="{{ route('pengeluaran') }}" class="nav-item nav-link">
@@ -39,7 +39,6 @@
                 <a href="{{ route('role') }}" class="nav-item nav-link">
                     <i class="far fa-file-alt me-2"></i>Role</a>
             </div>
-            @endif
         </nav>
     </div>
     <!-- Sidebar End -->

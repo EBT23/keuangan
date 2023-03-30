@@ -10,7 +10,7 @@ use App\Http\Controllers\PenggajianController;
 use App\Http\Controllers\PenjabController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\DatakaryawanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +40,7 @@ Route::get('logout', [AuthController::class, 'logout'])->name('keluar');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
+Route::get('/karyawan', [DatakaryawanController::class, 'karyawan'])->name('karyawan');
 Route::get('/distributor', [DistributorController::class, 'distributor'])->name('distributor');
 Route::get('/posisi', [PosisiController::class, 'posisi'])->name('posisi');
 Route::get('/pengeluaran', [PengeluaranController::class, 'pengeluaran'])->name('pengeluaran');

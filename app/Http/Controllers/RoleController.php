@@ -10,7 +10,6 @@ class RoleController extends Controller
     public function role()
     {
         $data['title'] = 'Role';
-    return view('role', 
-    ['role' =>  DB::table('role')->get()], $data);
+    return view('role', $data);
     }
 }
