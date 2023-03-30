@@ -13,15 +13,17 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    function login_post(Request $request)
+    public function login_post(Request $request)
     {
+        // dd($request);
         $request->validate([
+                'email' => 'required',
+                'password' => 'required',
+                ]);
 
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                
+            
+    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             // $user = Auth::User();
 
             $request->session()->regenerate();
@@ -32,25 +34,16 @@ class AuthController extends Controller
             'password' => 'Wrong username or password',
         ]);
     }
-    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
+  
+  
 
 
 
@@ -63,27 +56,32 @@ class AuthController extends Controller
         ['posisi' =>  DB::table('posisi')->get()]);
     }
 
+
     public function register_post(Request $request)
     {
-        $request->validate([
-            'nama' =>'required',
-            'posisi'=> 'required',
-            'email' =>'required|unique:users,email',
-            'password'=>'required'
-        ]);
-        dd($request);
-        $user = [
+
+        $request->validate(
+            [
+                'nama' => 'required',
+                'email' => 'required|unique:users,email',
+                'password' => 'required',
+                'tgl_lahir' => 'required',
+                'posisi' => 'required',
+            ]);
+
+            $user = [
             'nama' => $request->nama,
-            'posisi' => $request->posisi,
             'email' => $request->email,
+            'tgl_lahir' => $request->tgl_lahir,
             'password' => bcrypt($request->password),
             'role_id' => 2,
+            'posisi_id' => $request->posisi,
             'created_at' => now(),
         ];
 
         DB::table('users')->insert($user);
-        return route('login');
+        return view('auth.login');
+
 
     }
-
 }

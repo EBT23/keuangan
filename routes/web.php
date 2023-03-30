@@ -30,8 +30,13 @@ Route::get('/', function () {
 
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'login_post'])->name('login.post');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::get('/register', [AuthController::class, 'register_post'])->name('register.post');
+Route::post('/register', [AuthController::class, 'register_post'])->name('register.post');
+
+
+Route::get('logout', [AuthController::class, 'logout'])->name('keluar');
+
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
