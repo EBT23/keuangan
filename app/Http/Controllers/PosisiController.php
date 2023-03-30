@@ -8,6 +8,7 @@ class PosisiController extends Controller
 {
     public function posisi()
     {
-        return view('posisi');
+        $data['title'] = 'Posisi';
+        return view('posisi', $data);
     }
 }

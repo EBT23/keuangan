@@ -8,6 +8,7 @@ class PenggajianController extends Controller
 {
     public function penggajian()
     {
-        return view('penggajian');
+        $data['title'] = 'Penggajian';
+        return view('penggajian', $data);
     }
 }

@@ -8,6 +8,7 @@ class PenjabController extends Controller
 {
     public function penjab()
     {
-    return view('penjab');
+    $data['title'] = 'Penanggung Jawab';
+    return view('penjab', $data);
     }
 }

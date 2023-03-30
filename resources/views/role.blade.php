@@ -1,4 +1,5 @@
-@extends('layouts.base')
+@extends('layouts.base',['title' => "$title - Admin"])
+
 <!-- Start wrapper-->
 
 @section('content') 
@@ -25,7 +26,7 @@
 
         <div class="col-12">
             <div class="bg-light rounded h-100 p-4">
-                <h6 class="mb-4">Data Role</h6>
+                <h6 class="mb-4">Data {{ $title }}</h6>
                 <div class="table-responsive">
                    <table class="table">
                         <button type="button" class="btn btn-success m-2">

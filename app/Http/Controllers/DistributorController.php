@@ -8,6 +8,7 @@ class DistributorController extends Controller
 {
      public function distributor()
      {
-     return view('distributor');
+     $data['title'] = 'Distributor';
+     return view('distributor', $data);
      }
 }

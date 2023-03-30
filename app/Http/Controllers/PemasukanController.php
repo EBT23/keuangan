@@ -8,6 +8,7 @@ class PemasukanController extends Controller
 {
     public function pemasukan()
     {
-        return view('pemasukan');
+        $data['title'] = 'Pemasukan';
+        return view('pemasukan', $data);
     }
 }
