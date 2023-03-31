@@ -9,6 +9,6 @@ class DatakaryawanController extends Controller
     public function karyawan()
      {
      $data['title'] = 'Karyawan';
-     return view('karyawan', $data);
+     return view('datakaryawan', $data);
      }
 }

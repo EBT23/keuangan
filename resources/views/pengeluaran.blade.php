@@ -26,7 +26,41 @@
         <div class="col-12">
             <div class="bg-light rounded h-100 p-4">
                 <h6 class="mb-4">Data {{ $title }}</h6>
-                
+                <div class="col-12">
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">Responsive Table</h6>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Jenis Pengeluaran</th>
+                                        <th scope="col">Keterangan</th>
+                                        <th scope="col">Total Pengeluaran</th>
+                                        <th scope="col">Tanggal</th>
+                                        <th scope="col">Aksi</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($pengeluaran as $d )
+                                        
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>{{ $d['jenis_pengeluaran'] }}</td>
+                                        <td>{{ $d['keterangan'] }}</td>
+                                        <td>{{ $d['total_pengeluaran'] }}</td>
+                                        <td>{{ $d['tgl'] }}</td>
+                                          
+                                        <td>Member</td>
+                                    </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

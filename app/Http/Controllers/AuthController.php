@@ -73,11 +73,9 @@ class AuthController extends Controller
 
             $user = [
             'nama' => $request->nama,
-            'email' => $request->email,
-            'tgl_lahir' => $request->tgl_lahir,
-            'password' => bcrypt($request->password),
-            'role_id' => 2,
-            'posisi_id' => $request->posisi,
+            'keterangan' => $request->keterangan,
+            'total_pengeluaran' => $request->total_pengeluaran,
+            'tgl' => $request->tgl,
             'created_at' => now(),
         ];
 
