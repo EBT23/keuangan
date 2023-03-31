@@ -54,6 +54,9 @@ Route::get('/posisi', [PosisiController::class, 'posisi'])->name('posisi');
 #Pengeluaran
 Route::get('/pengeluaran', [PengeluaranController::class, 'pengeluaran'])->name('pengeluaran');
 Route::post('/tambah_pengeluaran', [PengeluaranController::class, 'tambah_pengeluaran'])->name('tambah.pengeluaran');
+Route::get('/edit_pengeluaran/{id}', [PengeluaranController::class, 'edit_pengeluaran'])->name('edit.pengeluaran');
+Route::post('/update_pengeluaran/{id}', [PengeluaranController::class, 'update_pengeluaran'])->name('update.pengeluaran');
+Route::delete('/delete_pengeluaran/{id}', [PengeluaranController::class, 'delete_pengeluaran'])->name('delete.pengeluaran');
 
 #PEMASUKAN
 Route::get('/pemasukan', [PemasukanController::class, 'pemasukan'])->name('pemasukan');

@@ -75,7 +75,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
+                                            <th scope="col">No</th>
                                             <th scope="col">Jenis Pengeluaran</th>
                                             <th scope="col">Keterangan</th>
                                             <th scope="col">Total Pengeluaran</th>
@@ -85,16 +85,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pengeluaran as $d )
-                                            
+                                        @foreach ($pengeluaran as $index => $pn )
                                         <tr>
-                                            <th scope="row">1</th>
-                                            <td>{{ $d['jenis_pengeluaran'] }}</td>
-                                            <td>{{ $d['keterangan'] }}</td>
-                                            <td>{{ $d['total_pengeluaran'] }}</td>
-                                            <td>{{ $d['tgl'] }}</td>
-                                              
-                                            <td>Member</td>
+                                            <th scope="row">{{ $index+1 }}</th>
+                                            <td>{{ $pn['jenis_pengeluaran'] }}</td>
+                                            <td>{{ $pn['keterangan'] }}</td>
+                                            <td>Rp. {{ $pn['total_pengeluaran'] }}</td>
+                                            <td>{{ $pn['tgl'] }}</td>
+                                            <td>
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    <a href="{{ route('edit.pengeluaran', ['id' => $pn['id']]) }}" type="button"
+                                                        class="btn btn-outline-primary waves-effect waves-light">
+                                                        Edit</a>
+                                                        <form action="{{ route('delete.pengeluaran', ['id' => $pn['id']]) }}" method="POST">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                        <button onclick="return confirm('Anda yakin akan menghapus ini? ')" type="submit"
+                                                        class="btn btn-outline-danger waves-effect waves-light">Hapus</i></button>
+                                                    </form>
+                                                </div>
+                                            </td>
                                         </tr>
                                         @endforeach
     
@@ -102,13 +112,10 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-</div>
 <!-- Content End -->
 
 <!-- Back to Top -->
