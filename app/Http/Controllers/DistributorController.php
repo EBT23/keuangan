@@ -33,12 +33,13 @@ class DistributorController extends Controller
             'updated_at' => now(),
             'created_at' => now(),
         ];
+
+        // dd($addDistributor);
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token, // token autentikasi
             'Accept' => 'application/json', // format respon
-        ])->post('http://backendkeuangan.dlhcode.com/api/tambah_distributor', $addDistributor);
+        ])->post('https://backendkeuangan.dlhcode.com/api/tambah_distributor', $addDistributor);
 
-       
 
         if ($response->ok()) {
             $response->json(); // data response jika request sukses

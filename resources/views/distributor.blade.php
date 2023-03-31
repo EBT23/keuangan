@@ -42,35 +42,38 @@
             <div class="card mb-5">
                 <div class="card-body">
                     <h4 class="card-title">FORM TAMBAH DATA DISTRIBUTOR</h4>
+                    <hr>
                     <form action="{{ route('tambah.distributor') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
-                        <div class="col-lg">
-                      <div class="mb-3">
-                        <label for="nama_distributor" class="form-label">Nama Distributor</label>
-                        <input class="form-control" name="nama_distributor" id="nama_distributor">
-                      </div>
-                      <div class="mb-3">
-                          <label for="tlp" class="form-label">No Telepon</label>
-                          <input class="form-control" name="tlp" id="tlp">
-                      </div>
+                    <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="nama_distributor" class="form-label">Nama Distributor</label>
+                            <input class="form-control" name="nama_distributor" id="nama_distributor">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tlp" class="form-label">No Telepon</label>
+                            <input type="number" class="form-control" name="tlp" id="tlp">
+                        </div>
                         <div class="mb-3">
                           <label for="area_cover" class="form-label">Area Cover</label>
                           <input type="text" class="form-control" name="area_cover" id="area_cover">
                         </div>
+                    </div>
+                    <div class="col-6">
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat</label>
-                            <textarea class="form-control" name="alamat" id="alamat"></textarea>
+                            <textarea class="form-control" name="alamat"  id="alamat"></textarea>
                         </div>
                         <div class="mb-3">
                           <label for="penjab_id" class="form-label">Penjab</label>
-                          <input class="form-control" name="penjab_id" id="penjab_id">
+                          <input class="form-control" name="penjab_id"  id="penjab_id">
                         </div>
-                        <button type="submit" class="btn btn-primary">
-                            Tambah
-                          </button>
-                        </div>
-                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Tambah
+                  </button>
                     </form>
                 </div>
             </div>
