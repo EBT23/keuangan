@@ -53,7 +53,7 @@ Route::get('/posisi', [PosisiController::class, 'posisi'])->name('posisi');
 
 #Pengeluaran
 Route::get('/pengeluaran', [PengeluaranController::class, 'pengeluaran'])->name('pengeluaran');
-Route::post('/pengeluaran', [PengeluaranController::class, 'tambah_pengeluaran'])->name('tambah.pengeluaran');
+Route::post('/tambah_pengeluaran', [PengeluaranController::class, 'tambah_pengeluaran'])->name('tambah.pengeluaran');
 
 #PEMASUKAN
 Route::get('/pemasukan', [PemasukanController::class, 'pemasukan'])->name('pemasukan');

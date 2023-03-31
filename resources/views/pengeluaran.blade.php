@@ -31,7 +31,7 @@
             <div class="row">
              <div class="col-6">
               <div class="mb-3">
-                <label for="jenis_pengeluaran" class="form-label">Jenis Pemasukan</label>
+                <label for="jenis_pengeluaran" class="form-label">Jenis Pengeluaran</label>
                 <input class="form-control" name="jenis_pengeluaran" id="jenis_pengeluaran">
               </div>
               <div class="mb-3">
@@ -45,7 +45,7 @@
                         <input type="date" class="form-control" id="tgl" name="tgl" id="tgl">
                       </div>
                       <div class="mb-3">
-                        <label for="total_pengeluaran" class="form-label">Total Pemasukan</label>
+                        <label for="total_pengeluaran" class="form-label">Total Pengeluaran</label>
                         <input class="form-control" name="total_pengeluaran" id="total_pengeluaran">
                       </div>
                     </div>

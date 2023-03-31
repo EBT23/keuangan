@@ -12,7 +12,7 @@ class PengeluaranController extends Controller
         $data['title'] = 'Pengeluaran';
         $token = session('access_token');
         
-        $response = Http::withToken("$token")->get('https://backendkeuangan.dlhcode.com/api/pengeluaran');
+        $response = Http::withToken("$token")->get('http://backendkeuangan.dlhcode.com/api/pengeluaran');
 
         $body = $response->getBody();
         $data['pengeluaran'] = json_decode($body,true);
@@ -24,6 +24,7 @@ class PengeluaranController extends Controller
     public function tambah_pengeluaran(Request $request)
     {
         $token = session('access_token');
+
         $addPengeluaran = [
             'jenis_pengeluaran' => $request->jenis_pengeluaran,
             'keterangan' => $request->keterangan,
@@ -33,19 +34,24 @@ class PengeluaranController extends Controller
             'created_at' => now(),
         ];
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer' . $token, 
-            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $token, // token autentikasi
+            'Accept' => 'application/json', // format respon
         ])->post('http://backendkeuangan.dlhcode.com/api/tambah_pengeluaran', $addPengeluaran);
 
-        if ($response->ok()){
-            $response->json();
-            return redirect()->route('pengeluaran')->withSuccess('Data Pengeluaran Berhasil Ditambah');
-        }else{
-            $errorMessage = $response->serverError() ? 'Server error' : 'Client error';
-            $errorMessage .= ': '. $response->body();
+       
 
-            return redirect()->route('pengeluaran')->with('error','Data Pengeluaran Gagal Disimpan');
-
+        if ($response->ok()) {
+            $response->json(); // data response jika request sukses
+            // lakukan sesuatu dengan data response
+            return redirect()
+                ->route('pengeluaran')
+                ->withSuccess('Pengeluaran berhasil ditambahkan');
+        } else {
+            $errorMessage = $response->serverError() ? 'Server error' : 'Client error'; // pesan error
+            $errorMessage .= ': ' . $response->body(); // tambahkan pesan error dari body response
+            // lakukan sesuatu dengan pesan error
+            return redirect()->route('pengeluaran')
+                ->with('error', 'Pengeluaran gagal disimpan');
         }
     }
    
