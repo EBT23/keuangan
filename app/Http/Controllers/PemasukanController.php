@@ -86,7 +86,7 @@ class PemasukanController extends Controller
 
     public function edit_pemasukan($id)
     {
-        $data['title'] = 'Edit Kota';
+        $data['title'] = 'Edit Data Pemasukan';
         $token = session('access_token');
         $client = new Client([
         'base_uri' => 'http://backendkeuangan.dlhcode.com/api/',
