@@ -50,7 +50,10 @@ Route::get('/edit_distributor/{id}', [DistributorController::class, 'edit_distri
 Route::delete('/delete_distributor/{id}', [PemasukDistributorController::class, 'delete_distributor'])->name('delete.distributor');
 
 Route::get('/posisi', [PosisiController::class, 'posisi'])->name('posisi');
+
+#Pengeluaran
 Route::get('/pengeluaran', [PengeluaranController::class, 'pengeluaran'])->name('pengeluaran');
+Route::post('/pengeluaran', [PengeluaranController::class, 'tambah_pengeluaran'])->name('tambah.pengeluaran');
 
 #PEMASUKAN
 Route::get('/pemasukan', [PemasukanController::class, 'pemasukan'])->name('pemasukan');

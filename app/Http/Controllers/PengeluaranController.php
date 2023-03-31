@@ -24,14 +24,29 @@ class PengeluaranController extends Controller
     public function tambah_pengeluaran(Request $request)
     {
         $token = session('access_token');
-        $data = [
+        $addPengeluaran = [
             'jenis_pengeluaran' => $request->jenis_pengeluaran,
-            'email' => $request->email,
-            'tgl_lahir' => $request->tgl_lahir,
-            'password' => bcrypt($request->password),
-            'role_id' => 2,
-            'posisi_id' => $request->posisi,
+            'keterangan' => $request->keterangan,
+            'total_pengeluaran' => $request->total_pengeluaran,
+            'tgl' => $request->tgl,
+            'updated_at' => now(),
+            'created_at' => now(),
         ];
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer' . $token, 
+            'Accept' => 'application/json',
+        ])->post('http://backendkeuangan.dlhcode.com/api/tambah_pengeluaran', $addPengeluaran);
+
+        if ($response->ok()){
+            $response->json();
+            return redirect()->route('pengeluaran')->withSuccess('Data Pengeluaran Berhasil Ditambah');
+        }else{
+            $errorMessage = $response->serverError() ? 'Server error' : 'Client error';
+            $errorMessage .= ': '. $response->body();
+
+            return redirect()->route('pengeluaran')->with('error','Data Pengeluaran Gagal Disimpan');
+
+        }
     }
    
 }
