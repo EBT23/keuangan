@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -55,4 +56,25 @@ class DistributorController extends Controller
                 ->with('error', 'Distributor gagal disimpan');
         }
     }
+
+    public function delete_distributor($id)
+    {
+        $token = session('access_token');
+        $client = new Client([
+        'base_uri' => 'http://backendkeuangan.dlhcode.com/api/',
+        'timeout' => 2.0,
+        ]);
+
+        $response = $client->request('DELETE', "delete_distributor/$id", [
+        'headers' => [
+        'Authorization' => 'Bearer ' . $token,
+        'Accept' => 'application/json',
+        ]
+        ]);
+
+        return redirect()
+            ->route('distributor')
+            ->withSuccess('Data distributor berhasil dihapus');
+    }
+
 }

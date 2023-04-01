@@ -109,7 +109,7 @@
                                                 <a href="" type="button"
                                                     class="btn btn-outline-primary waves-effect waves-light">
                                                     Edit</a>
-                                                   <form action="" method="POST">
+                                                   <form action="{{ route('delete.distributor', ['id' => $dt['id']]) }}" method="POST">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
                                                     <button onclick="return confirm('Anda yakin akan menghapus ini? ')" type="submit"

@@ -47,7 +47,7 @@ Route::get('/distributor', [DistributorController::class, 'distributor'])->name(
 Route::post('/tambah_distributor', [DistributorController::class, 'tambah_distributor'])->name('tambah.distributor');
 Route::post('/update_distributor/{id}', [DistributorController::class, 'update_distributor'])->name('update.distributor');
 Route::get('/edit_distributor/{id}', [DistributorController::class, 'edit_distributor'])->name('edit.distributor');
-Route::delete('/delete_distributor/{id}', [PemasukDistributorController::class, 'delete_distributor'])->name('delete.distributor');
+Route::delete('/delete_distributor/{id}', [DistributorController::class, 'delete_distributor'])->name('delete.distributor');
 
 Route::get('/posisi', [PosisiController::class, 'posisi'])->name('posisi');
 
