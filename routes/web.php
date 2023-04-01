@@ -68,3 +68,25 @@ Route::delete('/delete_pemasukan/{id}', [PemasukanController::class, 'delete_pem
 Route::get('/penggajian', [PenggajianController::class, 'penggajian'])->name('penggajian');
 Route::get('/penjab', [PenjabController::class, 'penjab'])->name('penjab');
 Route::get('/role', [RoleController::class, 'role'])->name('role');
+
+
+Route::get('/route-cache', function () {
+    Artisan::call('route:cache');
+    return 'Routes cache cleared';
+});
+Route::get('/config-cache', function () {
+    Artisan::call('config:cache');
+    return 'Config cache cleared';
+});
+Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    return 'Application cache cleared';
+});
+Route::get('/view-clear', function () {
+    Artisan::call('view:clear');
+    return 'View cache cleared';
+});
+Route::get('/optimize', function () {
+    Artisan::call('optimize');
+    return 'Routes cache cleared';
+});
