@@ -86,7 +86,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">No</th>
                                 <th scope="col">Nama Distributor</th>
                                 <th scope="col">Telepon</th>
                                 <th scope="col">Area Cover</th>
@@ -104,9 +104,9 @@
                                         <td>{{ $dt['area_cover'] }}</td>
                                         <td>{{ $dt['alamat'] }}</td>
                                         <td>{{ $dt['nama_penjab'] }}</td>
-                                        <td>
+                                        <td width="20px">
                                             <div class="d-flex flex-wrap gap-2">
-                                                <a href="" type="button"
+                                                <a href="{{ route('edit.distributor', ['id' => $dt['id']]) }}" type="button"
                                                     class="btn btn-outline-primary waves-effect waves-light">
                                                     Edit</a>
                                                    <form action="{{ route('delete.distributor', ['id' => $dt['id']]) }}" method="POST">

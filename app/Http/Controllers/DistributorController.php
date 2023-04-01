@@ -77,4 +77,56 @@ class DistributorController extends Controller
             ->withSuccess('Data distributor berhasil dihapus');
     }
 
+
+    public function edit_distributor($id)
+    {
+        $data['title'] = 'Edit Distributor';
+        $token = session('access_token');
+        $client = new Client([
+        'base_uri' => 'http://backendkeuangan.dlhcode.com/api/',
+        'timeout' => 2.0,
+        ]);
+    
+        $response = $client->request('GET', "get_distributor_by_id/$id", [
+        'headers' => [
+        'Authorization' => 'Bearer ' . $token,
+        'Accept' => 'application/json',
+        ]
+        ]);
+    
+    
+        $data['distributor'] = json_decode($response->getBody(), true);
+        $data['distributor'] = $data['distributor']['data'][0];
+   
+        return view('edit_distributor', $data);
+    }
+
+    public function update_distributor(Request $request, $id)
+    {
+        $token = session('access_token');
+        $client = new Client([
+            'base_uri' => 'http://backendkeuangan.dlhcode.com/api/',
+            'timeout' => 50.0,
+        ]);
+
+        $response = $client->request('PUT', "update_distributor/$id", [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/x-www-form-urlencoded',
+            ],
+            'json' => [
+                'nama_distributor' => $request->nama_distributor,
+                'tlp' => $request->tlp,
+                'area_cover' => $request->area_cover,
+                'alamat' => $request->alamat,
+                'penjab_id' => $request->penjab_id,
+                'updated_at' => now(),
+            ],
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+        return redirect()
+            ->route('distributor')
+            ->withSuccess('Data distributor berhasil diubah');
+    }
 }
