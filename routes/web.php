@@ -1,15 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DistributorController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PenjabController;
 use App\Http\Controllers\PosisiController;
-use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PenggajianController;
-use App\Http\Controllers\PenjabController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DistributorController;
+use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\DatakaryawanController;
 
 /*
