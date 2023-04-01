@@ -21,17 +21,79 @@
     <!-- Navbar Start -->
     @include('layouts.header')
     <!-- Navbar End -->
-    <div class="card-body">
+    <div class="card">
 
-        <div class="col-12">
-            <div class="bg-light rounded h-100 p-4">
-                <h6 class="mb-4">Data {{ $title }}</h6>
-                
+        <div class="card-body">
+            <h4 class="card-title">FORM TAMBAH DATA POSISI</h4>
+            <hr>
+        <form action="{{ route('tambah.posisi') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+            <div class="row">
+             <div class="col-6">
+              <div class="mb-3">
+                <label for="nama_posisi" class="form-label">Posisi</label>
+                <input  class="form-control" name="nama_posisi" id="nama_posisi">
+              </div>
+            </div>
+            </div>
+                <button type="submit" class="btn btn-primary">
+                    Tambah
+                </button>
+        </form>
+        </div>
+        <div class="card-body">
+            <div class="col-12">
+                <div class="bg-light rounded h-100 p-4">
+                    @if (Session::has('success'))
+                    <div class="alert alert-success">
+                        {{ Session::get('success') }}
+                    </div>
+                    @elseif (Session::has('errors'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('errors') }}
+                    </div>
+                    @endif
+                    <div class="col-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Data Posisi</h6>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Posisi</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($posisi as $index => $ps )
+                                        <tr>
+                                            <th scope="row">{{ $index+1 }}</th>
+                                            <td>{{ $ps['nama_posisi'] }}</td>
+                                            <td>
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    <a href="" type="button"
+                                                        class="btn btn-outline-primary waves-effect waves-light">
+                                                        Edit</a>
+                                                        <form action="" method="POST">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                        <button onclick="return confirm('Anda yakin akan menghapus ini? ')" type="submit"
+                                                        class="btn btn-outline-danger waves-effect waves-light">Hapus</i></button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
             </div>
         </div>
     </div>
-
-</div>
 <!-- Content End -->
 
 <!-- Back to Top -->
@@ -41,9 +103,3 @@
 </div>
 
 @endsection
-<!--End wrapper-->
-<script>
-$('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-})
-</script>

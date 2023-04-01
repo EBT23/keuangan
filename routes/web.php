@@ -50,6 +50,7 @@ Route::get('/edit_distributor/{id}', [DistributorController::class, 'edit_distri
 Route::delete('/delete_distributor/{id}', [DistributorController::class, 'delete_distributor'])->name('delete.distributor');
 
 Route::get('/posisi', [PosisiController::class, 'posisi'])->name('posisi');
+Route::post('/tambah_posisi', [PosisiController::class, 'tambah_posisi'])->name('tambah.posisi');
 
 #Pengeluaran
 Route::get('/pengeluaran', [PengeluaranController::class, 'pengeluaran'])->name('pengeluaran');
@@ -67,4 +68,9 @@ Route::delete('/delete_pemasukan/{id}', [PemasukanController::class, 'delete_pem
 
 Route::get('/penggajian', [PenggajianController::class, 'penggajian'])->name('penggajian');
 Route::get('/penjab', [PenjabController::class, 'penjab'])->name('penjab');
+
 Route::get('/role', [RoleController::class, 'role'])->name('role');
+Route::post('/tambah_role', [RoleController::class, 'tambah_role'])->name('tambah.role');
+Route::post('/update_role/{id}', [RoleController::class, 'update_role'])->name('update.role');
+Route::get('/edit_role/{id}', [RoleController::class, 'edit_role'])->name('edit.role');
+Route::delete('/delete_role/{id}', [RoleController::class, 'delete_role'])->name('delete.role');
