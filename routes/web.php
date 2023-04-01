@@ -51,6 +51,7 @@ Route::get('/edit_distributor/{id}', [DistributorController::class, 'edit_distri
 Route::delete('/delete_distributor/{id}', [DistributorController::class, 'delete_distributor'])->name('delete.distributor');
 
 Route::get('/posisi', [PosisiController::class, 'posisi'])->name('posisi');
+Route::post('/tambah_posisi', [PosisiController::class, 'tambah_posisi'])->name('tambah.posisi');
 
 #Pengeluaran
 Route::get('/pengeluaran', [PengeluaranController::class, 'pengeluaran'])->name('pengeluaran');

@@ -12,7 +12,7 @@ class PengeluaranController extends Controller
         $data['title'] = 'Pengeluaran';
         $token = session('access_token');
         
-        $response = Http::withToken("$token")->get('http://backendkeuangan.dlhcode.com/api/pengeluaran');
+        $response = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/pengeluaran');
 
         $body = $response->getBody();
         $data['pengeluaran'] = json_decode($body,true);
@@ -36,7 +36,7 @@ class PengeluaranController extends Controller
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token, // token autentikasi
             'Accept' => 'application/json', // format respon
-        ])->post('http://backendkeuangan.dlhcode.com/api/tambah_pengeluaran', $addPengeluaran);
+        ])->post('http://keuangan.dlhcode.com/api/tambah_pengeluaran', $addPengeluaran);
 
        
 
@@ -60,7 +60,7 @@ class PengeluaranController extends Controller
         $data['title'] = 'Edit Pengeluaran';
         $token = session('access_token');
         $client = new Client([
-        'base_uri' => 'http://backendkeuangan.dlhcode.com/api/',
+        'base_uri' => 'http://keuangan.dlhcode.com/api/',
         'timeout' => 2.0,
         ]);
     
@@ -82,7 +82,7 @@ class PengeluaranController extends Controller
     {
         $token = session('access_token');
         $client = new Client([
-            'base_uri' => 'http://backendkeuangan.dlhcode.com/api/',
+            'base_uri' => 'http://keuangan.dlhcode.com/api/',
             'timeout' => 50.0,
         ]);
 
@@ -112,7 +112,7 @@ class PengeluaranController extends Controller
     {
         $token = session('access_token');
         $client = new Client([
-        'base_uri' => 'http://backendkeuangan.dlhcode.com/api/',
+        'base_uri' => 'http://keuangan.dlhcode.com/api/',
         'timeout' => 2.0,
         ]);
 

@@ -14,7 +14,7 @@ class DistributorController extends Controller
 
         $token = session('access_token');
 
-        $response = Http::withToken("$token")->get('http://backendkeuangan.dlhcode.com/api/distributor');
+        $response = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/distributor');
         $body_distributor = $response->getBody();
         $data['distributor'] = json_decode($body_distributor, true);
         $data['distributor'] = $data['distributor']['data'];
@@ -39,7 +39,7 @@ class DistributorController extends Controller
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token, // token autentikasi
             'Accept' => 'application/json', // format respon
-        ])->post('https://backendkeuangan.dlhcode.com/api/tambah_distributor', $addDistributor);
+        ])->post('http://keuangan.dlhcode.com/api/tambah_distributor', $addDistributor);
 
 
         if ($response->ok()) {
@@ -61,7 +61,7 @@ class DistributorController extends Controller
     {
         $token = session('access_token');
         $client = new Client([
-        'base_uri' => 'http://backendkeuangan.dlhcode.com/api/',
+        'base_uri' => 'http://keuangan.dlhcode.com/api/api/',
         'timeout' => 2.0,
         ]);
 
@@ -83,7 +83,7 @@ class DistributorController extends Controller
         $data['title'] = 'Edit Distributor';
         $token = session('access_token');
         $client = new Client([
-        'base_uri' => 'http://backendkeuangan.dlhcode.com/api/',
+        'base_uri' => 'http://keuangan.dlhcode.com/api/api/',
         'timeout' => 2.0,
         ]);
     
@@ -105,7 +105,7 @@ class DistributorController extends Controller
     {
         $token = session('access_token');
         $client = new Client([
-            'base_uri' => 'http://backendkeuangan.dlhcode.com/api/',
+            'base_uri' => 'http://keuangan.dlhcode.com/api/api/',
             'timeout' => 50.0,
         ]);
 

@@ -32,7 +32,7 @@
              <div class="col-6">
               <div class="mb-3">
                 <label for="jenis_pemasukan" class="form-label">Jenis Pemasukan</label>
-                <input class="form-control" name="jenis_pemasukan" id="jenis_pemasukan">
+                <input type="text" class="form-control" name="jenis_pemasukan" id="jenis_pemasukan">
               </div>
               <div class="mb-3">
                   <label for="keterangan" class="form-label">Keterangan</label>
