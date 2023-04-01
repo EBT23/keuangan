@@ -17,7 +17,7 @@ class AuthController extends Controller
     public function login_post(Request $request)
     {
         $client = new Client();
-        $response = $client->request('POST','https://keuangan.dlhcode.com/api/login',[
+        $response = $client->request('POST','http://keuangan.dlhcode.com/api/login',[
             'form_params' =>[
                 'email' => $request->email,
                 'password' => $request->password,
