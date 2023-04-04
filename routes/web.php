@@ -50,8 +50,12 @@ Route::post('/update_distributor/{id}', [DistributorController::class, 'update_d
 Route::get('/edit_distributor/{id}', [DistributorController::class, 'edit_distributor'])->name('edit.distributor');
 Route::delete('/delete_distributor/{id}', [DistributorController::class, 'delete_distributor'])->name('delete.distributor');
 
+#POSISI
 Route::get('/posisi', [PosisiController::class, 'posisi'])->name('posisi');
 Route::post('/tambah_posisi', [PosisiController::class, 'tambah_posisi'])->name('tambah.posisi');
+Route::post('/update_posisi/{id}', [PosisiController::class, 'update_posisi'])->name('update.posisi');
+Route::get('/edit_posisi/{id}', [PosisiController::class, 'edit_posisi'])->name('edit.posisi');
+Route::delete('/delete_posisi/{id}', [PosisiController::class, 'delete_posisi'])->name('delete.posisi');
 
 #Pengeluaran
 Route::get('/pengeluaran', [PengeluaranController::class, 'pengeluaran'])->name('pengeluaran');
@@ -68,8 +72,19 @@ Route::get('/edit_pemasukan/{id}', [PemasukanController::class, 'edit_pemasukan'
 Route::delete('/delete_pemasukan/{id}', [PemasukanController::class, 'delete_pemasukan'])->name('delete.pemasukan');
 
 Route::get('/penggajian', [PenggajianController::class, 'penggajian'])->name('penggajian');
+
+#PENANGGUNGJAWAB
 Route::get('/penjab', [PenjabController::class, 'penjab'])->name('penjab');
+Route::post('/tambah_penjab', [PenjabController::class, 'tambah_penjab'])->name('tambah.penjab');
+Route::post('/update_penjab/{id}', [PenjabController::class, 'update_penjab'])->name('update.penjab');
+Route::get('/edit_penjab/{id}', [PenjabController::class, 'edit_penjab'])->name('edit.penjab');
+Route::delete('/delete_penjab/{id}', [PenjabController::class, 'delete_penjab'])->name('delete.penjab');
+
 Route::get('/role', [RoleController::class, 'role'])->name('role');
+Route::post('/tambah_role', [RoleController::class, 'tambah_role'])->name('tambah.role');
+Route::post('/update_role/{id}', [RoleController::class, 'update_role'])->name('update.role');
+Route::get('/edit_role/{id}', [RoleController::class, 'edit_role'])->name('edit.role');
+Route::delete('/delete_role/{id}', [RoleController::class, 'delete_role'])->name('delete.role');
 
 
 Route::get('/route-cache', function () {

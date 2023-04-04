@@ -32,7 +32,7 @@
              <div class="col-6">
               <div class="mb-3">
                 <label for="nama_posisi" class="form-label">Posisi</label>
-                <input  class="form-control" name="nama_posisi" id="nama_posisi">
+                <input  type="text" class="form-control" name="nama_posisi" id="nama_posisi">
               </div>
             </div>
             </div>
@@ -72,12 +72,12 @@
                                             <td>{{ $ps['nama_posisi'] }}</td>
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">
-                                                    <a href="" type="button"
+                                                    <a href="{{ route('edit.posisi', ['id' => $ps['id']]) }}" type="button"
                                                         class="btn btn-outline-primary waves-effect waves-light">
                                                         Edit</a>
-                                                        <form action="" method="POST">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
+                                                        <form action="{{ route('delete.posisi', ['id' => $ps['id']]) }}" method="POST">
+                                                            {{ csrf_field() }}
+                                                            {{ method_field('DELETE') }}
                                                         <button onclick="return confirm('Anda yakin akan menghapus ini? ')" type="submit"
                                                         class="btn btn-outline-danger waves-effect waves-light">Hapus</i></button>
                                                     </form>

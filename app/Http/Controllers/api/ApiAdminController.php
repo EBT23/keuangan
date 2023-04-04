@@ -11,7 +11,7 @@ use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 class ApiAdminController extends Controller
 {
@@ -292,6 +292,7 @@ class ApiAdminController extends Controller
         $posisi = DB::table('posisi')->insert([
 
             'nama_posisi' => $request->nama_posisi,
+            'updated_at' => now(),
         ]);
 
         return response()->json([

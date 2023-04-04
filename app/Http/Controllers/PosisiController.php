@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Http;
 
 class PosisiController extends Controller
@@ -27,14 +29,14 @@ class PosisiController extends Controller
 
         $addPosisi = [
             'nama_posisi' => $request->nama_posisi,
-            'updated_at' => now(),
-            'created_at' => now(),
+            
         ];
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token, // token autentikasi
             'Accept' => 'application/json', // format respon
         ])->post('http://keuangan.dlhcode.com/api/tambah_posisi', $addPosisi);
 
+       
 
         if ($response->ok()) {
             $response->json(); // data response jika request sukses
@@ -49,5 +51,73 @@ class PosisiController extends Controller
             return redirect()->route('posisi')
                 ->with('error', 'Posisi gagal disimpan');
         }
+    }
+
+    public function update_posisi(Request $request, $id)
+    {
+        $token = session('access_token');
+        $client = new Client([
+            'base_uri' => 'http://keuangan.dlhcode.com/api/',
+            'timeout' => 50.0,
+        ]);
+
+        $response = $client->request('PUT', "update_posisi/$id", [
+                'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/x-www-form-urlencoded',
+            ],
+            'json' => [
+                'nama_posisi' => $request->nama_posisi,
+                'updated_at' => now(),
+            ],
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+        return redirect()
+            ->route('posisi')
+            ->withSuccess('Data Posisi berhasil diubah');
+    }
+
+    public function edit_posisi($id)
+    {
+        $data['title'] = 'Edit Data Posisi';
+        $token = session('access_token');
+        $client = new Client([
+        'base_uri' => 'http://keuangan.dlhcode.com/api/',
+        'timeout' => 2.0,
+        ]);
+    
+        $response = $client->request('GET', "get_posisi_by_id/$id", [
+        'headers' => [
+        'Authorization' => 'Bearer ' . $token,
+        'Accept' => 'application/json',
+        ]
+        ]);
+    
+    
+        $data['posisi'] = json_decode($response->getBody(), true);
+        $data['posisi'] = $data['posisi']['data'][0];
+   
+        return view('edit_posisi', $data);
+    }
+
+    public function delete_posisi($id)
+    {
+        $token = session('access_token');
+        $client = new Client([
+        'base_uri' => 'http://keuangan.dlhcode.com/api/',
+        'timeout' => 2.0,
+        ]);
+
+        $response = $client->request('DELETE', "delete_posisi/$id", [
+        'headers' => [
+        'Authorization' => 'Bearer ' . $token,
+        'Accept' => 'application/json',
+        ]
+        ]);
+
+        return redirect()
+            ->route('posisi')
+            ->withSuccess('Data Posisi berhasil dihapus');
     }
 }

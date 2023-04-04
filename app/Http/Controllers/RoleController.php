@@ -29,8 +29,6 @@ class RoleController extends Controller
 
         $addRole = [
             'role' => $request->role,
-            'updated_at' => now(),
-            'created_at' => now(),
         ];
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $token, // token autentikasi
@@ -75,5 +73,48 @@ class RoleController extends Controller
         return redirect()
             ->route('role')
             ->withSuccess('Data Role berhasil diubah');
+    }
+
+    public function edit_role($id)
+    {
+        $data['title'] = 'Edit Data Role';
+        $token = session('access_token');
+        $client = new Client([
+        'base_uri' => 'http://keuangan.dlhcode.com/api/',
+        'timeout' => 2.0,
+        ]);
+    
+        $response = $client->request('GET', "get_role_by_id/$id", [
+        'headers' => [
+        'Authorization' => 'Bearer ' . $token,
+        'Accept' => 'application/json',
+        ]
+        ]);
+    
+    
+        $data['role'] = json_decode($response->getBody(), true);
+        $data['role'] = $data['role']['data'][0];
+   
+        return view('edit_role', $data);
+    }
+
+    public function delete_role($id)
+    {
+        $token = session('access_token');
+        $client = new Client([
+        'base_uri' => 'http://keuangan.dlhcode.com/api/',
+        'timeout' => 2.0,
+        ]);
+
+        $response = $client->request('DELETE', "delete_role/$id", [
+        'headers' => [
+        'Authorization' => 'Bearer ' . $token,
+        'Accept' => 'application/json',
+        ]
+        ]);
+
+        return redirect()
+            ->route('role')
+            ->withSuccess('Data Role berhasil dihapus');
     }
 }
