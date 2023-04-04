@@ -45,8 +45,8 @@
                             <input type="number" class="form-control" name="tlp" id="tlp" value="{{ $distributor['tlp'] }}">
                         </div>
                         <div class="mb-3">
-                          <label for="area_cover" class="form-label">Area Cover</label>
-                          <input type="text" class="form-control" name="area_cover" id="area_cover" value="{{ $distributor['area_cover'] }}">
+                        <label for="area_cover" class="form-label">Area Cover</label>
+                        <input type="text" class="form-control" name="area_cover" id="area_cover" value="{{ $distributor['area_cover'] }}">
                         </div>
                     </div>
                     <div class="col-6">

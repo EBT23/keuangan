@@ -24,6 +24,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/logout', [ApiAuthController::class, 'logout']);
     Route::get('/me', [ApiAuthController::class, 'me']);
 
+    Route::get('/karyawan', [ApiAdminController::class, 'karyawan']);
+    Route::post('/tambah_karyawan', [ApiAdminController::class, 'tambah_karyawan']);
+    Route::put('/update_karyawan/{id}', [ApiAdminController::class, 'update_karyawan']);
+    Route::delete('/delete_karyawan/{id}', [ApiAdminController::class, 'delete_karyawan']);
+    Route::get('/get_karyawan_by_id/{id}', [ApiAdminController::class, 'get_karyawan_by_id']);
+
     Route::get('/pengeluaran', [ApiAdminController::class, 'pengeluaran']);
     Route::post('/tambah_pengeluaran', [ApiAdminController::class, 'tambah_pengeluaran']);
     Route::put('/update_pengeluaran/{id}', [ApiAdminController::class, 'update_pengeluaran']);
@@ -55,6 +61,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/get_posisi_by_id/{id}', [ApiAdminController::class, 'get_posisiId']);
 
     Route::get('/penggajian', [ApiAdminController::class, 'penggajian']);
+
+    Route::get('/karyawan', [ApiAdminController::class, 'karyawan']);
+    Route::post('/tambah_karyawan', [ApiAdminController::class, 'tambah_karyawan']);
+    Route::put('/update_karyawan/{id}', [ApiAdminController::class, 'update_karyawan']);
+    Route::delete('/delete_karyawan/{id}', [ApiAdminController::class, 'delete_karyawan']);
+    Route::get('/get_karyawan_by_id/{id}', [ApiAdminController::class, 'get_karyawan_id']);
 
     Route::get('/role', [ApiAdminController::class, 'role']);
     Route::post('/tambah_role', [ApiAdminController::class, 'tambah_role']);

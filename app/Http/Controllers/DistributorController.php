@@ -57,55 +57,11 @@ class DistributorController extends Controller
         }
     }
 
-    public function delete_distributor($id)
-    {
-        $token = session('access_token');
-        $client = new Client([
-        'base_uri' => 'http://keuangan.dlhcode.com/api/api/',
-        'timeout' => 2.0,
-        ]);
-
-        $response = $client->request('DELETE', "delete_distributor/$id", [
-        'headers' => [
-        'Authorization' => 'Bearer ' . $token,
-        'Accept' => 'application/json',
-        ]
-        ]);
-
-        return redirect()
-            ->route('distributor')
-            ->withSuccess('Data distributor berhasil dihapus');
-    }
-
-
-    public function edit_distributor($id)
-    {
-        $data['title'] = 'Edit Distributor';
-        $token = session('access_token');
-        $client = new Client([
-        'base_uri' => 'http://keuangan.dlhcode.com/api/api/',
-        'timeout' => 2.0,
-        ]);
-    
-        $response = $client->request('GET', "get_distributor_by_id/$id", [
-        'headers' => [
-        'Authorization' => 'Bearer ' . $token,
-        'Accept' => 'application/json',
-        ]
-        ]);
-    
-    
-        $data['distributor'] = json_decode($response->getBody(), true);
-        $data['distributor'] = $data['distributor']['data'][0];
-   
-        return view('edit_distributor', $data);
-    }
-
     public function update_distributor(Request $request, $id)
     {
         $token = session('access_token');
         $client = new Client([
-            'base_uri' => 'http://keuangan.dlhcode.com/api/api/',
+            'base_uri' => 'http://keuangan.dlhcode.com/api/',
             'timeout' => 50.0,
         ]);
 
@@ -127,6 +83,49 @@ class DistributorController extends Controller
         $data = json_decode($response->getBody(), true);
         return redirect()
             ->route('distributor')
-            ->withSuccess('Data distributor berhasil diubah');
+            ->withSuccess('Data Distributor berhasil diubah');
+    }
+
+    public function edit_distributor($id)
+    {
+        $data['title'] = 'Edit Data Distributor';
+        $token = session('access_token');
+        $client = new Client([
+        'base_uri' => 'http://keuangan.dlhcode.com/api/',
+        'timeout' => 2.0,
+        ]);
+    
+        $response = $client->request('GET', "get_distributor_by_id/$id", [
+        'headers' => [
+        'Authorization' => 'Bearer ' . $token,
+        'Accept' => 'application/json',
+        ]
+        ]);
+    
+    
+        $data['distributor'] = json_decode($response->getBody(), true);
+        $data['distributor'] = $data['distributor']['data'][0];
+   
+        return view('edit_distributor', $data);
+    }
+
+    public function delete_distributor($id)
+    {
+        $token = session('access_token');
+        $client = new Client([
+        'base_uri' => 'http://keuangan.dlhcode.com/api/',
+        'timeout' => 2.0,
+        ]);
+
+        $response = $client->request('DELETE', "delete_distributor/$id", [
+            'headers' => [
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+            ]
+        ]);
+
+        return redirect()
+            ->route('distributor')
+            ->withSuccess('Data distributor berhasil dihapus');
     }
 }

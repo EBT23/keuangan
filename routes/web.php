@@ -12,6 +12,7 @@ use App\Http\Controllers\PenggajianController;
 use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\DatakaryawanController;
+use App\Http\Controllers\KaryawanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,8 @@ Route::get('/edit_pemasukan/{id}', [PemasukanController::class, 'edit_pemasukan'
 Route::delete('/delete_pemasukan/{id}', [PemasukanController::class, 'delete_pemasukan'])->name('delete.pemasukan');
 
 Route::get('/penggajian', [PenggajianController::class, 'penggajian'])->name('penggajian');
+
+Route::get('/karyawan', [KaryawanController::class, 'karyawan'])->name('karyawan');
 
 #PENANGGUNGJAWAB
 Route::get('/penjab', [PenjabController::class, 'penjab'])->name('penjab');

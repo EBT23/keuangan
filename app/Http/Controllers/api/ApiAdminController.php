@@ -425,4 +425,20 @@ class ApiAdminController extends Controller
             'data' => $role
         ]);
     }
+
+    public function karyawan()
+    {
+        $data = DB::table('users')
+                ->join('role', 'role.id', '=', 'users.role_id')
+                ->join('posisi', 'posisi.id', '=', 'users.posisi_id')
+                ->select('users.name','users.email','users.tempat_lahir','users.tgl_lahir','users.no_identitas',
+                         'role.role', 'posisi.nama_posisi')
+                ->where('role.id','=','2')
+                ->get();
+
+            return response()->json([
+                'data' => $data
+            ]);
+    }
+    
 }

@@ -24,36 +24,18 @@
     <div class="card">
 
         <div class="card-body">
-            <h4 class="card-title">FORM TAMBAH DATA DISTRIBUTOR</h4>
+            <h4 class="card-title">FORM TAMBAH DATA KARYAWAN</h4>
             <hr>
-        <form action="{{ route('tambah.distributor') }}" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
             <div class="row">
              <div class="col-6">
               <div class="mb-3">
-                <label for="nama_distributor" class="form-label">Distributor</label>
-                <input type="text" class="form-control" name="nama_distributor" id="nama_distributor">
-              </div>
-              <div class="mb-3">
-                  <label for="tlp" class="form-label">No Telepon</label>
-                  <input type="number" class="form-control" name="tlp" id="tlp"></input>
-              </div>
-              <div class="mb-3">
-                  <label for="area_cover" class="form-label">Area Cover</label>
-                  <input type="text" class="form-control" name="area_cover" id="area_cover"></input>
+                <label for="role" class="form-label">Role</label>
+                <input type="text" class="form-control" name="role" id="role">
               </div>
             </div>
-                 <div class="col-6">
-                    <div class="mb-3">
-                        <label for="alamat" class="form-label">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat">
-                      </div>
-                      <div class="mb-3">
-                        <label for="penjab_id" class="form-label">Penanggung Jawab</label>
-                        <input class="form-control" name="penjab_id" id="penjab_id">
-                      </div>
-                    </div>
-                </div>
+            </div>
                 <button type="submit" class="btn btn-primary">
                     Tambah
                 </button>
@@ -73,45 +55,45 @@
                     @endif
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Data Distributor</h6>
+                            <h6 class="mb-4">Data Karyawan</h6>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>
-                                            <th scope="col">Distributor</th>
-                                            <th scope="col">Telepon</th>
-                                            <th scope="col">Area Cover</th>
-                                            <th scope="col">Alamat</th>
-                                            <th scope="col">Penanggung Jawab</th>
+                                            <th scope="col">No Identitas</th>
+                                            <th scope="col">Nama Lengkap</th>
+                                            <th scope="col">Posisi</th>
+                                            <th scope="col">Tempat Lahir</th>
+                                            <th scope="col">Tanggal Lahir</th>
                                             <th scope="col">Aksi</th>
-                                           
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($distributor as $index => $dt )
+                                        @foreach ($karyawan as $index => $kr )
                                         <tr>
                                             <th scope="row">{{ $index+1 }}</th>
-                                            <td>{{ $dt['nama_distributor'] }}</td>
-                                            <td>{{ $dt['tlp'] }}</td>
-                                            <td>{{ $dt['area_cover'] }}</td>
-                                            <td>{{ $dt['alamat']  }}</td>
-                                            <td>{{ $dt['nama_penjab']  }}</td>
+                                            <td>{{ $kr['no_identitas'] }}</td>
+                                            <td>{{ $kr['name'] }}</td>
+                                            <td>{{ $kr['nama_posisi'] }}</td>
+                                            <td>{{ $kr['tempat_lahir'] }}</td>
+                                            <td>{{ $kr['tgl_lahir'] }}</td>
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">
-                                                    <a href="{{ route('edit.distributor', ['id' => $dt['id']]) }}" type="button"
+                                                    <a href="" type="button"
                                                         class="btn btn-outline-primary waves-effect waves-light">
                                                         Edit</a>
-                                                        <form action="{{ route('delete.distributor', ['id' => $dt['id']]) }}" method="POST">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
+                                                        <form action="" method="POST">
+                                                            {{ csrf_field() }}
+                                                            {{ method_field('DELETE') }}
                                                         <button onclick="return confirm('Anda yakin akan menghapus ini? ')" type="submit"
                                                         class="btn btn-outline-danger waves-effect waves-light">Hapus</i></button>
                                                     </form>
                                                 </div>
                                             </td>
                                         </tr>
-                                        @endforeach   
+                                        @endforeach
+    
                                     </tbody>
                                 </table>
                             </div>
