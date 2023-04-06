@@ -11,6 +11,7 @@ use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApiAdminController extends Controller
@@ -432,13 +433,86 @@ class ApiAdminController extends Controller
                 ->join('role', 'role.id', '=', 'users.role_id')
                 ->join('posisi', 'posisi.id', '=', 'users.posisi_id')
                 ->select('users.name','users.email','users.tempat_lahir','users.tgl_lahir','users.no_identitas',
-                         'role.role', 'posisi.nama_posisi')
+                        'users.status','users.no_tlp','users.domisili','role.*','posisi.*')
                 ->where('role.id','=','2')
                 ->get();
 
             return response()->json([
                 'data' => $data
             ]);
+    }
+
+    public function tambah_karyawan(Request $request)
+    {
+        $validate = $request->validate([
+            'name'=> 'required',
+            'email'=> 'required|string|email|max:255|unique:users',
+            'no_identitas'=> 'required',
+            'tempat_lahir'=> 'required',
+            'tgl_lahir'=> 'required',
+            'no_rek'=> 'required',
+            'posisi_id'=> 'required',
+            'no_tlp'=> 'required',
+            ], [
+                'email.unique' => 'email sudah digunakan',
+        ]);
+
+        $karyawan = DB::table('users')->insert([
+
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'password'=> bcrypt('12345678'),
+            'no_identitas'=> $request->no_identitas,
+            'tempat_lahir'=> $request->tempat_lahir,
+            'tgl_lahir'=> $request->tgl_lahir,
+            'no_rek'=> $request->no_rek,
+            'role_id'=> 2,
+            'posisi_id'=> $request->posisi_id,
+            'status'=> $request->status,
+            'domisili'=> $request->domisili,
+            'no_tlp'=> $request->no_tlp,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Karyawan berhasil ditambah',
+            'data' => $karyawan
+        ], Response::HTTP_OK);
+    }
+
+    public function update_karyawan(Request $request, $id)
+    {
+        $karyawan = User::findOrFail($id);
+        $karyawan->update($request->all());
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diubah',
+            'data' => $karyawan
+        ]);
+    }
+
+    public function delete_karyawan($id)
+    {
+        $karyawan = User::findOrFail($id);
+        $karyawan->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil dihapus',
+            'data' => $karyawan
+        ]);
+    }
+
+    public function get_karyawan_id($id)
+    {
+        $karyawan = DB::table('users')
+        ->where('id', '=', $id)
+        ->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil ditampilkan',
+            'data' => $karyawan
+        ]);
     }
     
 }

@@ -11,7 +11,6 @@ use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PenggajianController;
 use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\PengeluaranController;
-use App\Http\Controllers\DatakaryawanController;
 use App\Http\Controllers\KaryawanController;
 
 /*
@@ -42,7 +41,6 @@ Route::get('logout', [AuthController::class, 'logout'])->name('keluar');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
-Route::get('/karyawan', [DatakaryawanController::class, 'karyawan'])->name('karyawan');
 
 #DISTRIBUTOR
 Route::get('/distributor', [DistributorController::class, 'distributor'])->name('distributor');
@@ -75,6 +73,10 @@ Route::delete('/delete_pemasukan/{id}', [PemasukanController::class, 'delete_pem
 Route::get('/penggajian', [PenggajianController::class, 'penggajian'])->name('penggajian');
 
 Route::get('/karyawan', [KaryawanController::class, 'karyawan'])->name('karyawan');
+Route::post('/tambah_karyawan', [KaryawanController::class, 'tambah_karyawan'])->name('tambah.karyawan');
+Route::post('/update_karyawan/{id}', [KaryawanController::class, 'update_karyawan'])->name('update.karyawan');
+Route::get('/edit_karyawan/{id}', [KaryawanController::class, 'edit_karyawan'])->name('edit.karyawan');
+Route::delete('/delete_karyawan/{id}', [KaryawanController::class, 'delete_karyawan'])->name('delete.karyawan');
 
 #PENANGGUNGJAWAB
 Route::get('/penjab', [PenjabController::class, 'penjab'])->name('penjab');

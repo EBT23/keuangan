@@ -26,13 +26,60 @@
         <div class="card-body">
             <h4 class="card-title">FORM TAMBAH DATA KARYAWAN</h4>
             <hr>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('tambah.karyawan') }}" method="POST" enctype="multipart/form-data">
                 @csrf
             <div class="row">
              <div class="col-6">
               <div class="mb-3">
-                <label for="role" class="form-label">Role</label>
-                <input type="text" class="form-control" name="role" id="role">
+                <label for="name" class="form-label">Nama Lengkap</label>
+                <input type="text" class="form-control" name="name" id="name">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email">
+              </div>
+              <div class="mb-3">
+                <label for="no_identitas" class="form-label">No Identitas</label>
+                <input type="number" class="form-control" name="no_identitas" id="no_identitas">
+              </div>
+              <div class="mb-3">
+                <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
+                <textarea class="form-control" name="tempat_lahir" id="tempat_lahir"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
+                <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" id="tgl_lahir">
+              </div>
+            </div>
+             <div class="col-6">
+              <div class="mb-3">
+                <label for="no_rek" class="form-label">No Rekening</label>
+                <input type="text" class="form-control" name="no_rek" id="no_rek">
+              </div>
+              <div class="mb-3">
+                <label for="posisi_id" class="form-label">Posisi</label>
+                <select class="form-control" name="posisi_id" data-allow-clear="true">
+                    @foreach ($posisi as $item)
+                        <option value="{{ $item['id'] }}">
+                            {{ $item['nama_posisi'] }}
+                        </option>
+                    @endforeach
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-control" name="status" id="status">
+                    <option value="Karyawan Tetap" {{ old('status') == 'active' ? 'selected' : '' }}>Karyawan Tetap</option>
+                    <option value="Karyawan Tidak Tetap" {{ old('status') == 'inactive' ? 'selected' : '' }}>Karyawan Tidak Tetap</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="domisili" class="form-label">Domisili</label>
+                <textarea class="form-control" name="domisili" id="domisili"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="no_tlp" class="form-label">No Handphone</label>
+                <input type="number" class="form-control" id="no_tlp" name="no_tlp" id="no_tlp">
               </div>
             </div>
             </div>
@@ -66,6 +113,9 @@
                                             <th scope="col">Posisi</th>
                                             <th scope="col">Tempat Lahir</th>
                                             <th scope="col">Tanggal Lahir</th>
+                                            <th scope="col">No Handphone</th>
+                                            <th scope="col">Domisili</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
@@ -78,6 +128,9 @@
                                             <td>{{ $kr['nama_posisi'] }}</td>
                                             <td>{{ $kr['tempat_lahir'] }}</td>
                                             <td>{{ $kr['tgl_lahir'] }}</td>
+                                            <td>{{ $kr['no_tlp'] }}</td>
+                                            <td>{{ $kr['domisili'] }}</td>
+                                            <td>{{ $kr['status'] }}</td>
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">
                                                     <a href="" type="button"

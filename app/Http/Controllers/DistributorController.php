@@ -14,11 +14,15 @@ class DistributorController extends Controller
 
         $token = session('access_token');
 
+        $response1 = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/penjab');
         $response = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/distributor');
         $body_distributor = $response->getBody();
+        $body1 = $response1->getBody();
+        $data1['penjab'] = json_decode($body1, true);
+        $data1['penjab'] = $data1['penjab']['data'];
         $data['distributor'] = json_decode($body_distributor, true);
         $data['distributor'] = $data['distributor']['data'];
-        return view('distributor', $data);
+        return view('distributor', $data, $data1);
     }
 
     public function tambah_distributor(Request $request)

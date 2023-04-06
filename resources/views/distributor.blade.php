@@ -49,8 +49,14 @@
                         <input type="text" class="form-control" id="alamat" name="alamat">
                       </div>
                       <div class="mb-3">
-                        <label for="penjab_id" class="form-label">Penanggung Jawab</label>
-                        <input class="form-control" name="penjab_id" id="penjab_id">
+                        <label for="posisi_id" class="form-label">Posisi</label>
+                        <select class="form-control" name="penjab_id" data-allow-clear="true">
+                         @foreach ($penjab as $item)
+                        <option value="{{ $item['id'] }}">
+                            {{ $item['nama_penjab'] }}
+                        </option>
+                    @endforeach
+                </select>
                       </div>
                     </div>
                 </div>
