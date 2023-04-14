@@ -133,10 +133,10 @@
                                             <td>{{ $kr['status'] }}</td>
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">
-                                                    <a href="" type="button"
+                                                    <a href="{{ route('edit.karyawan', ['id' => $kr['id']]) }}" type="button"
                                                         class="btn btn-outline-primary waves-effect waves-light">
                                                         Edit</a>
-                                                        <form action="" method="POST">
+                                                        <form action="{{ route('delete.karyawan', ['id' => $kr['id']]) }}" method="POST">
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}
                                                         <button onclick="return confirm('Anda yakin akan menghapus ini? ')" type="submit"

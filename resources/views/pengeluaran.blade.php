@@ -7,7 +7,7 @@
 <div
     id="spinner"
     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div
+    <div>
         class="spinner-border text-primary"
         style="width: 3rem; height: 3rem;"
         role="status">
@@ -18,7 +18,7 @@
 
 <!-- Content Start -->
 <div class="content">
-    <!-- Navbar Start -->
+    <!-- Navbar Start -->        
     @include('layouts.header')
     <!-- Navbar End -->
     <div class="card">
@@ -30,10 +30,17 @@
                 @csrf
             <div class="row">
              <div class="col-6">
-              <div class="mb-3">
-                <label for="jenis_pengeluaran" class="form-label">Jenis Pengeluaran</label>
-                <input class="form-control" name="jenis_pengeluaran" id="jenis_pengeluaran">
-              </div>
+                <div class="mb-3">
+                    <label for="distributor_id" class="form-label">Distributor</label>
+                    <select class="form-select" name="distributor_id" data-allow-clear="true">
+                        <option selected="">Pilih Distributor</option>
+                        @foreach ($distributor as $item)
+                            <option value="{{ $item['id'] }}">
+                                {{ $item['nama_distributor'] }}
+                            </option>
+                        @endforeach
+                    </select>
+                  </div>
               <div class="mb-3">
                   <label for="keterangan" class="form-label">Keterangan</label>
                   <textarea class="form-control" name="keterangan" id="keterangan"></textarea>
@@ -48,6 +55,10 @@
                         <label for="total_pengeluaran" class="form-label">Total Pengeluaran</label>
                         <input class="form-control" name="total_pengeluaran" id="total_pengeluaran">
                       </div>
+                      <div class="mb-3">
+                        <label for="bukti_pengeluaran" class="form-label">Bukti Pengeluaran</label>
+                        <input class="form-control form-control-sm" name="bukti_pengeluaran" id="bukti_pengeluaran" type="file">
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">
@@ -72,7 +83,7 @@
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Responsive Table</h6>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table  id="pengeluaran" class="display" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>
@@ -88,7 +99,7 @@
                                         @foreach ($pengeluaran as $index => $pn )
                                         <tr>
                                             <th scope="row">{{ $index+1 }}</th>
-                                            <td>{{ $pn['jenis_pengeluaran'] }}</td>
+                                            <td>{{ $pn['nama_distributor'] }}</td>
                                             <td>{{ $pn['keterangan'] }}</td>
                                             <td>Rp. {{ $pn['total_pengeluaran'] }}</td>
                                             <td>{{ $pn['tgl'] }}</td>
@@ -109,6 +120,7 @@
                                         @endforeach
     
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -122,6 +134,11 @@
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
     <i class="bi bi-arrow-up"></i>
 </a>
-</div>
 
+</div>
+<script>
+    $(document).ready(function() {
+    $('#pengeluaran').DataTable();
+} );
+</script>
 @endsection

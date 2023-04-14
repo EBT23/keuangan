@@ -15,11 +15,15 @@ class PemasukanController extends Controller
 
         $token = session('access_token');
 
+        $response1 = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/distributor');
         $response = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/pemasukan');
         $body_pemasukan = $response->getBody();
+        $body1 = $response1->getBody();
+        $data1['distributor'] = json_decode($body1, true);
+        $data1['distributor'] = $data1['distributor']['data'];
         $data['pemasukan'] = json_decode($body_pemasukan, true);
         $data['pemasukan'] = $data['pemasukan']['data'];
-        return view('pemasukan', $data);
+        return view('pemasukan', $data, $data1);
     }
 
     public function tambah_pemasukan(Request $request)

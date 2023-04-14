@@ -30,10 +30,17 @@
                 @csrf
             <div class="row">
              <div class="col-6">
-              <div class="mb-3">
-                <label for="jenis_pemasukan" class="form-label">Jenis Pemasukan</label>
-                <input type="text" class="form-control" name="jenis_pemasukan" id="jenis_pemasukan">
-              </div>
+                <div class="mb-3">
+                    <label for="distributor_id" class="form-label">Distributor</label>
+                    <select class="form-select" name="distributor_id" data-allow-clear="true">
+                        <option selected="">Pilih Distributor</option>
+                        @foreach ($distributor as $item)
+                            <option value="{{ $item['id'] }}">
+                                {{ $item['nama_distributor'] }}
+                            </option>
+                        @endforeach
+                    </select>
+                  </div>
               <div class="mb-3">
                   <label for="keterangan" class="form-label">Keterangan</label>
                   <textarea class="form-control" name="keterangan" id="keterangan"></textarea>
@@ -48,8 +55,12 @@
                         <label for="total_pemasukan" class="form-label">Total Pemasukan</label>
                         <input class="form-control" name="total_pemasukan" id="total_pemasukan">
                       </div>
+                      <div class="mb-3">
+                          <label for="bukti_pemasukan" class="form-label">Bukti Pemasukan</label>
+                          <input class="form-control form-control-sm" name="bukti_pemasukan" id="bukti_pemasukan" type="file">
+                          </div>
+                     </div>
                     </div>
-                </div>
                 <button type="submit" class="btn btn-primary">
                     Tambah
                 </button>
@@ -75,7 +86,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>
-                                            <th scope="col">Jenis Pemasukkan</th>
+                                            <th scope="col">Distributor</th>
                                             <th scope="col">Keterangan</th>
                                             <th scope="col">Tanggal</th>
                                             <th scope="col">Total Pemasukkan</th>
@@ -87,7 +98,7 @@
                                         @foreach ($pemasukan as $index => $pm )
                                         <tr>
                                             <th scope="row">{{ $index+1 }}</th>
-                                            <td>{{ $pm['jenis_pemasukan'] }}</td>
+                                            <td>{{ $pm['nama_distributor'] }}</td>
                                             <td>{{ $pm['keterangan'] }}</td>
                                             <td>{{ $pm['tgl'] }}</td>
                                             <td>Rp. {{ number_format($pm['total_pemasukan'])  }}</td>

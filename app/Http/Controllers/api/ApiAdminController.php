@@ -22,7 +22,10 @@ class ApiAdminController extends Controller
     }
     public function pengeluaran()
     {
-        $pengeluaran = DB::table('pengeluaran')->get();
+        $pengeluaran = DB::table('pengeluaran')
+            ->join('distributor', 'distributor.id', '=', 'pengeluaran.distributor_id')
+            ->select('distributor.id', 'distributor.nama_distributor', 'pengeluaran.keterangan', 'pengeluaran.tgl', 'pengeluaran.total_pengeluaran', 'pengeluaran.bukti_pengeluaran')
+            ->get();
         return response()->json([
             'data' => $pengeluaran
         ]);
@@ -30,17 +33,19 @@ class ApiAdminController extends Controller
     public function tambah_pengeluaran(Request $request)
     {
         $validate = $request->validate([
-            'jenis_pengeluaran' => 'required',
+            'distributor_id' => 'required',
             'keterangan' => 'required',
             'total_pengeluaran' => 'required',
             'tgl' => 'required',
+            'bukti_pengeluaran' => 'required',
         ]);
 
         $pengeluaran = DB::table('pengeluaran')->insert([
-            'jenis_pengeluaran' => $request->jenis_pengeluaran,
+            'distributor_id' => $request->distributor_id,
             'keterangan' => $request->keterangan,
             'total_pengeluaran' => $request->total_pengeluaran,
             'tgl' => $request->tgl,
+            'bukti_pengeluaran' => $request->bukti_pengeluaran,
         ]);
 
         return response()->json([
@@ -83,25 +88,30 @@ class ApiAdminController extends Controller
     }
     public function pemasukan()
     {
-        $pengeluaran = DB::table('pemasukan')->get();
+        $pemasukan = DB::table('pemasukan')
+            ->join('distributor', 'distributor.id', '=', 'pemasukan.distributor_id')
+            ->select('distributor.id', 'distributor.nama_distributor', 'pemasukan.keterangan', 'pemasukan.tgl', 'pemasukan.total_pemasukan', 'pemasukan.bukti_pemasukan')
+            ->get();
         return response()->json([
-            'data' => $pengeluaran
+            'data' => $pemasukan
         ]);
     }
     public function tambah_pemasukan(Request $request)
     {
         $validate = $request->validate([
-            'jenis_pemasukan' => 'required',
+            'distributor_id' => 'required',
             'keterangan' => 'required',
             'total_pemasukan' => 'required',
             'tgl' => 'required',
+            'bukti_pemasukan' => 'required',
         ]);
 
         $pemasukan = DB::table('pemasukan')->insert([
-            'jenis_pemasukan' => $request->jenis_pemasukan,
+            'distributor_id' => $request->distributor_id,
             'keterangan' => $request->keterangan,
             'total_pemasukan' => $request->total_pemasukan,
             'tgl' => $request->tgl,
+            'bukti_pemasukan' => $request->bukti_pemasukan,
         ]);
 
         return response()->json([

@@ -12,13 +12,15 @@ class PengeluaranController extends Controller
         $data['title'] = 'Pengeluaran';
         $token = session('access_token');
         
+        $response1 = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/distributor');
         $response = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/pengeluaran');
-
-        $body = $response->getBody();
-        $data['pengeluaran'] = json_decode($body,true);
+        $body_pengeluaran = $response->getBody();
+        $body1 = $response1->getBody();
+        $data1['distributor'] = json_decode($body1, true);
+        $data1['distributor'] = $data1['distributor']['data'];
+        $data['pengeluaran'] = json_decode($body_pengeluaran, true);
         $data['pengeluaran'] = $data['pengeluaran']['data'];
-        
-        return view('pengeluaran', $data);
+        return view('pengeluaran', $data, $data1);
     }
 
     public function tambah_pengeluaran(Request $request)
@@ -26,10 +28,11 @@ class PengeluaranController extends Controller
         $token = session('access_token');
 
         $addPengeluaran = [
-            'jenis_pengeluaran' => $request->jenis_pengeluaran,
+            'distributor_id' => $request->distributor_id,
             'keterangan' => $request->keterangan,
             'total_pengeluaran' => $request->total_pengeluaran,
             'tgl' => $request->tgl,
+            'bukti_pengeluaran' => $request->bukti_pengeluaran,
             'updated_at' => now(),
             'created_at' => now(),
         ];
@@ -92,10 +95,11 @@ class PengeluaranController extends Controller
                 'Accept' => 'application/x-www-form-urlencoded',
             ],
             'json' => [
-                'jenis_pengeluaran' => $request->jenis_pengeluaran,
+                'distributor_id' => $request->distributor_id,
                 'keterangan' => $request->keterangan,
-                'tgl' => $request->tgl,
                 'total_pengeluaran' => $request->total_pengeluaran,
+                'tgl' => $request->tgl,
+                'bukti_pengeluaran' => $request->bukti_pengeluaran,
                 'updated_at' => now(),
             ],
         ]);
@@ -116,6 +120,7 @@ class PengeluaranController extends Controller
         'timeout' => 2.0,
         ]);
 
+        
         $response = $client->request('DELETE', "delete_pengeluaran/$id", [
         'headers' => [
         'Authorization' => 'Bearer ' . $token,

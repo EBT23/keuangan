@@ -57,7 +57,7 @@
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Data Penanggung Jawab</h6>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" id="penjab">
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>
@@ -103,3 +103,12 @@
 </div>
 
 @endsection
+<script>
+
+    $(document).ready(function () {
+        $('#penjab ').DataTable();
+</script>
+});
+<script src="{{ asset('js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.5.1.js') }}"></script>

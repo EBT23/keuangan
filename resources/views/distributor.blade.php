@@ -135,3 +135,8 @@
 </div>
 
 @endsection
+<script>
+    $(document).ready(function() {
+    $('#distributor').DataTable();
+} );
+</script>
