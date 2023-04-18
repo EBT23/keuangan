@@ -53,8 +53,8 @@ class PemasukanController extends Controller
         if ($request->hasFile('bukti_pemasukan')) {
             $file = $request->file('bukti_pemasukan');
             $filename = time() . '-' . $file->getClientOriginalName();
-            $path = $file->storeAs('public/upload', $filename);
-            $data->bukti_pemasukan = $path;
+            $path = $file->move(public_path('upload/pemasukan'), $filename);
+            $data->bukti_pemasukan = $filename;
         }
         $data->save();
 

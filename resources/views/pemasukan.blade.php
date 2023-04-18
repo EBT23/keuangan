@@ -103,7 +103,7 @@
                                             <td>{{ $pm['keterangan'] }}</td>
                                             <td>{{ $pm['tgl'] }}</td>
                                             <td>Rp. {{ number_format($pm['total_pemasukan'])  }}</td>
-                                            <td><img src="{{ asset('public/storage/app/public/upload/' . $pm['bukti_pemasukan'] . '') }}" width="30" height="30" alt="Gambar Kosong">
+                                            <td><img src="{{ asset('upload/pemasukan/' . $pm['bukti_pemasukan'] . '') }}" width="30" height="30" alt="Gambar Kosong">
                                             </td>
                                            
                                             <td>
