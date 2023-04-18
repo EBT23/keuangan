@@ -58,7 +58,8 @@
               </div>
               <div class="mb-3">
                 <label for="posisi_id" class="form-label">Posisi</label>
-                <select class="form-control" name="posisi_id" data-allow-clear="true">
+                <select class="form-select" name="posisi_id" data-allow-clear="true">
+                    <option selected="">Pilih Posisi</option>
                     @foreach ($posisi as $item)
                         <option value="{{ $item['id'] }}">
                             {{ $item['nama_posisi'] }}
@@ -68,7 +69,8 @@
               </div>
               <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
-                <select class="form-control" name="status" id="status">
+                <select class="form-select" name="status" data-allow-clear="true">
+                    <option selected="">Status :</option>
                     <option value="Karyawan Tetap" {{ old('status') == 'active' ? 'selected' : '' }}>Karyawan Tetap</option>
                     <option value="Karyawan Tidak Tetap" {{ old('status') == 'inactive' ? 'selected' : '' }}>Karyawan Tidak Tetap</option>
                 </select>

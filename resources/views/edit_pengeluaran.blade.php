@@ -1,4 +1,4 @@
-@extends('layouts.base',['title' => "$title - Admin"])
+@extends('layouts.base')
 <!-- Start wrapper-->
 
 @section('content') 
@@ -10,7 +10,7 @@
     <div
         class="spinner-border text-primary"
         style="width: 3rem; height: 3rem;"
-        role="status">
+        role="status"> 
         <span class="sr-only">Loading...</span>
     </div>
 </div>
@@ -24,7 +24,7 @@
     <div class="card-body">
         <div class="col-12">
             <div class="bg-light rounded h-100 p-4">
-                <h6 class="mb-4">Data {{ $title }}</h6>
+                <h6 class="mb-4">Data Pengeluaran</h6>
                  <!-- Table Start -->
  <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
@@ -32,42 +32,49 @@
         <div class="col-12">
             <div class="card mb-5">
                 <div class="card-body">
-                    <h4 class="card-header">EDIT DATA pengeluaran</h4>
-                    <form action="{{ route('update.pengeluaran', ['id' => $pengeluaran['id']]) }}" method="POST" enctype="multipart/form-data">
+                    <h4 class="card-header">EDIT DATA PENGELUARAN</h4>
+                    <form action="{{ route('update.pengeluaran', $pengeluaran->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                 <div class="row">
-                <div class="col-12">
-                    <div class="mb-3">
-                        <label for="jenis_pengeluaran" class="form-label">Jenis pengeluaran</label>
-                        <input type="text" class="form-control" id="jenis_pengeluaran"
-						value="{{ $pengeluaran['jenis_pengeluaran'] }}" name="jenis_pengeluaran"
-						aria-describedby="jenis_pengeluaran" required>
+                        <div class="row">
+                        <div class="col-lg">
+                      <div class="mb-3">
+                        <label for="distributor_id" class="form-label">Nama Distributor</label>
+                        <select class="form-select" name="distributor_id" data-allow-clear="true">
+                            <option selected="">Pilih Distributor</option>
+                            @foreach ($distributor as $item)
+                                <option value="{{ $item->id }}">
+                                    {{ $item->nama_distributor }}
+                                </option>
+                            @endforeach
+                        </select>
                       </div>
                       <div class="mb-3">
                           <label for="keterangan" class="form-label">Keterangan</label>
-                          <input type="text" class="form-control" value="{{ $pengeluaran['keterangan'] }}" name="keterangan" id="keterangan" aria-describedby="jenis_pemasukan" required>
+                          <input type="text" class="form-control" value="{{ $pengeluaran['keterangan'] }}" name="keterangan" id="keterangan" aria-describedby="jenis_pengeluaran" required>
                       </div>
-                    </div>
-                </div>
-                      
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <label for="tgl" class="form-label">Tanggal</label>
-                                <input type="date" class="form-control" id="tgl"
-                              value="{{ $pengeluaran['tgl'] }}" name="tgl"
-                              aria-describedby="tgl" required>
-                              </div>
-                              <div class="mb-3">
-                                <label for="total_pengeluaran" class="form-label">Total pengeluaran</label>
-                                <input type="text" class="form-control" id="total_pengeluaran"
-                                value="{{ $pengeluaran['total_pengeluaran'] }}" name="total_pengeluaran"
-                                aria-describedby="total_pengeluaran" required>
-                              </div>
+                        <div class="mb-3">
+                          <label for="tgl" class="form-label">Tanggal</label>
+                          <input type="date" class="form-control" id="tgl"
+						value="{{ $pengeluaran['tgl'] }}" name="tgl"
+						aria-describedby="tgl" required>
+                        </div>
+                        <div class="mb-3">
+                          <label for="total_pengeluaran" class="form-label">Total Pengeluaran</label>
+                          <input type="text" class="form-control" id="total_pengeluaran"
+                          value="{{ $pengeluaran['total_pengeluaran'] }}" name="total_pengeluaran"
+                          aria-describedby="total_pengeluaran" required>
+                        </div>
+                        <div class="mb-3">
+                          <label for="bukti_pengeluaran" class="form-label">Bukti Pengeluaran</label>
+                          <input type="file" class="form-control" id="bukti_pengeluaran"
+                          value="{{ $pengeluaran['bukti_pengeluaran'] }}" name="bukti_pengeluaran"
+                          aria-describedby="bukti_pengeluaran" required>
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">
                             Simpan
                           </button>
                           <a href="{{ route('pengeluaran') }}" class="btn btn-secondary mt-3">Kembali</a>
+                        </div>
                         </div>
                     </form>
                 </div>

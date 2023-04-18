@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Distributor;
 use App\Models\Pemasukan;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -13,20 +14,15 @@ class PemasukanController extends Controller
 {
     public function pemasukan()
     {
-        $data['title'] = 'Kelola Pemasukan';
+        $title['title'] = 'Kelola Pemasukan';
        
-        $token = session('access_token');
+       $data = DB::table('pemasukan')
+       ->join('distributor', 'distributor.id', '=', 'pemasukan.distributor_id')
+       ->select('pemasukan.*', 'distributor.nama_distributor')
+       ->get();
+       $data1 = Distributor::all();
 
-        $response1 = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/distributor');
-        $response = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/pemasukan');
-        $body_pemasukan = $response->getBody();
-        $body1 = $response1->getBody();
-        $data1['distributor'] = json_decode($body1, true);
-        $data1['distributor'] = $data1['distributor']['data'];
-        $data['pemasukan'] = json_decode($body_pemasukan, true);
-        $data['pemasukan'] = $data['pemasukan']['data'];
-        // dd($data['pemasukan']);
-        return view('pemasukan', $data, $data1);
+        return view('pemasukan', ['data' => $data],['data1' => $data1 ], $title);
     }
 
     public function tambah_pemasukan(Request $request)
@@ -38,7 +34,7 @@ class PemasukanController extends Controller
             'keterangan' => 'required',
             'tgl' => 'required',
             'total_pemasukan' => 'required',
-            'bukti_pemasukan' => 'required|file|max:2048',
+            'bukti_pemasukan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         // menyimpan data
@@ -63,29 +59,44 @@ class PemasukanController extends Controller
     }
 
     public function update_pemasukan(Request $request, $id)
-    {
-        $token = session('access_token');
-        $client = new Client([
-            'base_uri' => 'http://keuangan.dlhcode.com/api/',
-            'timeout' => 50.0,
+    {   
+        // Validasi request
+        $request->validate([
+            'distributor_id' => 'required',
+            'keterangan' => 'required|string',
+            'tgl' => 'required',
+            'total_pemasukan' => 'required|numeric|min:0',
+            'bukti_pemasukan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $response = $client->request('PUT', "update_pemasukan/$id", [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/x-www-form-urlencoded',
-            ],
-            'json' => [
-                'distributor_id' => $request->distributor_id,
-                'keterangan' => $request->keterangan,
-                'tgl' => $request->tgl,
-                'total_pemasukan' => $request->total_pemasukan,
-                'bukti_pemasukan' => $request->bukti_pemasukan,
-                'updated_at' => now(),
-            ],
-        ]);
+         // Cari item berdasarkan id
+        $pemasukan = Pemasukan::find($id);
 
-        $data = json_decode($response->getBody(), true);
+        // Jika item tidak ditemukan, kembalikan response error 404
+        if (!$pemasukan) {
+            return response()->json([
+                'message' => 'Data not found'
+            ], 404);
+        }
+
+        // Update data pemasukan
+            $pemasukan->distributor_id = $request->distributor_id;
+            $pemasukan->keterangan = $request->keterangan;
+            $pemasukan->tgl = $request->tgl;
+            $pemasukan->total_pemasukan = $request->total_pemasukan;
+            $pemasukan->updated_at = now();
+
+         // simpan file
+        if ($request->hasFile('bukti_pemasukan')) {
+            $file = $request->file('bukti_pemasukan');
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $path = $file->move(public_path('upload/pemasukan'), $filename);
+            $pemasukan->bukti_pemasukan = $filename;
+        }
+
+        $pemasukan->save();
+
+        
         return redirect()
             ->route('pemasukan')
             ->withSuccess('Data Pemasukan berhasil diubah');
@@ -93,45 +104,20 @@ class PemasukanController extends Controller
 
     public function edit_pemasukan($id)
     {
+        // $data['title'] = 'Edit Data Pemasukan';
 
-        $data['title'] = 'Edit Data Pemasukan';
-        $token = session('access_token');
-        $client = new Client([
-        'base_uri' => 'http://keuangan.dlhcode.com/api/',
-        'timeout' => 2.0,
-        ]);
-      
-        $response1 = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/distributor');
-        $response = $client->request('GET', "get_pemasukan_by_id/$id", [
-        'headers' => [
-        'Authorization' => 'Bearer ' . $token,
-        'Accept' => 'application/json',
-        ]
-        ]);
-    
-        $body1 = $response1->getBody();
-        $data1['distributor'] = json_decode($body1, true);
-        $data1['distributor'] = $data1['distributor']['data'];
-        $data['pemasukan'] = json_decode($response->getBody(), true);
-        $data['pemasukan'] = $data['pemasukan']['data'][0];
+        $distributor = Distributor::all();
+        $pemasukan = Pemasukan::find($id); // Ambil data pemasukan berdasarkan ID
+
    
-        return view('edit_pemasukan', $data, $data1);
+        return view('edit_pemasukan', ['pemasukan' => $pemasukan], ['distributor' => $distributor]);
     }
 
     public function delete_pemasukan($id)
     {
-        $token = session('access_token');
-        $client = new Client([
-        'base_uri' => 'http://keuangan.dlhcode.com/api/',
-        'timeout' => 2.0,
-        ]);
-
-        $response = $client->request('DELETE', "delete_pemasukan/$id", [
-        'headers' => [
-        'Authorization' => 'Bearer ' . $token,
-        'Accept' => 'application/json',
-        ]
-        ]);
+        DB::table('pemasukan')
+            ->where('id', $id)
+            ->delete();
 
         return redirect()
             ->route('pemasukan')

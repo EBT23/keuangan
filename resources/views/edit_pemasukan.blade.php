@@ -1,4 +1,4 @@
-@extends('layouts.base',['title' => "$title - Admin"])
+@extends('layouts.base')
 <!-- Start wrapper-->
 
 @section('content') 
@@ -24,7 +24,7 @@
     <div class="card-body">
         <div class="col-12">
             <div class="bg-light rounded h-100 p-4">
-                <h6 class="mb-4">{{ $title }}</h6>
+                <h6 class="mb-4"></h6>
                  <!-- Table Start -->
  <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
@@ -33,7 +33,7 @@
             <div class="card mb-5">
                 <div class="card-body">
                     <h4 class="card-header">EDIT DATA PEMASUKAN</h4>
-                    <form action="{{ route('update.pemasukan', ['id' => $pemasukan['id']]) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('update.pemasukan', $pemasukan->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                         <div class="col-lg">
@@ -42,8 +42,8 @@
                         <select class="form-select" name="distributor_id" data-allow-clear="true">
                             <option selected="">Pilih Distributor</option>
                             @foreach ($distributor as $item)
-                                <option value="{{ $item['id'] }}">
-                                    {{ $item['nama_distributor'] }}
+                                <option value="{{ $item->id }}">
+                                    {{ $item->nama_distributor }}
                                 </option>
                             @endforeach
                         </select>
@@ -90,19 +90,9 @@
 </div>
 <!-- Content End -->
 <!-- Button trigger modal -->
-
-  
-  
 <!-- Back to Top -->
 <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
     <i class="bi bi-arrow-up"></i>
 </a>
 </div>
-
-<!--End wrapper-->
-<script>
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus')
-    })
-</script>
 @endsection

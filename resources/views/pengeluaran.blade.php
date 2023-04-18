@@ -1,4 +1,4 @@
-@extends('layouts.base',['title' => "$title - Admin"])
+@extends('layouts.base')
 <!-- Start wrapper-->
 
 @section('content') 
@@ -35,8 +35,8 @@
                     <select class="form-select" name="distributor_id" data-allow-clear="true">
                         <option selected="">Pilih Distributor</option>
                         @foreach ($distributor as $item)
-                            <option value="{{ $item['id'] }}">
-                                {{ $item['nama_distributor'] }}
+                            <option value="{{ $item->id }}">
+                                {{ $item->nama_distributor }}
                             </option>
                         @endforeach
                     </select>
@@ -69,7 +69,7 @@
         <div class="card-body">
             <div class="col-12">
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Data {{ $title }}</h6>
+                    <h6 class="mb-4">Data Pengeluaran</h6>
                     @if (Session::has('success'))
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
@@ -81,16 +81,17 @@
                     @endif
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Responsive Table</h6>
+                            <h6 class="mb-4">Data Pengeluaran</h6>
                             <div class="table-responsive">
                                 <table  id="pengeluaran" class="display" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>
-                                            <th scope="col">Jenis Pengeluaran</th>
+                                            <th scope="col">Distributor</th>
                                             <th scope="col">Keterangan</th>
-                                            <th scope="col">Total Pengeluaran</th>
                                             <th scope="col">Tanggal</th>
+                                            <th scope="col">Total Pengeluaran</th>
+                                            <th scope="col">Bukti Pengeluaran</th>
                                             <th scope="col">Aksi</th>
                                            
                                         </tr>
@@ -99,16 +100,38 @@
                                         @foreach ($pengeluaran as $index => $pn )
                                         <tr>
                                             <th scope="row">{{ $index+1 }}</th>
-                                            <td>{{ $pn['nama_distributor'] }}</td>
-                                            <td>{{ $pn['keterangan'] }}</td>
-                                            <td>Rp. {{ $pn['total_pengeluaran'] }}</td>
-                                            <td>{{ $pn['tgl'] }}</td>
+                                            <td>{{ $pn->nama_distributor }}</td>
+                                            <td>{{ $pn->keterangan }}</td>
+                                            <td>{{ $pn->tgl }}</td>
+                                            <td>Rp. {{ number_format($pn->total_pengeluaran) }}</td>
+                                            <td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#imageModal{{ $pn->id }}">
+                                                <i class="far fa-eye"></i>
+                                              </button>
+                                            </td>
+                                            <!-- Button trigger modal -->
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="imageModal{{ $pn->id }}" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="imageModalLabel">Bukti Pengeluaran</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img src="{{ asset('upload/pengeluaran/' . $pn->bukti_pengeluaran . '') }}" width="750" height="500" alt="Gambar Kosong">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">
-                                                    <a href="{{ route('edit.pengeluaran', ['id' => $pn['id']]) }}" type="button"
+                                                    <a href="{{ route('edit.pengeluaran', $pn->id) }}" type="button"
                                                         class="btn btn-outline-primary waves-effect waves-light">
                                                         Edit</a>
-                                                        <form action="{{ route('delete.pengeluaran', ['id' => $pn['id']]) }}" method="POST">
+                                                        <form action="{{ route('delete.pengeluaran', $pn->id) }}" method="POST">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
                                                         <button onclick="return confirm('Anda yakin akan menghapus ini? ')" type="submit"

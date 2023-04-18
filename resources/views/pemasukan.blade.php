@@ -1,4 +1,4 @@
-@extends('layouts.base',['title' => "$title - Admin"])
+@extends('layouts.base')
 <!-- Start wrapper-->
 
 @section('content') 
@@ -34,9 +34,9 @@
                     <label for="distributor_id" class="form-label">Distributor</label>
                     <select class="form-select" name="distributor_id" data-allow-clear="true">
                         <option selected="">Pilih Distributor</option>
-                        @foreach ($distributor as $item)
-                            <option value="{{ $item['id'] }}">
-                                {{ $item['nama_distributor'] }}
+                        @foreach ($data1 as $item)
+                            <option value="{{ $item->id }}">
+                                {{ $item->nama_distributor }}
                             </option>
                         @endforeach
                     </select>
@@ -46,7 +46,7 @@
                   <textarea class="form-control" name="keterangan" id="keterangan"></textarea>
               </div>
             </div>
-                 <div class="col-6">
+                 <div class="col-6" >
                     <div class="mb-3">
                         <label for="tgl" class="form-label">Tanggal</label>
                         <input type="date" class="form-control" id="tgl" name="tgl" id="tgl">
@@ -61,9 +61,9 @@
                           </div>
                      </div>
                     </div>
-                <button type="submit" class="btn btn-primary">
-                    Tambah
-                </button>
+                    <div class="">
+                        <button class="btn btn-primary" type="submit">Tambah</button>
+                      </div>
         </form>
         </div>
         <div class="card-body">
@@ -96,22 +96,43 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pemasukan as $index => $pm )
+                                        @foreach ($data as $index => $pm )
                                         <tr>
                                             <th scope="row">{{ $index+1 }}</th>
-                                            <td>{{ $pm['nama_distributor'] }}</td>
-                                            <td>{{ $pm['keterangan'] }}</td>
-                                            <td>{{ $pm['tgl'] }}</td>
-                                            <td>Rp. {{ number_format($pm['total_pemasukan'])  }}</td>
-                                            <td><img src="{{ asset('upload/pemasukan/' . $pm['bukti_pemasukan'] . '') }}" width="30" height="30" alt="Gambar Kosong">
-                                            </td>
-                                           
+                                            <td>{{ $pm->nama_distributor }}</td>
+                                            <td>{{ $pm->keterangan }}</td>
+                                            <td>{{ $pm->tgl }}</td>
+                                            <td>Rp. {{ number_format($pm->total_pemasukan)  }}</td>
+                                            {{-- <td><img src="{{ asset('upload/pemasukan/' . $pm['bukti_pemasukan'] . '') }}" width="30" height="30" alt="Gambar Kosong">
+                                            </td> --}}
+                                           <td><button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#imageModal{{ $pm->id }}">
+                                            <i class="far fa-eye"></i>
+                                          </button>
+                                        </td>
+                                           <!-- Button trigger modal -->
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="imageModal{{ $pm->id }}" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="imageModalLabel">Bukti Pemasukan</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img src="{{ asset('upload/pemasukan/' . $pm->bukti_pemasukan . '') }}" width="750" height="500" alt="Gambar Kosong">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">
-                                                    <a href="{{ route('edit.pemasukan', ['id' => $pm['id']]) }}" type="button"
+                                                    <a href="{{ route('edit.pemasukan', $pm->id) }}" type="button"
                                                         class="btn btn-outline-primary waves-effect waves-light">
                                                         Edit</a>
-                                                        <form action="{{ route('delete.pemasukan', ['id' => $pm['id']]) }}" method="POST">
+                                                        <form action="{{ route('delete.pemasukan', $pm->id) }}" method="POST">
                                                         {{ csrf_field() }}
                                                         {{ method_field('DELETE') }}
                                                         <button onclick="return confirm('Anda yakin akan menghapus ini? ')" type="submit"

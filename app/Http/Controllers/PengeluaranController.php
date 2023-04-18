@@ -1,135 +1,125 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Distributor;
+use App\Models\Pengeluaran;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class PengeluaranController extends Controller
 {
     public function pengeluaran()
     {
-        $data['title'] = 'Pengeluaran';
-        $token = session('access_token');
-        
-        $response1 = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/distributor');
-        $response = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/pengeluaran');
-        $body_pengeluaran = $response->getBody();
-        $body1 = $response1->getBody();
-        $data1['distributor'] = json_decode($body1, true);
-        $data1['distributor'] = $data1['distributor']['data'];
-        $data['pengeluaran'] = json_decode($body_pengeluaran, true);
-        $data['pengeluaran'] = $data['pengeluaran']['data'];
-        return view('pengeluaran', $data, $data1);
+        $data['title'] = 'Kelola Pengeluaran';
+       
+       $pengeluaran = DB::table('pengeluaran')
+       ->join('distributor', 'distributor.id', '=', 'pengeluaran.distributor_id')
+       ->select('pengeluaran.*', 'distributor.nama_distributor')
+       ->get();
+       $distributor = Distributor::all();
+
+        return view('pengeluaran', ['pengeluaran' => $pengeluaran],['distributor' => $distributor ], $data);
     }
 
     public function tambah_pengeluaran(Request $request)
     {
-        $token = session('access_token');
+         // validasi input
+         $request->validate([
+            'distributor_id' => 'required',
+            'keterangan' => 'required',
+            'tgl' => 'required',
+            'total_pengeluaran' => 'required',
+            'bukti_pengeluaran' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
-        $addPengeluaran = [
-            'distributor_id' => $request->distributor_id,
-            'keterangan' => $request->keterangan,
-            'total_pengeluaran' => $request->total_pengeluaran,
-            'tgl' => $request->tgl,
-            'bukti_pengeluaran' => $request->bukti_pengeluaran,
-            'updated_at' => now(),
-            'created_at' => now(),
-        ];
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $token, // token autentikasi
-            'Accept' => 'application/json', // format respon
-        ])->post('http://keuangan.dlhcode.com/api/tambah_pengeluaran', $addPengeluaran);
+        // menyimpan data
+        $data = new Pengeluaran();
+        $data->distributor_id = $request->distributor_id;
+        $data->keterangan = $request->keterangan;
+        $data->tgl = $request->tgl;
+        $data->total_pengeluaran = $request->total_pengeluaran;
+        $data->bukti_pengeluaran = $request->bukti_pengeluaran;
 
-       
-
-        if ($response->ok()) {
-            $response->json(); // data response jika request sukses
-            // lakukan sesuatu dengan data response
-            return redirect()
-                ->route('pengeluaran')
-                ->withSuccess('Pengeluaran berhasil ditambahkan');
-        } else {
-            $errorMessage = $response->serverError() ? 'Server error' : 'Client error'; // pesan error
-            $errorMessage .= ': ' . $response->body(); // tambahkan pesan error dari body response
-            // lakukan sesuatu dengan pesan error
-            return redirect()->route('pengeluaran')
-                ->with('error', 'Pengeluaran gagal disimpan');
+        // simpan file
+        if ($request->hasFile('bukti_pengeluaran')) {
+            $file = $request->file('bukti_pengeluaran');
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $path = $file->move(public_path('upload/pengeluaran'), $filename);
+            $data->bukti_pengeluaran = $filename;
         }
+        $data->save();
+
+        return redirect()->route('pengeluaran')
+            ->with('success', 'Data berhasil disimpan.');
     }
 
-    public function edit_pengeluaran($id)
+    public function edit_pengeluaran($id) 
     {
-        $data['title'] = 'Edit Pengeluaran';
-        $token = session('access_token');
-        $client = new Client([
-        'base_uri' => 'http://keuangan.dlhcode.com/api/',
-        'timeout' => 2.0,
-        ]);
-    
-        $response = $client->request('GET', "get_pengeluaran_by_id/$id", [
-        'headers' => [
-        'Authorization' => 'Bearer ' . $token,
-        'Accept' => 'application/json',
-        ]
-        ]);
-    
-    
-        $data['pengeluaran'] = json_decode($response->getBody(), true);
-        $data['pengeluaran'] = $data['pengeluaran']['data'][0];
+       
+        $distributor = Distributor::all();
+        $pengeluaran = Pengeluaran::find($id); // Ambil data pengeluaran berdasarkan ID
+
    
-        return view('edit_pengeluaran', $data);
+        return view('edit_pengeluaran', ['pengeluaran' => $pengeluaran], ['distributor' => $distributor]);
     }
 
     public function update_pengeluaran(Request $request, $id)
     {
-        $token = session('access_token');
-        $client = new Client([
-            'base_uri' => 'http://keuangan.dlhcode.com/api/',
-            'timeout' => 50.0,
-        ]);
+       // Validasi request
+       $request->validate([
+        'distributor_id' => 'required',
+        'keterangan' => 'required|string',
+        'tgl' => 'required',
+        'total_pengeluaran' => 'required|numeric|min:0',
+        'bukti_pengeluaran' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
 
-        $response = $client->request('PUT', "update_pengeluaran/$id", [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/x-www-form-urlencoded',
-            ],
-            'json' => [
-                'distributor_id' => $request->distributor_id,
-                'keterangan' => $request->keterangan,
-                'total_pengeluaran' => $request->total_pengeluaran,
-                'tgl' => $request->tgl,
-                'bukti_pengeluaran' => $request->bukti_pengeluaran,
-                'updated_at' => now(),
-            ],
-        ]);
+     // Cari item berdasarkan id
+    $pengeluaran = Pengeluaran::find($id);
 
-        $data = json_decode($response->getBody(), true);
-        return redirect()
-            ->route('pengeluaran')
-            ->withSuccess('Data pengeluaran berhasil diubah');
+    // Jika item tidak ditemukan, kembalikan response error 404
+    if (!$pengeluaran) {
+        return response()->json([
+            'message' => 'Data not found'
+        ], 404);
+    }
+
+    // Update data pengeluaran
+        $pengeluaran->distributor_id = $request->distributor_id;
+        $pengeluaran->keterangan = $request->keterangan;
+        $pengeluaran->tgl = $request->tgl;
+        $pengeluaran->total_pengeluaran = $request->total_pengeluaran;
+        $pengeluaran->updated_at = now();
+
+     // simpan file
+    if ($request->hasFile('bukti_pengeluaran')) {
+        $file = $request->file('bukti_pengeluaran');
+        $filename = time() . '-' . $file->getClientOriginalName();
+        $path = $file->move(public_path('upload/pengeluaran'), $filename);
+        $pengeluaran->bukti_pengeluaran = $filename;
+    }
+
+    $pengeluaran->save();
+
+    
+    return redirect()
+        ->route('pengeluaran')
+        ->withSuccess('Data Pengeluaran berhasil diubah');
     }
 
 
 
-    public function delete_pengeluaran($id)
-    {
-        $token = session('access_token');
-        $client = new Client([
-        'base_uri' => 'http://keuangan.dlhcode.com/api/',
-        'timeout' => 2.0,
-        ]);
-
-        
-        $response = $client->request('DELETE', "delete_pengeluaran/$id", [
-        'headers' => [
-        'Authorization' => 'Bearer ' . $token,
-        'Accept' => 'application/json',
-        ]
-        ]);
-
-        return redirect()
-            ->route('pengeluaran')
-            ->withSuccess('Data pengeluaran berhasil dihapus');
-    }
-}
+    public function delete_pengeluaran($id) 
+    { 
+        DB::table('pengeluaran')
+            ->where('id', $id)
+            ->delete();
+ 
+        return redirect() 
+            ->route('pemasukan')
+            ->withSuccess('Data Pengeluaran berhasil dihapus');
+    } 
+} 

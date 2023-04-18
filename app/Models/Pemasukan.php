@@ -12,10 +12,16 @@ class Pemasukan extends Model
     protected $table = 'pemasukan'; //nama tabel pada database
 
     protected $fillable = [ //kolom yang diizinkan diisi secara massal
+        'id',
         'distributor_id',
         'keterangan',
         'tgl',
         'total_pemasukan',
         'bukti_pemasukan',
     ];
+
+    public function distributor()
+    {
+        return $this->hasMany('App\Models\Distributor');
+    }
 }
