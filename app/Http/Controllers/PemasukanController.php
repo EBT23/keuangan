@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pemasukan;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class PemasukanController extends Controller
@@ -12,7 +14,7 @@ class PemasukanController extends Controller
     public function pemasukan()
     {
         $data['title'] = 'Kelola Pemasukan';
-
+       
         $token = session('access_token');
 
         $response1 = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/distributor');
@@ -23,41 +25,41 @@ class PemasukanController extends Controller
         $data1['distributor'] = $data1['distributor']['data'];
         $data['pemasukan'] = json_decode($body_pemasukan, true);
         $data['pemasukan'] = $data['pemasukan']['data'];
+        // dd($data['pemasukan']);
         return view('pemasukan', $data, $data1);
     }
 
     public function tambah_pemasukan(Request $request)
     {
-        $token = session('access_token');
+        
+            // validasi input
+        $request->validate([
+            'distributor_id' => 'required',
+            'keterangan' => 'required',
+            'tgl' => 'required',
+            'total_pemasukan' => 'required',
+            'bukti_pemasukan' => 'required|file|max:2048',
+        ]);
 
-        $addPemasukan = [
-            'jenis_pemasukan' => $request->jenis_pemasukan,
-            'keterangan' => $request->keterangan,
-            'tgl' => $request->tgl,
-            'total_pemasukan' => $request->total_pemasukan,
-            'updated_at' => now(),
-            'created_at' => now(),
-        ];
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $token, // token autentikasi
-            'Accept' => 'application/json', // format respon
-        ])->post('http://keuangan.dlhcode.com/api/tambah_pemasukan', $addPemasukan);
+        // menyimpan data
+        $data = new Pemasukan();
+        $data->distributor_id = $request->distributor_id;
+        $data->keterangan = $request->keterangan;
+        $data->tgl = $request->tgl;
+        $data->total_pemasukan = $request->total_pemasukan;
+        $data->bukti_pemasukan = $request->bukti_pemasukan;
 
-       
-
-        if ($response->ok()) {
-            $response->json(); // data response jika request sukses
-            // lakukan sesuatu dengan data response
-            return redirect()
-                ->route('pemasukan')
-                ->withSuccess('Pemasukan berhasil ditambahkan');
-        } else {
-            $errorMessage = $response->serverError() ? 'Server error' : 'Client error'; // pesan error
-            $errorMessage .= ': ' . $response->body(); // tambahkan pesan error dari body response
-            // lakukan sesuatu dengan pesan error
-            return redirect()->route('pemasukan')
-                ->with('error', 'Pemasukan gagal disimpan');
+        // simpan file
+        if ($request->hasFile('bukti_pemasukan')) {
+            $file = $request->file('bukti_pemasukan');
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/upload', $filename);
+            $data->bukti_pemasukan = $path;
         }
+        $data->save();
+
+        return redirect()->route('pemasukan')
+            ->with('success', 'Data berhasil disimpan.');
     }
 
     public function update_pemasukan(Request $request, $id)
@@ -74,10 +76,11 @@ class PemasukanController extends Controller
                 'Accept' => 'application/x-www-form-urlencoded',
             ],
             'json' => [
-                'jenis_pemasukan' => $request->jenis_pemasukan,
+                'distributor_id' => $request->distributor_id,
                 'keterangan' => $request->keterangan,
                 'tgl' => $request->tgl,
                 'total_pemasukan' => $request->total_pemasukan,
+                'bukti_pemasukan' => $request->bukti_pemasukan,
                 'updated_at' => now(),
             ],
         ]);
@@ -90,13 +93,15 @@ class PemasukanController extends Controller
 
     public function edit_pemasukan($id)
     {
+
         $data['title'] = 'Edit Data Pemasukan';
         $token = session('access_token');
         $client = new Client([
         'base_uri' => 'http://keuangan.dlhcode.com/api/',
         'timeout' => 2.0,
         ]);
-    
+      
+        $response1 = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/distributor');
         $response = $client->request('GET', "get_pemasukan_by_id/$id", [
         'headers' => [
         'Authorization' => 'Bearer ' . $token,
@@ -104,11 +109,13 @@ class PemasukanController extends Controller
         ]
         ]);
     
-    
+        $body1 = $response1->getBody();
+        $data1['distributor'] = json_decode($body1, true);
+        $data1['distributor'] = $data1['distributor']['data'];
         $data['pemasukan'] = json_decode($response->getBody(), true);
         $data['pemasukan'] = $data['pemasukan']['data'][0];
    
-        return view('edit_pemasukan', $data);
+        return view('edit_pemasukan', $data, $data1);
     }
 
     public function delete_pemasukan($id)

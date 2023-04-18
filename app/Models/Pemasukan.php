@@ -12,9 +12,10 @@ class Pemasukan extends Model
     protected $table = 'pemasukan'; //nama tabel pada database
 
     protected $fillable = [ //kolom yang diizinkan diisi secara massal
-        'jenis_pemasukan',
+        'distributor_id',
         'keterangan',
-        'total_pemasukan',
         'tgl',
+        'total_pemasukan',
+        'bukti_pemasukan',
     ];
 }

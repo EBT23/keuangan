@@ -90,6 +90,7 @@
                                             <th scope="col">Keterangan</th>
                                             <th scope="col">Tanggal</th>
                                             <th scope="col">Total Pemasukkan</th>
+                                            <th scope="col">Bukti Pemasukkan</th>
                                             <th scope="col">Aksi</th>
                                            
                                         </tr>
@@ -102,6 +103,9 @@
                                             <td>{{ $pm['keterangan'] }}</td>
                                             <td>{{ $pm['tgl'] }}</td>
                                             <td>Rp. {{ number_format($pm['total_pemasukan'])  }}</td>
+                                            <td><img src="{{ asset('public/storage/app/public/upload/' . $pm['bukti_pemasukan'] . '') }}" width="30" height="30" alt="Gambar Kosong">
+                                            </td>
+                                           
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">
                                                     <a href="{{ route('edit.pemasukan', ['id' => $pm['id']]) }}" type="button"

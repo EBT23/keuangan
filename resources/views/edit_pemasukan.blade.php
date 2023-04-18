@@ -38,10 +38,15 @@
                         <div class="row">
                         <div class="col-lg">
                       <div class="mb-3">
-                        <label for="jenis_pemasukan" class="form-label">Jenis Pemasukan</label>
-                        <input type="text" class="form-control" id="jenis_pemasukan"
-						value="{{ $pemasukan['jenis_pemasukan'] }}" name="jenis_pemasukan"
-						aria-describedby="jenis_pemasukan" required>
+                        <label for="distributor_id" class="form-label">Nama Distributor</label>
+                        <select class="form-select" name="distributor_id" data-allow-clear="true">
+                            <option selected="">Pilih Distributor</option>
+                            @foreach ($distributor as $item)
+                                <option value="{{ $item['id'] }}">
+                                    {{ $item['nama_distributor'] }}
+                                </option>
+                            @endforeach
+                        </select>
                       </div>
                       <div class="mb-3">
                           <label for="keterangan" class="form-label">Keterangan</label>
@@ -58,6 +63,12 @@
                           <input type="text" class="form-control" id="total_pemasukan"
                           value="{{ $pemasukan['total_pemasukan'] }}" name="total_pemasukan"
                           aria-describedby="total_pemasukan" required>
+                        </div>
+                        <div class="mb-3">
+                          <label for="bukti_pemasukan" class="form-label">Bukti Pemasukan</label>
+                          <input type="file" class="form-control" id="bukti_pemasukan"
+                          value="{{ $pemasukan['bukti_pemasukan'] }}" name="bukti_pemasukan"
+                          aria-describedby="bukti_pemasukan" required>
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">
                             Simpan
