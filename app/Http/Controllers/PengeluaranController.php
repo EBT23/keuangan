@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Distributor;
+use App\Models\JenisPengeluaran;
 use App\Models\Pengeluaran;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -16,19 +17,19 @@ class PengeluaranController extends Controller
         $data['title'] = 'Kelola Pengeluaran';
        
        $pengeluaran = DB::table('pengeluaran')
-       ->join('distributor', 'distributor.id', '=', 'pengeluaran.distributor_id')
-       ->select('pengeluaran.*', 'distributor.nama_distributor')
+       ->join('jenis_pengeluaran', 'jenis_pengeluaran.id', '=', 'pengeluaran.jenis_pengeluaran_id')
+       ->select('pengeluaran.*', 'jenis_pengeluaran.jenis_pengeluaran')
        ->get();
-       $distributor = Distributor::all();
+       $jenis_pengeluaran = JenisPengeluaran::all();
 
-        return view('pengeluaran', ['pengeluaran' => $pengeluaran],['distributor' => $distributor ], $data);
+        return view('pengeluaran', ['pengeluaran' => $pengeluaran],['jenis_pengeluaran' => $jenis_pengeluaran ], $data);
     }
 
     public function tambah_pengeluaran(Request $request)
     {
          // validasi input
          $request->validate([
-            'distributor_id' => 'required',
+            'jenis_pengeluaran_id' => 'required',
             'keterangan' => 'required',
             'tgl' => 'required',
             'total_pengeluaran' => 'required',
@@ -37,7 +38,7 @@ class PengeluaranController extends Controller
 
         // menyimpan data
         $data = new Pengeluaran();
-        $data->distributor_id = $request->distributor_id;
+        $data->jenis_pengeluaran_id = $request->jenis_pengeluaran_id;
         $data->keterangan = $request->keterangan;
         $data->tgl = $request->tgl;
         $data->total_pengeluaran = $request->total_pengeluaran;
@@ -59,18 +60,18 @@ class PengeluaranController extends Controller
     public function edit_pengeluaran($id) 
     {
        
-        $distributor = Distributor::all();
+        $jenis_pengeluaran = JenisPengeluaran::all();
         $pengeluaran = Pengeluaran::find($id); // Ambil data pengeluaran berdasarkan ID
 
    
-        return view('edit_pengeluaran', ['pengeluaran' => $pengeluaran], ['distributor' => $distributor]);
+        return view('edit_pengeluaran', ['pengeluaran' => $pengeluaran], ['jenis_pengeluaran' => $jenis_pengeluaran]);
     }
 
     public function update_pengeluaran(Request $request, $id)
     {
        // Validasi request
        $request->validate([
-        'distributor_id' => 'required',
+        'jenis_pengeluaran_id' => 'required',
         'keterangan' => 'required|string',
         'tgl' => 'required',
         'total_pengeluaran' => 'required|numeric|min:0',
@@ -88,7 +89,7 @@ class PengeluaranController extends Controller
     }
 
     // Update data pengeluaran
-        $pengeluaran->distributor_id = $request->distributor_id;
+        $pengeluaran->jenis_pengeluaran_id = $request->jenis_pengeluaran_id;
         $pengeluaran->keterangan = $request->keterangan;
         $pengeluaran->tgl = $request->tgl;
         $pengeluaran->total_pengeluaran = $request->total_pengeluaran;
