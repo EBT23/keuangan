@@ -31,12 +31,12 @@
             <div class="row">
              <div class="col-6">
                 <div class="mb-3">
-                    <label for="distributor_id" class="form-label">Distributor</label>
-                    <select class="form-select" name="distributor_id" data-allow-clear="true">
-                        <option selected="">Pilih Distributor</option>
-                        @foreach ($distributor as $item)
+                    <label for="jenis_pengeluaran_id" class="form-label">Jenis Pengeluaran</label>
+                    <select class="form-select" name="jenis_pengeluaran_id" data-allow-clear="true">
+                        <option selected="">Jenis Pengeluaran:</option>
+                        @foreach ($jenis_pengeluaran as $item)
                             <option value="{{ $item->id }}">
-                                {{ $item->nama_distributor }}
+                                {{ $item->jenis_pengeluaran }}
                             </option>
                         @endforeach
                     </select>
@@ -100,7 +100,7 @@
                                         @foreach ($pengeluaran as $index => $pn )
                                         <tr>
                                             <th scope="row">{{ $index+1 }}</th>
-                                            <td>{{ $pn->nama_distributor }}</td>
+                                            <td>{{ $pn->jenis_pengeluaran }}</td>
                                             <td>{{ $pn->keterangan }}</td>
                                             <td>{{ $pn->tgl }}</td>
                                             <td>Rp. {{ number_format($pn->total_pengeluaran) }}</td>
