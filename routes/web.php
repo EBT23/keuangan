@@ -71,6 +71,10 @@ Route::get('/edit_pemasukan/{id}', [PemasukanController::class, 'edit_pemasukan'
 Route::delete('/delete_pemasukan/{id}', [PemasukanController::class, 'delete_pemasukan'])->name('delete.pemasukan');
 
 Route::get('/penggajian', [PenggajianController::class, 'penggajian'])->name('penggajian');
+Route::post('/tambah_penggajian', [PenggajianController::class, 'tambah_penggajian'])->name('tambah_penggajian');
+Route::delete('/delete_penggajian/{id}', [PenggajianController::class, 'delete_penggajian'])->name('delete_penggajian');
+Route::get('/detail_penggajian/{id}', [PenggajianController::class, 'detail_penggajian'])->name('detail_penggajian');
+
 
 Route::get('/karyawan', [KaryawanController::class, 'karyawan'])->name('karyawan');
 Route::post('/tambah_karyawan', [KaryawanController::class, 'tambah_karyawan'])->name('tambah.karyawan');

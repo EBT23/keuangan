@@ -6,7 +6,7 @@
         <i class="fa fa-bars"></i>
     </a>
     <div class="navbar-nav align-items-center ms-auto my-3">
-            <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-            <a href="{{ route('keluar') }}" class="dropdown-item">Log Out</a>
+        <img class="rounded-circle me-lg-2" src="{{ asset('img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
+        <a href="{{ route('keluar') }}" class="dropdown-item">Log Out</a>
     </div>
 </nav>
