@@ -13,6 +13,7 @@ use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\JenisPengeluaranController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\PengaturanGajiController;
 use App\Models\JenisPengeluaran;
 
 /*
@@ -72,11 +73,16 @@ Route::post('/update_pemasukan/{id}', [PemasukanController::class, 'update_pemas
 Route::get('/edit_pemasukan/{id}', [PemasukanController::class, 'edit_pemasukan'])->name('edit.pemasukan');
 Route::delete('/delete_pemasukan/{id}', [PemasukanController::class, 'delete_pemasukan'])->name('delete.pemasukan');
 
+Route::get('/pengaturan_gaji', [PengaturanGajiController::class, 'pengaturan_gaji'])->name('pengaturan_gaji');
+Route::post('/tambah_pengaturan_gaji', [PengaturanGajiController::class, 'tambah_pengaturan_gaji'])->name('tambah_pengaturan_gaji');
+Route::post('/edit_pengaturan_gaji', [PengaturanGajiController::class, 'edit_pengaturan_gaji'])->name('edit_pengaturan_gaji');
+Route::delete('/delete_pengaturan_gaji/{id}', [PengaturanGajiController::class, 'delete_pengaturan_gaji'])->name('delete_pengaturan_gaji');
+
+
 Route::get('/penggajian', [PenggajianController::class, 'penggajian'])->name('penggajian');
 Route::post('/tambah_penggajian', [PenggajianController::class, 'tambah_penggajian'])->name('tambah_penggajian');
 Route::delete('/delete_penggajian/{id}', [PenggajianController::class, 'delete_penggajian'])->name('delete_penggajian');
 Route::get('/detail_penggajian/{id}', [PenggajianController::class, 'detail_penggajian'])->name('detail_penggajian');
-
 
 Route::get('/karyawan', [KaryawanController::class, 'karyawan'])->name('karyawan');
 Route::post('/tambah_karyawan', [KaryawanController::class, 'tambah_karyawan'])->name('tambah.karyawan');

@@ -27,32 +27,21 @@ class PenggajianController extends Controller
         $insentif = $request->insentiv;
         $kehadiran = $request->kehadiran;
         $pinjaman= $request->pinjaman;
-
-        $users = DB::table('users')
+                
+        $users = DB::table('pengaturan_gaji')
+                ->join('users', 'users.id', '=', 'pengaturan_gaji.id_user')
+                ->join('posisi', 'posisi.id', '=', 'users.posisi_id')
+                ->select('pengaturan_gaji.*', 'users.name', 'posisi.nama_posisi', 'users.no_identitas')
                 ->where('role_id', '=', 2)
-                ->where('id', '=', $nama_karyawan)
+                ->where('id_user', '=', $nama_karyawan)
                 ->get();
-       
-        if ($users[0]->posisi_id == '1') {
-            $gapok = 1400000;
-            $tunjangan_jabatan = 200000;
-        }elseif($users[0]->posisi_id == '2' || $users[0]->posisi_id == '3' || $users[0]->posisi_id == '4' ){
-            $gapok = 1600000;
-            $tunjangan_jabatan = 300000;
-        }elseif ($users[0]->posisi_id == '5' || $users[0]->posisi_id == '6' || $users[0]->posisi_id == '7') {
-            $gapok = 1800000;
-            $tunjangan_jabatan = 400000;
-        }elseif ($users[0]->posisi_id == '8') {
-            $gapok = 2000000;
-            $tunjangan_jabatan = 500000;
-        }else{
-            $gapok = 0;
-            $tunjangan_jabatan = 0;
-        }
-        
-        $uang_makan = $kehadiran*15000;
 
-        $lembur = $jam_lembur*60000;
+        $gapok = $users[0]->gapok;
+        $tunjangan_jabatan = $users[0]->tunjangan_jabatan;
+        
+        $uang_makan = $kehadiran*$users[0]->uang_makan;
+
+        $lembur = $jam_lembur*$users[0]->lembur;
 
         $jumlah_gaji = ($gapok + $tunjangan_jabatan + $uang_makan + $insentif + $lembur) - $pinjaman;
 
