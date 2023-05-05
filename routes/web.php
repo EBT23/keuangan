@@ -10,8 +10,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PenggajianController;
 use App\Http\Controllers\DistributorController;
+use App\Http\Controllers\JenisPengeluaranController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\KaryawanController;
+use App\Models\JenisPengeluaran;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,6 +96,11 @@ Route::post('/tambah_role', [RoleController::class, 'tambah_role'])->name('tamba
 Route::post('/update_role/{id}', [RoleController::class, 'update_role'])->name('update.role');
 Route::get('/edit_role/{id}', [RoleController::class, 'edit_role'])->name('edit.role');
 Route::delete('/delete_role/{id}', [RoleController::class, 'delete_role'])->name('delete.role');
+
+Route::get('/jenis_pengeluaran', [JenisPengeluaranController::class, 'jenis_pengeluaran'])->name('jenis.pengeluaran');
+Route::post('/tambah_jenis_pengeluaran', [JenisPengeluaranController::class, 'addJenis_pengeluaran'])->name('tambah.jenis.pengeluaran');
+Route::delete('/delete_jpengeluaran/{id}', [JenisPengeluaranController::class, 'delete_jp'])->name('delete.jenis_pengeluaran');
+
 
 
 Route::get('/route-cache', function () {

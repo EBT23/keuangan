@@ -28,6 +28,8 @@
                 <i class="fa fa-th me-2"></i>Pemasukkan</a>
             <a href="{{ route('pengeluaran') }}" class="nav-item nav-link">
                 <i class="fa fa-keyboard me-2"></i>Pengeluaran</a>
+            <a href="{{ route('jenis.pengeluaran') }}" class="nav-item nav-link">
+                <i class="fa fa-keyboard me-2"></i>Jenis Pengeluaran</a>
             <a href="{{ route('penggajian') }}" class="nav-item nav-link">
                 <i class="fa fa-table me-2"></i>Penggajian</a>
             <a href="{{ route('penjab') }}" class="nav-item nav-link">
