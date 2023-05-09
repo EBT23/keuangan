@@ -73,4 +73,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/update_role/{id}', [ApiAdminController::class, 'update_role']);
     Route::delete('/delete_role/{id}', [ApiAdminController::class, 'delete_role']);
     Route::get('/get_role_by_id/{id}', [ApiAdminController::class, 'get_roleId']);
+
+    Route::get('/jenis_pengeluaran', [ApiAdminController::class, 'jenis_pengeluaran']);
+    Route::get('/get_jenis_pengeluaran_by_id/{id}', [ApiAdminController::class, 'jenis_pengeluaran_by_id']);
 });
