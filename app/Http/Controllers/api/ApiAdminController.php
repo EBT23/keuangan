@@ -23,8 +23,8 @@ class ApiAdminController extends Controller
     public function pengeluaran()
     {
         $pengeluaran = DB::table('pengeluaran')
-            ->join('distributor', 'distributor.id', '=', 'pengeluaran.distributor_id')
-            ->select('distributor.id', 'distributor.nama_distributor', 'pengeluaran.keterangan', 'pengeluaran.tgl', 'pengeluaran.total_pengeluaran', 'pengeluaran.bukti_pengeluaran')
+            ->join('jenis_pengeluaran', 'jenis_pengeluaran.id', '=', 'pengeluaran.jenis_pengeluaran_id')
+            ->select('pengeluaran.id','jenis_pengeluaran.jenis_pengeluaran','pengeluaran.keterangan', 'pengeluaran.tgl', 'pengeluaran.total_pengeluaran', 'pengeluaran.bukti_pengeluaran')
             ->get();
         return response()->json([
             'data' => $pengeluaran
