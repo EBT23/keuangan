@@ -118,7 +118,9 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('edit_pengaturan_gaji') }}">
+                                                        <form action="{{ route('edit_pengaturan_gaji') }}"
+                                                            method="post">
+                                                            @csrf
                                                             <div class="mb-3">
                                                                 <label for="nama_karyawan" class="form-label">Nama
                                                                     Keryawan</label>
@@ -128,8 +130,8 @@
                                                                     <option value="" disabled selected>Pilih Karyawan
                                                                     </option>
                                                                     @foreach ( $users as $u )
-                                                                    <option <?php if ($pilihan==1) { echo 'selected' ;
-                                                                        }?> value="{{ $u->id }}">{{
+                                                                    <option value="{{
+                                                                        $u->id }}">{{
                                                                         $u->name.'-'.$u->no_identitas }}</option>
                                                                     @endforeach
                                                                 </select>

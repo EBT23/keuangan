@@ -90,7 +90,7 @@ class ApiAdminController extends Controller
         $pengeluaran->total_pengeluaran = $request->total_pengeluaran;
         $pengeluaran->tgl = $request->tgl;
     
-       
+    
         if ($request->hasFile('bukti_pengeluaran')) {
           // hapus gambar
             if ($pengeluaran->bukti_pengeluaran != null) {

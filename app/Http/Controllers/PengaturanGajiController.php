@@ -67,15 +67,18 @@ class PengaturanGajiController extends Controller
    public function edit_pengaturan_gaji(Request $request)
    {
         $id = $request->id;
-        $id_user = $request->id_user;
+        $nama_karyawan = $request->nama_karyawan;
         $gapok = $request->gapok;
         $tunjangan_jabatan = $request->tunjangan_jabatan;
         $uang_makan = $request->uang_makan;
         $lembur = $request->lembur;
 
-         DB::table('pengaturan_gaji')
-              ->where('id', $id)
-              ->update(['id_user' => $id_user],['gapok' => $gapok],['tunjangan_jabatan' => $tunjangan_jabatan],['uang_makan' => $uang_makan],['lembur' => $lembur]);
+        DB::select("UPDATE pengaturan_gaji
+        SET id_user = $nama_karyawan, gapok = $gapok, tunjangan_jabatan = $tunjangan_jabatan, uang_makan = $uang_makan, lembur = $lembur
+        WHERE id = $id");
+        //  DB::table('pengaturan_gaji')
+        //       ->where('id', $id)
+        //       ->update(['id_user' => $nama_karyawan],['gapok' => $gapok],['tunjangan_jabatan' => $tunjangan_jabatan],['uang_makan' => $uang_makan],['lembur' => $lembur]);
 
               return redirect()->route('pengaturan_gaji')
                         ->with('success', 'Data berhasil edit');

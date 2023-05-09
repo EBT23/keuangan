@@ -121,6 +121,7 @@ class KaryawanController extends Controller
         $data1['posisi'] = $data1['posisi']['data'];
     
         $data['karyawan'] = json_decode($response->getBody(), true);
+        // dd($data['karyawan']);
         $data['karyawan'] = $data['karyawan']['data'][0];
    
         return view('edit_karyawan', $data, $data1);
