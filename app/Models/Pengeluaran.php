@@ -11,9 +11,10 @@ class Pengeluaran extends Model
     protected $table = 'pengeluaran'; //nama tabel pada database
 
     protected $fillable = [ //kolom yang diizinkan diisi secara massal
-        'jenis_pengeluaran',
+        'jenis_pengeluaran_id',
         'keterangan',
         'total_pengeluaran',
         'tgl',
+        'bukti_pengeluaran'
     ];
 }

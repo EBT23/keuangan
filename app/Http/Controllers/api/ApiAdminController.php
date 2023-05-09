@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApiAdminController extends Controller
@@ -23,8 +26,8 @@ class ApiAdminController extends Controller
     public function pengeluaran()
     {
         $pengeluaran = DB::table('pengeluaran')
-            ->join('distributor', 'distributor.id', '=', 'pengeluaran.distributor_id')
-            ->select('distributor.id', 'distributor.nama_distributor', 'pengeluaran.keterangan', 'pengeluaran.tgl', 'pengeluaran.total_pengeluaran', 'pengeluaran.bukti_pengeluaran')
+            ->join('jenis_pengeluaran', 'jenis_pengeluaran.id', '=', 'pengeluaran.jenis_pengeluaran_id')
+            ->select('jenis_pengeluaran.id', 'jenis_pengeluaran.jenis_pengeluaran', 'pengeluaran.*')
             ->get();
         return response()->json([
             'data' => $pengeluaran
@@ -32,36 +35,79 @@ class ApiAdminController extends Controller
     }
     public function tambah_pengeluaran(Request $request)
     {
-        $validate = $request->validate([
-            'distributor_id' => 'required',
-            'keterangan' => 'required',
-            'total_pengeluaran' => 'required',
+       
+        $validatedData = $request->validate([
+            'jenis_pengeluaran_id' => 'required',
+            'keterangan' => 'required|max:255',
+            'total_pengeluaran' => 'required|numeric',
             'tgl' => 'required',
-            'bukti_pengeluaran' => 'required',
+            'bukti_pengeluaran' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $pengeluaran = DB::table('pengeluaran')->insert([
-            'distributor_id' => $request->distributor_id,
-            'keterangan' => $request->keterangan,
-            'total_pengeluaran' => $request->total_pengeluaran,
-            'tgl' => $request->tgl,
-            'bukti_pengeluaran' => $request->bukti_pengeluaran,
+       
+        if ($request->hasFile('bukti_pengeluaran')) {
+            $gambar = $request->file('bukti_pengeluaran');
+            $gambarName = time() . '_' . $gambar->getClientOriginalName();
+            $gambar->storeAs('public/gambar_pengeluaran', $gambarName);
+        } else {
+            $gambarName = null;
+        }
+
+    
+        $pengeluaran = Pengeluaran::create([
+            'jenis_pengeluaran_id' => $validatedData['jenis_pengeluaran_id'],
+            'keterangan' => $validatedData['keterangan'],
+            'total_pengeluaran' => $validatedData['total_pengeluaran'],
+            'tgl' => $validatedData['tgl'],
+            'bukti_pengeluaran' => $gambarName,
         ]);
 
+    
         return response()->json([
-            'success' => true,
-            'message' => 'Pengeluaran berhasil disimpan',
-            'data' => $pengeluaran
-        ], Response::HTTP_OK);
+            'message' => 'Data pengeluaran berhasil ditambahkan.',
+            'data' => $pengeluaran,
+        ], 201);
     }
+
     public function update_pengeluaran(Request $request, $id)
     {
         $pengeluaran = Pengeluaran::findOrFail($id);
-        $pengeluaran->update($request->all());
+
+        $validator = Validator::make($request->all(), [
+            'jenis_pengeluaran_id' => 'required',
+            'keterangan' => 'required',
+            'total_pengeluaran' => 'required',
+            'tgl' => 'required',
+            'bukti_pengeluaran' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+    
+        $pengeluaran->jenis_pengeluaran_id = $request->jenis_pengeluaran_id;
+        $pengeluaran->keterangan = $request->keterangan;
+        $pengeluaran->total_pengeluaran = $request->total_pengeluaran;
+        $pengeluaran->tgl = $request->tgl;
+    
+       
+        if ($request->hasFile('bukti_pengeluaran')) {
+          // hapus gambar
+            if ($pengeluaran->bukti_pengeluaran != null) {
+                Storage::delete($pengeluaran->bukti_pengeluaran);
+            }
+    
+            // upload gambar baru
+            $file = $request->file('bukti_pengeluaran');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/gambar_pengeluaran', $filename);
+            $pengeluaran->bukti_pengeluaran = $path;
+        }
+    
+        $pengeluaran->save();
+    
         return response()->json([
-            'success' => true,
-            'message' => 'Pengeluaran berhasil dirubah',
-            'data' => $pengeluaran
+            'message' => 'Data pengeluaran berhasil diupdate'
         ]);
     }
     public function delete_pengeluaran($id)
@@ -90,7 +136,7 @@ class ApiAdminController extends Controller
     {
         $pemasukan = DB::table('pemasukan')
             ->join('distributor', 'distributor.id', '=', 'pemasukan.distributor_id')
-            ->select('distributor.id', 'distributor.nama_distributor', 'pemasukan.keterangan', 'pemasukan.tgl', 'pemasukan.total_pemasukan', 'pemasukan.bukti_pemasukan')
+            ->select('distributor.id', 'distributor.nama_distributor', 'pemasukan.*')
             ->get();
         return response()->json([
             'data' => $pemasukan
@@ -98,46 +144,76 @@ class ApiAdminController extends Controller
     }
     public function tambah_pemasukan(Request $request)
     {
-        $validate = $request->validate([
+        $validatedData = $request->validate([
             'distributor_id' => 'required',
             'keterangan' => 'required',
-            'total_pemasukan' => 'required',
             'tgl' => 'required',
-            'bukti_pemasukan' => 'required',
+            'total_pemasukan' => 'required',
+            'bukti_pemasukan' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $pemasukan = DB::table('pemasukan')->insert([
-            'distributor_id' => $request->distributor_id,
-            'keterangan' => $request->keterangan,
-            'total_pemasukan' => $request->total_pemasukan,
-            'tgl' => $request->tgl,
-            'bukti_pemasukan' => $request->bukti_pemasukan,
+       
+        if ($request->hasFile('bukti_pemasukan')) {
+            $gambar = $request->file('bukti_pemasukan');
+            $gambarName = time() . '_' . $gambar->getClientOriginalName();
+            $gambar->storeAs('public/gambar_pemasukan', $gambarName);
+        } else {
+            $gambarName = null;
+        }
+
+    
+        $pemasukan = Pemasukan::create([
+            'distributor_id' => $validatedData['distributor_id'],
+            'keterangan' => $validatedData['keterangan'],
+            'tgl' => $validatedData['tgl'],
+            'total_pemasukan' => $validatedData['total_pemasukan'],
+            'bukti_pemasukan' => $gambarName,
         ]);
 
+    
         return response()->json([
-            'success' => true,
-            'message' => 'Pemasukan berhasil disimpan',
-            'data' => $pemasukan
-        ], Response::HTTP_OK);
+            'message' => 'Data pemasukan berhasil ditambahkan.',
+            'data' => $pemasukan,
+        ], 201);
     }
     public function update_pemasukan(Request $request, $id)
     {
         $pemasukan = Pemasukan::findOrFail($id);
-        $pemasukan->update($request->all());
-        return response()->json([
-            'success' => true,
-            'message' => 'pemasukan berhasil dirubah',
-            'data' => $pemasukan
+
+        $validator = Validator::make($request->all(), [
+            'distributor_id' => 'required',
+            'keterangan' => 'required',
+            'total_pemasukan' => 'required',
+            'tgl' => 'required',
+            'bukti_pemasukan' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    }
-    public function delete_pemasukan($id)
-    {
-        $pemasukan = Pemasukan::findOrFail($id);
-        $pemasukan->delete();
+    
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+    
+        $pemasukan->distributor_id = $request->distributor_id;
+        $pemasukan->keterangan = $request->keterangan;
+        $pemasukan->total_pemasukan = $request->total_pemasukan;
+        $pemasukan->tgl = $request->tgl;
+    
+        if ($request->hasFile('bukti_pemasukan')) {
+          // hapus gambar
+            if ($pemasukan->bukti_pemasukan != null) {
+                Storage::delete($pemasukan->bukti_pemasukan);
+            }
+    
+            // upload gambar baru
+            $file = $request->file('bukti_pemasukan');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/gambar_pemasukan', $filename);
+            $pemasukan->bukti_pemasukan = $path;
+        }
+    
+        $pemasukan->save();
+    
         return response()->json([
-            'success' => true,
-            'message' => 'Pemasukan berhasil dihapus',
-            'data' => $pemasukan
+            'message' => 'Data pemasukan berhasil diupdate'
         ]);
     }
     public function get_pemasukan_by_id($id)
@@ -522,6 +598,27 @@ class ApiAdminController extends Controller
             'success' => true,
             'message' => 'Data berhasil ditampilkan',
             'data' => $karyawan
+        ]);
+    }
+
+    public function jenis_pengeluaran()
+    {
+        $jenis_pengeluaran = DB::table('jenis_pengeluaran')->get();
+        return response()->json([
+            'data' => $jenis_pengeluaran
+        ]);
+    }
+
+    public function jenis_pengeluaran_by_id($id)
+    {
+        $jenis_pengeluaran = DB::table('jenis_pengeluaran')
+            ->where('id', '=', $id)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil ditampilkan',
+            'data' => $jenis_pengeluaran
         ]);
     }
     
