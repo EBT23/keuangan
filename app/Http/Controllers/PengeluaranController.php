@@ -12,6 +12,24 @@ use Illuminate\Support\Facades\Http;
 
 class PengeluaranController extends Controller
 {
+    // public function getPengeluaran(Request $request)
+    // {
+    //     $pengeluaran = DB::table('pengeluaran')->select('bukti_pengeluaran')->get(); 
+        
+    //     $data = [];
+    //     foreach ($pengeluaran as $pg) {
+    //         $url = url('/storage/gambar_pengeluaran/' . $pg->bukti_pengeluaran); 
+    //         $data[] = [
+    //             'bukti_pengeluaran' => $pg->bukti_pengeluaran,
+    //             'url' => $url
+    //         ];
+    //     }
+        
+    //     dd($data);
+
+       
+    //     return response()->json($data);
+    // }
     public function pengeluaran()
     {
         $data['title'] = 'Kelola Pengeluaran';

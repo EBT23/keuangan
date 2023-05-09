@@ -24,7 +24,8 @@ class ApiAdminController extends Controller
     {
     }
     public function pengeluaran()
-    {
+    {   
+       
         $pengeluaran = DB::table('pengeluaran')
             ->join('jenis_pengeluaran', 'jenis_pengeluaran.id', '=', 'pengeluaran.jenis_pengeluaran_id')
             ->select('jenis_pengeluaran.id','jenis_pengeluaran.jenis_pengeluaran','pengeluaran.*')

@@ -103,6 +103,7 @@ Route::post('/update_role/{id}', [RoleController::class, 'update_role'])->name('
 Route::get('/edit_role/{id}', [RoleController::class, 'edit_role'])->name('edit.role');
 Route::delete('/delete_role/{id}', [RoleController::class, 'delete_role'])->name('delete.role');
 
+// Route::get('/get_images', [PengeluaranController::class, 'getPengeluaran'])->name('get.Images');
 Route::get('/jenis_pengeluaran', [JenisPengeluaranController::class, 'jenis_pengeluaran'])->name('jenis.pengeluaran');
 Route::post('/tambah_jenis_pengeluaran', [JenisPengeluaranController::class, 'addJenis_pengeluaran'])->name('tambah.jenis.pengeluaran');
 Route::delete('/delete_jpengeluaran/{id}', [JenisPengeluaranController::class, 'delete_jp'])->name('delete.jenis_pengeluaran');
