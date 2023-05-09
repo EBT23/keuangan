@@ -12,10 +12,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\HttpFoundation\Response;
 
 class ApiAdminController extends Controller
 {
@@ -27,7 +27,7 @@ class ApiAdminController extends Controller
     {
         $pengeluaran = DB::table('pengeluaran')
             ->join('jenis_pengeluaran', 'jenis_pengeluaran.id', '=', 'pengeluaran.jenis_pengeluaran_id')
-            ->select('pengeluaran.id','jenis_pengeluaran.jenis_pengeluaran','pengeluaran.keterangan', 'pengeluaran.tgl', 'pengeluaran.total_pengeluaran', 'pengeluaran.bukti_pengeluaran')
+            ->select('jenis_pengeluaran.id','jenis_pengeluaran.jenis_pengeluaran','pengeluaran.*')
             ->get();
         return response()->json([
             'data' => $pengeluaran
