@@ -219,6 +219,18 @@ class ApiAdminController extends Controller
             'message' => 'Data pemasukan berhasil diupdate'
         ]);
     }
+
+    public function delete_pemasukan($id)
+    {
+        $pemasukan = Pemasukan::findOrFail($id);
+        $pemasukan->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Pemasukan berhasil dihapus',
+            'data' => $pemasukan
+        ]);
+    }
+    
     public function get_pemasukan_by_id($id)
     {
         $pemasukan = DB::table('pemasukan')
