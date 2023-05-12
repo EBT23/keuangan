@@ -54,12 +54,12 @@
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Data Jenis Pengeluaran</h6>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table id="myTable" class="display">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No</th>
+                                            <th scope="col" width="5%">No</th>
                                             <th scope="col">Jenis Pengeluaran</th>
-                                            <th scope="col">Aksi</th>
+                                            <th scope="col" width="15%">Aksi</th>
 
                                         </tr>
                                     </thead>

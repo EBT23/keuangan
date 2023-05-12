@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DistributorExport;
+use App\Models\Distributor;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DistributorController extends Controller
 {
@@ -131,5 +134,10 @@ class DistributorController extends Controller
         return redirect()
             ->route('distributor')
             ->withSuccess('Data distributor berhasil dihapus');
+    }
+
+    public function export_excel()
+    {
+        return Excel::download(new DistributorExport,'dsitributor.xlsx');
     }
 }

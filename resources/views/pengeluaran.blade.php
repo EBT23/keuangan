@@ -83,7 +83,7 @@
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Data Pengeluaran</h6>
                             <div class="table-responsive">
-                                <table  id="pengeluaran" class="display" style="width:100%">
+                                <table  id="myTable" class="display">
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>

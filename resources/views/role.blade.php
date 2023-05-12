@@ -57,12 +57,12 @@
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Data Role</h6>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table id="myTable" class="display">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No</th>
+                                            <th scope="col" width="10%">No</th>
                                             <th scope="col">Role</th>
-                                            <th scope="col">Aksi</th>
+                                            <th scope="col" width="20%">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
