@@ -78,14 +78,14 @@
                 </form>
 
                 <div class="table-responsive">
-                    <table class="table">
+                    <table id="myTable" class="display">
                         <thead>
                             <tr>
-                                <th scope="col">No</th>
+                                <th scope="col" width="10%">No</th>
                                 <th scope="col">Priode</th>
                                 <th scope="col">Nama Karyawan</th>
                                 <th scope="col">Total Gaji</th>
-                                <th scope="col">Aksi</th>
+                                <th scope="col"width="15%">Aksi</th>
 
                             </tr>
                         </thead>
@@ -99,11 +99,9 @@
                                 <td>Rp. {{ number_format($gj->total) }}</td>
                                 <td>
                                     <span class="row">
-                                        <div class="col-lg-2">
+                                        <div class="d-flex">
                                             <a href="{{ route('detail_penggajian', $gj->id) }}"
-                                                class="btn btn-outline-primary waves-effect waves-light">Detail</a>
-                                        </div>
-                                        <div class="col-lg-2">
+                                                class="btn btn-outline-primary waves-effect waves-light mr-3">Detail</a>
                                             <form action="{{ route('delete_penggajian', $gj->id) }}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}

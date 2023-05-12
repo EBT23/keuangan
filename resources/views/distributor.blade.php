@@ -88,13 +88,13 @@
                                 <table id="myTable" class="display">
                                     <thead>
                                         <tr>
-                                            <th scope="col" width="10%">No</th>
+                                            <th scope="col" width="5%">No</th>
                                             <th scope="col">Distributor</th>
                                             <th scope="col">Telepon</th>
                                             <th scope="col">Area Cover</th>
                                             <th scope="col">Alamat</th>
                                             <th scope="col">Penanggung Jawab</th>
-                                            <th scope="col" width="20%">Aksi</th>
+                                            <th scope="col" width="15%">Aksi</th>
                                            
                                         </tr>
                                     </thead>
