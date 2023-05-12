@@ -49,7 +49,8 @@ class ApiAdminController extends Controller
         if ($request->hasFile('bukti_pengeluaran')) {
             $gambar = $request->file('bukti_pengeluaran');
             $gambarName = time() . '_' . $gambar->getClientOriginalName();
-            $gambar->storeAs('public/gambar_pengeluaran', $gambarName);
+            $path = $gambar->move(public_path('upload/pengeluaran'), $gambarName);
+            $gambar->bukti_pengeluaran = $gambarName;
         } else {
             $gambarName = null;
         }
@@ -101,7 +102,7 @@ class ApiAdminController extends Controller
             // upload gambar baru
             $file = $request->file('bukti_pengeluaran');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('public/gambar_pengeluaran', $filename);
+            $path = $file->move(public_path('upload/pengeluaran'), $filename);
             $pengeluaran->bukti_pengeluaran = $path;
         }
     
@@ -157,7 +158,8 @@ class ApiAdminController extends Controller
         if ($request->hasFile('bukti_pemasukan')) {
             $gambar = $request->file('bukti_pemasukan');
             $gambarName = time() . '_' . $gambar->getClientOriginalName();
-            $gambar->storeAs('public/gambar_pemasukan', $gambarName);
+            $path = $gambar->move(public_path('upload/pemasukan'), $gambarName);
+            $gambar->bukti_pemasukan = $gambarName;
         } else {
             $gambarName = null;
         }
@@ -207,7 +209,7 @@ class ApiAdminController extends Controller
             // upload gambar baru
             $file = $request->file('bukti_pemasukan');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $path = $file->storeAs('public/gambar_pemasukan', $filename);
+            $path = $file->move(public_path('upload/pemasukan'), $filename);
             $pemasukan->bukti_pemasukan = $path;
         }
     
@@ -217,6 +219,18 @@ class ApiAdminController extends Controller
             'message' => 'Data pemasukan berhasil diupdate'
         ]);
     }
+
+    public function delete_pemasukan($id)
+    {
+        $pemasukan = Pemasukan::findOrFail($id);
+        $pemasukan->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'Pemasukan berhasil dihapus',
+            'data' => $pemasukan
+        ]);
+    }
+    
     public function get_pemasukan_by_id($id)
     {
         $pemasukan = DB::table('pemasukan')
