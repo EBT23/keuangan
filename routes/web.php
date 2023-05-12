@@ -47,6 +47,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
 #DISTRIBUTOR
 Route::get('/distributor', [DistributorController::class, 'distributor'])->name('distributor');
+Route::get('/distributor/export_excel', [DistributorController::class, 'export_excel'])->name('disti.export_excel');
 Route::post('/tambah_distributor', [DistributorController::class, 'tambah_distributor'])->name('tambah.distributor');
 Route::post('/update_distributor/{id}', [DistributorController::class, 'update_distributor'])->name('update.distributor');
 Route::get('/edit_distributor/{id}', [DistributorController::class, 'edit_distributor'])->name('edit.distributor');
