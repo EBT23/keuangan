@@ -81,9 +81,7 @@
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Data Distributor</h6>
-                            <div class="my-2">
-                                <a class="btn btn-info" href="{{ route('disti.export_excel') }}" target="_blank">Export DATA</a>
-                            </div>
+                            
                             <div class="table-responsive">
                                 <table id="myTable" class="display">
                                     <thead>

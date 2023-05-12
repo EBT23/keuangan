@@ -7,12 +7,12 @@
 <div
     id="spinner"
     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div>
-        class="spinner-border text-primary"
-        style="width: 3rem; height: 3rem;"
-        role="status">
-        <span class="sr-only">Loading...</span>
-    </div>
+    <div
+    class="spinner-border text-primary"
+    style="width: 3rem; height: 3rem;"
+    role="status">
+    <span class="sr-only">Loading...</span>
+</div>
 </div>
 <!-- Spinner End -->
 
@@ -80,8 +80,22 @@
                     </div>
                     @endif
                     <div class="col-12">
-                        <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Data Pengeluaran</h6>
+                        <div class="bg-light rounded h-100 p-2">
+                            <tbody style="margin-bottom: 2px"><tr>
+                                <td>Dari :</td>
+                                <td><input type="text" id="min" name="min"></td>
+                            </tr>
+                            <tr>
+                                <td>Sampai :</td>
+                                <td><input type="text" id="max" name="max"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-success">Cari Data </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <hr>
                             <div class="table-responsive">
                                 <table  id="myTable" class="display">
                                     <thead>
