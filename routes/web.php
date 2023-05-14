@@ -13,6 +13,7 @@ use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\JenisPengeluaranController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PengaturanGajiController;
 use App\Models\JenisPengeluaran;
 
@@ -108,6 +109,14 @@ Route::get('/jenis_pengeluaran', [JenisPengeluaranController::class, 'jenis_peng
 Route::post('/tambah_jenis_pengeluaran', [JenisPengeluaranController::class, 'addJenis_pengeluaran'])->name('tambah.jenis.pengeluaran');
 Route::delete('/delete_jpengeluaran/{id}', [JenisPengeluaranController::class, 'delete_jp'])->name('delete.jenis_pengeluaran');
 
+#Laporan
+Route::get('/pemasukan', [LaporanController::class, 'pemasukan'])->name('pemasukan');
+Route::get('/pengeluaran', [LaporanController::class, 'pengeluaran'])->name('pengeluaran');
+Route::get('/gaji', [LaporanController::class, 'gaji'])->name('gaji');
+// Route::post('/tambah_distributor', [LaporanController::class, 'tambah_distributor'])->name('tambah.distributor');
+// Route::post('/update_distributor/{id}', [LaporanController::class, 'update_distributor'])->name('update.distributor');
+// Route::get('/edit_distributor/{id}', [LaporanController::class, 'edit_distributor'])->name('edit.distributor');
+// Route::delete('/delete_distributor/{id}', [LaporanController::class, 'delete_distributor'])->name('delete.distributor');
 
 
 Route::get('/route-cache', function () {
