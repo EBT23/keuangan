@@ -28,7 +28,7 @@ class ApiAdminController extends Controller
        
         $pengeluaran = DB::table('pengeluaran')
             ->join('jenis_pengeluaran', 'jenis_pengeluaran.id', '=', 'pengeluaran.jenis_pengeluaran_id')
-            ->select('jenis_pengeluaran.id','jenis_pengeluaran.jenis_pengeluaran','pengeluaran.*')
+            ->select('users.id AS user_id','jenis_pengeluaran.id','jenis_pengeluaran.jenis_pengeluaran','pengeluaran.*')
             ->get();
         return response()->json([
             'data' => $pengeluaran

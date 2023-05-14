@@ -23,6 +23,8 @@ class KaryawanController extends Controller
         $data['karyawan'] = json_decode($body, true);
         $data['karyawan'] = $data['karyawan']['data'];
 
+        // dd($data['karyawan']);
+
         return view('karyawan', $data, $data1);
     }
 

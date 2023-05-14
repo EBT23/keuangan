@@ -1,16 +1,12 @@
 @extends('layouts.base',['title' => "$title - Admin"])
 <!-- Start wrapper-->
 
-@section('content') 
+@section('content')
 <!-- Spinner Start -->
 
-<div
-    id="spinner"
+<div id="spinner"
     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div
-        class="spinner-border text-primary"
-        style="width: 3rem; height: 3rem;"
-        role="status">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 </div>
@@ -26,69 +22,71 @@
         <div class="card-body">
             <h4 class="card-title">FORM TAMBAH DATA KARYAWAN</h4>
             <hr>
-        <form action="{{ route('tambah.karyawan') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('tambah.karyawan') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-            <div class="row">
-             <div class="col-6">
-              <div class="mb-3">
-                <label for="name" class="form-label">Nama Lengkap</label>
-                <input type="text" class="form-control" name="name" id="name">
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" id="email">
-              </div>
-              <div class="mb-3">
-                <label for="no_identitas" class="form-label">No Identitas</label>
-                <input type="number" class="form-control" name="no_identitas" id="no_identitas">
-              </div>
-              <div class="mb-3">
-                <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-                <textarea class="form-control" name="tempat_lahir" id="tempat_lahir"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-                <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" id="tgl_lahir">
-              </div>
-            </div>
-             <div class="col-6">
-              <div class="mb-3">
-                <label for="no_rek" class="form-label">No Rekening</label>
-                <input type="text" class="form-control" name="no_rek" id="no_rek">
-              </div>
-              <div class="mb-3">
-                <label for="posisi_id" class="form-label">Posisi</label>
-                <select class="form-select" name="posisi_id" data-allow-clear="true">
-                    <option selected="">Pilih Posisi</option>
-                    @foreach ($posisi as $item)
-                        <option value="{{ $item['id'] }}">
-                            {{ $item['nama_posisi'] }}
-                        </option>
-                    @endforeach
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="status" class="form-label">Status</label>
-                <select class="form-select" name="status" data-allow-clear="true">
-                    <option selected="">Status :</option>
-                    <option value="Karyawan Tetap" {{ old('status') == 'active' ? 'selected' : '' }}>Karyawan Tetap</option>
-                    <option value="Karyawan Tidak Tetap" {{ old('status') == 'inactive' ? 'selected' : '' }}>Karyawan Tidak Tetap</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="domisili" class="form-label">Domisili</label>
-                <textarea class="form-control" name="domisili" id="domisili"></textarea>
-            </div>
-            <div class="mb-3">
-                <label for="no_tlp" class="form-label">No Handphone</label>
-                <input type="number" class="form-control" id="no_tlp" name="no_tlp" id="no_tlp">
-              </div>
-            </div>
-            </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" name="name" id="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" id="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="no_identitas" class="form-label">No Identitas</label>
+                            <input type="number" class="form-control" name="no_identitas" id="no_identitas">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
+                            <textarea class="form-control" name="tempat_lahir" id="tempat_lahir"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
+                            <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" id="tgl_lahir">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="no_rek" class="form-label">No Rekening</label>
+                            <input type="text" class="form-control" name="no_rek" id="no_rek">
+                        </div>
+                        <div class="mb-3">
+                            <label for="posisi_id" class="form-label">Posisi</label>
+                            <select class="form-select" name="posisi_id" data-allow-clear="true">
+                                <option selected="">Pilih Posisi</option>
+                                @foreach ($posisi as $item)
+                                <option value="{{ $item['id'] }}">
+                                    {{ $item['nama_posisi'] }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" name="status" data-allow-clear="true">
+                                <option selected="">Status :</option>
+                                <option value="Karyawan Tetap" {{ old('status')=='active' ? 'selected' : '' }}>Karyawan
+                                    Tetap</option>
+                                <option value="Karyawan Tidak Tetap" {{ old('status')=='inactive' ? 'selected' : '' }}>
+                                    Karyawan Tidak Tetap</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="domisili" class="form-label">Domisili</label>
+                            <textarea class="form-control" name="domisili" id="domisili"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="no_tlp" class="form-label">No Handphone</label>
+                            <input type="number" class="form-control" id="no_tlp" name="no_tlp" id="no_tlp">
+                        </div>
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary">
                     Tambah
                 </button>
-        </form>
+            </form>
         </div>
         <div class="card-body">
             <div class="col-12">
@@ -135,35 +133,41 @@
                                             <td>{{ $kr['status'] }}</td>
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">
-                                                    <a href="{{ route('edit.karyawan', ['id' => $kr['id']]) }}" type="button"
+                                                    <a href="{{ route('edit.karyawan', ['id' => $kr['user_id']]) }}"
+                                                        type="button"
                                                         class="btn btn-outline-primary waves-effect waves-light">
                                                         Edit</a>
-                                                        <form action="{{ route('delete.karyawan', ['id' => $kr['id']]) }}" method="POST">
-                                                            {{ csrf_field() }}
-                                                            {{ method_field('DELETE') }}
-                                                        <button onclick="return confirm('Anda yakin akan menghapus ini? ')" type="submit"
-                                                        class="btn btn-outline-danger waves-effect waves-light">Hapus</i></button>
+                                                    <form action="{{ route('delete.karyawan', ['id' => $kr['id']]) }}"
+                                                        method="POST">
+                                                        {{ csrf_field() }}
+                                                        {{ method_field('DELETE') }}
+                                                        <button
+                                                            onclick="return confirm('Anda yakin akan menghapus ini? ')"
+                                                            type="submit"
+                                                            class="btn btn-outline-danger waves-effect waves-light">Hapus</i></button>
                                                     </form>
                                                 </div>
                                             </td>
                                         </tr>
                                         @endforeach
-    
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- Content End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
+            <i class="bi bi-arrow-up"></i>
+        </a>
     </div>
-<!-- Content End -->
 
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
-    <i class="bi bi-arrow-up"></i>
-</a>
-</div>
-
-<script>let table = new DataTable('#myTable');</script>
-@endsection
+    <script>
+        let table = new DataTable('#myTable');
+    </script>
+    @endsection
