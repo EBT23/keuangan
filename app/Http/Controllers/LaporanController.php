@@ -98,7 +98,7 @@ class LaporanController extends Controller
         $fileName = "Laporan Pemasukan Tgl $request->StartDate - $request->EndDate";
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $fileName . '"');
+        header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
         header('Cache-Control: max-age=0');
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
@@ -114,14 +114,14 @@ class LaporanController extends Controller
         $offer_customer_data = DB::select("select p.*, jp.jenis_pengeluaran from pengeluaran p left join jenis_pengeluaran jp on jp.id=p.jenis_pengeluaran_id where 1=1 $query");
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Id');
+        $sheet->setCellValue('A1', 'Jenis Pengeluaran');
         $sheet->setCellValue('B1', 'Keterangan');
         $sheet->setCellValue('C1', 'Tanggal');
         $sheet->setCellValue('D1', 'Nilai');
         $rows = 2;
         // dd($offer_customer_data);
         foreach ($offer_customer_data as $empDetails) {
-            $sheet->setCellValue('A' . $rows, $empDetails->jenis_pengeluaran_id);
+            $sheet->setCellValue('A' . $rows, $empDetails->jenis_pengeluaran);
             $sheet->setCellValue('B' . $rows, $empDetails->keterangan);
             $sheet->setCellValue('C' . $rows, $empDetails->tgl);
             $sheet->setCellValue('D' . $rows, $empDetails->total_pengeluaran);
@@ -131,7 +131,7 @@ class LaporanController extends Controller
         $fileName = "Laporan Pengeluaran Tgl $request->StartDate - $request->EndDate";
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $fileName . '"');
+        header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
         header('Cache-Control: max-age=0');
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
@@ -243,7 +243,7 @@ class LaporanController extends Controller
         $fileName = "Laporan Penggajian Nama " . $name->name . " Tahun $request->tahun";
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $fileName . '"');
+        header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
         header('Cache-Control: max-age=0');
 
         $writer = IOFactory::createWriter(
@@ -288,7 +288,7 @@ class LaporanController extends Controller
         $fileName = "Laporan Penggajian ID " . $id . "";
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $fileName . '"');
+        header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
         header('Cache-Control: max-age=0');
 
         $writer = IOFactory::createWriter(
