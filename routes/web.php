@@ -110,9 +110,18 @@ Route::post('/tambah_jenis_pengeluaran', [JenisPengeluaranController::class, 'ad
 Route::delete('/delete_jpengeluaran/{id}', [JenisPengeluaranController::class, 'delete_jp'])->name('delete.jenis_pengeluaran');
 
 #Laporan
-Route::get('/pemasukan', [LaporanController::class, 'pemasukan'])->name('pemasukan');
-Route::get('/pengeluaran', [LaporanController::class, 'pengeluaran'])->name('pengeluaran');
-Route::get('/gaji', [LaporanController::class, 'gaji'])->name('gaji');
+Route::get('/laporan/pemasukan', [LaporanController::class, 'pemasukan'])->name('laporan.pemasukan');
+Route::get('/laporan/pengeluaran', [LaporanController::class, 'pengeluaran'])->name('laporan.pengeluaran');
+Route::get('/laporan/gaji', [LaporanController::class, 'gaji'])->name('laporan.gaji');
+Route::post('/pemasukan/search', [LaporanController::class, 'pemasukanSearch'])->name('pemasukan.search');
+Route::get('/pemasukan/cetak', [LaporanController::class, 'exportPemasukan'])->name('pemasukan.cetak');
+Route::get('/pemasukan/cetakById/{id}', [LaporanController::class, 'exportPemasukanById'])->name('pemasukan.cetakById');
+Route::post('/pengeluaran/search', [LaporanController::class, 'pengeluaranSearch'])->name('pengeluaran.search');
+Route::get('/pengeluaran/cetak', [LaporanController::class, 'exportpengeluaran'])->name('pengeluaran.cetak');
+Route::get('/pengeluaran/cetakById/{id}', [LaporanController::class, 'exportpengeluaranById'])->name('pengeluaran.cetakById');
+Route::post('/gaji/search', [LaporanController::class, 'gajiSearch'])->name('gaji.search');
+Route::get('/gaji/cetak', [LaporanController::class, 'exportgaji'])->name('gaji.cetak');
+Route::get('/gaji/cetakById/{id}', [LaporanController::class, 'exportgajiById'])->name('gaji.cetakById');
 // Route::post('/tambah_distributor', [LaporanController::class, 'tambah_distributor'])->name('tambah.distributor');
 // Route::post('/update_distributor/{id}', [LaporanController::class, 'update_distributor'])->name('update.distributor');
 // Route::get('/edit_distributor/{id}', [LaporanController::class, 'edit_distributor'])->name('edit.distributor');

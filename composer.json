@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "maatwebsite/excel": "^3.1",
+        "phpoffice/phpspreadsheet": "^1.28",
         "symfony/http-foundation": "^6.2",
         "yajra/laravel-datatables-oracle": "^10.4"
     },

@@ -21,16 +21,16 @@
         <div class="card-body">
             <h4 class="card-title">FORM LAPORAN DATA GAJI</h4>
             <hr>
-            <form action="{{ route('tambah.jenis.pengeluaran') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('gaji.search') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-4">
                         <div class="mb-3">
                             <label for="users_id" class="form-label">Nama Kariyawan</label>
-                            <select class="form-control" name="user_id" id="user_id">
+                            <select class="form-control" name="user_id" id="user_id" required>
                                 <option value="" selected>-- Pilih --</option>
                                 @foreach ($users as $u)
-                                <option value="{{$u->id}}">{{$u->name}}</option>
+                                <option value="{{$u->id}}" {{ $u->id == $user_id ? 'selected' : '' }}>{{$u->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -38,24 +38,31 @@
                     <div class="col-4">
                         <div class="mb-3">
                             <label for="tahun" class="form-label">Tahun</label>
-                            <select class="form-control" name="" id="">
+                            <select class="form-control" name="tahun" id="tahun" required>
                                 <option value="" selected>-- pilih --</option>
                                 @php
-                                $year = date('Y');
-                                $min = $year - 2;
-                                $max = $year;
-                                for ($i = $max; $i >= $min; $i--) {
-                                echo '<option value=' . $i . '>' . $i . '</option>';
-                                }
-                                @endphp
+                                            $year = date('Y');
+                                            $min = $year - 2;
+                                            $max = $year;
+                                        @endphp
+                                        @for ($i = $max; $i >= $min; $i--)
+                                            <option value="{{ $i }}" {{ $i == $tahun ? 'selected' : '' }}>
+                                                {{ $i }}</option>
+                                        @endfor
                             </select>
                         </div>
                     </div>
                     <div class="col-4">
-                        <div class="mb-3">
-                            <button class="btn btn-primary" type="submit" style="margin-top: 31px;">Filter</button>
+                            <div class="mb-3">
+                                <button class="btn btn-primary" type="submit" style="margin-top: 31px;">Filter</button>
+                                @if ($user_id != '')
+                                    <a onclick="sendexcel()" class="btn btn-success" style="margin-top: 31px;">Cetak</a>
+                                    <a href="/laporan/pemasukan" class="btn btn-danger" type="submit"
+                                        style="margin-top: 31px;">Reset</a>
+                                @endif
+
+                            </div>
                         </div>
-                    </div>
                 </div>
 
             </form>
@@ -92,15 +99,16 @@
                                         @foreach ($gaji as $index => $pm )
                                         <tr>
                                             <th scope="row">{{ $index+1 }}</th>
-                                            <td>{{ $pm->id_users }}</td>
+                                            <td>{{ $pm->name }}</td>
                                             <td>{{ $pm->bulan }}</td>
                                             <td>{{ $pm->gapok }}</td>
                                             <td>{{ $pm->makan_transport }}</td>
                                             <td>
-                                                <div class="d-flex flex-wrap gap-2">
-                                                    <button>Cetak</button>
-                                                </div>
-                                            </td>
+                                                        <div class="d-flex flex-wrap gap-2">
+                                                            <a href="/gaji/cetakById/{{ $pm->id }}"
+                                                                class="btn btn-success">Cetak</a>
+                                                        </div>
+                                                    </td>
                                         </tr>
                                         @endforeach
 
@@ -119,5 +127,27 @@
             <i class="bi bi-arrow-up"></i>
         </a>
     </div>
+    <script>
+            function sendexcel() {
+               
+                $.ajax({
+                    url: "/gaji/cetak",
+                    type: "GET",
+                    data: {
+                        user_id:  $('#user_id').val(),
+                        tahun: $('#tahun').val(),
+                    },
+                    success: function(response) {
+                        console.log(response);
+                         window.open(this.url,'_blank' );
+                        // document.getElementById("total_items").value = response;
+                        // document.getElementById("disp").innerHTML = response;
+                    },
+                    error: function() {
+                        alert("error");
+                    }
+                });
+            }
+        </script>
 
     @endsection

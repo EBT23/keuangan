@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -16,26 +18,24 @@ class AuthController extends Controller
 
     public function login_post(Request $request)
     {
-        $client = new Client();
-        $response = $client->request('POST','http://keuangan.dlhcode.com/api/login',[
-            'form_params' =>[
-                'email' => $request->email,
-                'password' => $request->password,
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $session = User::where('email', $request->email)->first();
+            // dd($session);
+            Session::put('name', $session->name);
 
-            ]
-            ]);
-            $body = $response->getbody();
-            $data = json_decode($body, true);
+            $request->session()->regenerate();
+            return redirect()->route('index');
+        }
 
-            if(isset($data['data'])){
-                session(['access_token' => $data['data']]);
-                return redirect()->route('index');
-            }else{
-                return redirect()->back();
-            }
-
-
+        return back()->withInput()->withErrors([
+            'password' => 'Wrong username or password',
+        ]);
     }
+   
 
     public function logout(Request $request)
     {

@@ -583,6 +583,7 @@ class ComposerStaticInitb6dfefa5e1cc55694ade108e7d612f5f
         'App\\Http\\Controllers\\DistributorController' => __DIR__ . '/../..' . '/app/Http/Controllers/DistributorController.php',
         'App\\Http\\Controllers\\JenisPengeluaranController' => __DIR__ . '/../..' . '/app/Http/Controllers/JenisPengeluaranController.php',
         'App\\Http\\Controllers\\KaryawanController' => __DIR__ . '/../..' . '/app/Http/Controllers/KaryawanController.php',
+        'App\\Http\\Controllers\\LaporanController' => __DIR__ . '/../..' . '/app/Http/Controllers/LaporanController.php',
         'App\\Http\\Controllers\\PemasukanController' => __DIR__ . '/../..' . '/app/Http/Controllers/PemasukanController.php',
         'App\\Http\\Controllers\\PengaturanGajiController' => __DIR__ . '/../..' . '/app/Http/Controllers/PengaturanGajiController.php',
         'App\\Http\\Controllers\\PengeluaranController' => __DIR__ . '/../..' . '/app/Http/Controllers/PengeluaranController.php',

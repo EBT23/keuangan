@@ -21,29 +21,37 @@
         <div class="card-body">
             <h4 class="card-title">FORM LAPORAN DATA JENIS PENGELUARAN</h4>
             <hr>
-            <form action="{{ route('tambah.jenis.pengeluaran') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="row">
-                    <div class="col-4">
-                        <div class="mb-3">
-                            <label for="date_start" class="form-label">Dari Tanggal</label>
-                            <input type="date" class="form-control" name="date_start" id="date_start">
+            <form action="{{ route('pengeluaran.search') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="StartDate" class="form-label">Dari Tanggal</label>
+                                <input type="date" class="form-control" name="StartDate" id="StartDate"
+                                    value="{{ $StartDate }}" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="mb-3">
-                            <label for="date_end" class="form-label">Sampai Tanggal</label>
-                            <input type="date" class="form-control" name="date_end" id="date_end">
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="EndDate" class="form-label">Sampai Tanggal</label>
+                                <input type="date" class="form-control" name="EndDate" id="EndDate"
+                                    value="{{ $EndDate }}" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="mb-3">
-                            <button class="btn btn-primary" type="submit" style="margin-top: 31px;">Filter</button>
-                        </div>
-                    </div>
-                </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <button class="btn btn-primary" type="submit" style="margin-top: 31px;">Filter</button>
+                                @if ($StartDate != '')
+                                    <a onclick="sendexcel()" class="btn btn-success" style="margin-top: 31px;">Cetak</a>
+                                    <a href="/laporan/pengeluaran" class="btn btn-danger" type="submit"
+                                        style="margin-top: 31px;">Reset</a>
+                                @endif
 
-            </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
         </div>
         <div class="card-body">
             <div class="col-12">
@@ -65,7 +73,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col" width="5%">No</th>
-                                            <th scope="col">Distributo</th>
+                                            <th scope="col">Jenis Pengeluaran</th>
                                             <th scope="col">Keterangan</th>
                                             <th scope="col">Tanggal</th>
                                             <th scope="col">Nilai</th>
@@ -77,14 +85,15 @@
                                         @foreach ($pengeluaran as $index => $pm )
                                         <tr>
                                             <th scope="row">{{ $index+1 }}</th>
-                                            <td>{{ $pm->jenis_pengeluaran_id }}</td>
+                                            <td>{{ $pm->jenis_pengeluaran }}</td>
                                             <td>{{ $pm->keterangan }}</td>
                                             <td>{{ $pm->tgl }}</td>
                                             <td>{{ $pm->total_pengeluaran }}</td>
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">
-                                                    <button>Cetak</button>
-                                                </div>
+                                                            <a href="/pengeluaran/cetakById/{{ $pm->id }}"
+                                                                class="btn btn-success">Cetak</a>
+                                                        </div>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -104,5 +113,29 @@
             <i class="bi bi-arrow-up"></i>
         </a>
     </div>
+    <script>
+            function sendexcel() {
+                var StartDate = $('#StartDate').val();
+                var EndDate = $('#EndDate').val();
+                console.log(StartDate);
+                $.ajax({
+                    url: "/pengeluaran/cetak",
+                    type: "GET",
+                    data: {
+                        StartDate: StartDate,
+                        EndDate: EndDate,
+                    },
+                    success: function(response) {
+                        console.log(response);
+                         window.open(this.url,'_blank' );
+                        // document.getElementById("total_items").value = response;
+                        // document.getElementById("disp").innerHTML = response;
+                    },
+                    error: function() {
+                        alert("error");
+                    }
+                });
+            }
+        </script>
 
     @endsection

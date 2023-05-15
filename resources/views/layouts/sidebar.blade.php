@@ -18,8 +18,9 @@
                 <span>Admin</span>
             </div>
         </div>
-        <!-- @i (request()->user()->role_id == 1) -->
+        
         <div class="navbar-nav w-100">
+             @if (request()->user()->role_id == 1) 
             <a href="{{ route('index') }}" class="nav-item nav-link ">
                 <i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{ route('karyawan') }}" class="nav-item nav-link">
@@ -42,12 +43,14 @@
                 <i class="fa fa-chart-bar me-2"></i>Distributor</a>
             <a href="{{ route('role') }}" class="nav-item nav-link">
                 <i class="far fa-file-alt me-2"></i>Role</a>
-            <a href="{{ route('pemasukan') }}" class="nav-item nav-link">
+                @elseif (request()->user()->role_id == 3) 
+            <a href="{{ route('laporan.pemasukan') }}" class="nav-item nav-link">
                 <i class="far fa-file-alt me-2"></i>Laporan Pemasukan</a>
-            <a href="{{ route('pengeluaran') }}" class="nav-item nav-link">
+            <a href="{{ route('laporan.pengeluaran') }}" class="nav-item nav-link">
                 <i class="far fa-file-alt me-2"></i>Laporan Pengeluaran</a>
-            <a href="{{ route('gaji') }}" class="nav-item nav-link">
+            <a href="{{ route('laporan.gaji') }}" class="nav-item nav-link">
                 <i class="far fa-file-alt me-2"></i>Laporan Gaji</a>
+                @endif
         </div>
 
     </nav>
