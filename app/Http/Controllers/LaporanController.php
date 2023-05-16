@@ -30,17 +30,7 @@ class LaporanController extends Controller
 
         return view('laporanPengeluaran', ['pengeluaran' => $pengeluaran], $data);
     }
-    public function gaji()
-    {
-        $data['title'] = 'Laporan Gaji';
-        $data['user_id'] = "";
-        $data['tahun'] = "";
-        $gaji =
-            DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users");
-        $users = DB::table('users')->where('role_id', 2)->get();
-
-        return view('laporanGaji', ['gaji' => $gaji, 'users' => $users], $data);
-    }
+   
     public function pemasukanSearch(Request $request)
     {
         $d['title'] = 'Laporan Pemasukan';
@@ -191,17 +181,28 @@ class LaporanController extends Controller
         $writer->save("php://output");
     }
 
+    public function gaji()
+    {
+        $data['title'] = 'Laporan Gaji';
+        $data['bln'] = "";
+        $gaji =
+            DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users");
+        $bulan =
+            DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users group by bulan");
+
+        return view('laporanGaji', ['gaji' => $gaji, 'bulan' => $bulan], $data);
+    }
+
     public function gajiSearch(Request $request)
     {
         $d['title'] = 'Laporan Gaji';
 
-        $user_id = $request->user_id ? "$request->user_id" : "";
-        $tahun = $request->tahun ? "$request->tahun" : "";
-        $query = $user_id && $tahun != "" ? "and p.id_users like '%$user_id%' AND  substr(p.bulan like '%$tahun%',1,4)" : "";
-        // dd($tahun);
-        $d['user_id'] = $user_id;
-        $d['tahun'] = $tahun;
-        $d['users'] = DB::table('users')->where('role_id', 2)->get();
+        $bulan = $request->bulan ? "$request->bulan" : "";
+        $query = $bulan != "" ? "and p.bulan like '%$bulan%'" : "";
+        // dd($bulan);
+        $d['bln'] = $bulan;
+        $d['bulan'] =
+        DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users group by bulan");
         $d['gaji'] = DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users where 1=1 $query");
         // dd($d['gaji']);
         // $request->session()->put('date_start', $request->all());
@@ -210,10 +211,10 @@ class LaporanController extends Controller
     public function exportgaji(Request $request)
     {
         // dd($request->all());
-        $offer_customer_data = DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users order by p.id_users asc");
+        $offer_customer_data = DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users where p.bulan = '$request->bulan'");
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Id');
+        $sheet->setCellValue('A1', 'Nama');
         $sheet->setCellValue('B1', 'Bulan');
         $sheet->setCellValue('C1', 'Gapok');
         $sheet->setCellValue('D1', 'Makan & Transport');
@@ -238,9 +239,9 @@ class LaporanController extends Controller
             $sheet->setCellValue('J' . $rows, $empDetails->total);
             $rows++;
         }
-        $name = DB::table('users')->where('id', "$request->user_id")->first();
+
         // dd($name);
-        $fileName = "Laporan Penggajian Nama " . $name->name . " Tahun $request->tahun";
+        $fileName = "Laporan Penggajian Tahun&Bulan $request->bulan";
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
@@ -297,5 +298,13 @@ class LaporanController extends Controller
         );
         $writer->save('php://output');
         exit;
+    }
+    public function gajiName()
+    {
+        $data['title'] = 'Laporan Gaji';
+        $gaji =
+            DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users where u.name = '" . request()->user()->name . "'");
+
+        return view('laporanGajiByName', ['gaji' => $gaji], $data);
     }
 }

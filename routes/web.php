@@ -122,10 +122,8 @@ Route::get('/pengeluaran/cetakById/{id}', [LaporanController::class, 'exportpeng
 Route::post('/gaji/search', [LaporanController::class, 'gajiSearch'])->name('gaji.search');
 Route::get('/gaji/cetak', [LaporanController::class, 'exportgaji'])->name('gaji.cetak');
 Route::get('/gaji/cetakById/{id}', [LaporanController::class, 'exportgajiById'])->name('gaji.cetakById');
-// Route::post('/tambah_distributor', [LaporanController::class, 'tambah_distributor'])->name('tambah.distributor');
-// Route::post('/update_distributor/{id}', [LaporanController::class, 'update_distributor'])->name('update.distributor');
-// Route::get('/edit_distributor/{id}', [LaporanController::class, 'edit_distributor'])->name('edit.distributor');
-// Route::delete('/delete_distributor/{id}', [LaporanController::class, 'delete_distributor'])->name('delete.distributor');
+
+Route::get('/gaji/name', [LaporanController::class, 'gajiName'])->name('laporan.gaji.name');
 
 
 Route::get('/route-cache', function () {

@@ -21,35 +21,7 @@
         <div class="card-body">
             <h4 class="card-title">FORM LAPORAN DATA GAJI</h4>
             <hr>
-            <form action="{{ route('gaji.search') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="row">
-                    <div class="col-4">
-                        <div class="mb-3">
-                            <label for="users_id" class="form-label">Tahun & Bulan</label>
-                            <select class="form-control" name="bulan" id="bulan" required>
-                                <option value="" selected>-- Pilih --</option>
-                                @foreach ($bulan as $u)
-                                <option value="{{$u->bulan}}" {{ $u->bulan == $bln ? 'selected' : '' }}>{{$u->bulan}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="col-4">
-                            <div class="mb-3">
-                                <button class="btn btn-primary" type="submit" style="margin-top: 31px;">Filter</button>
-                                @if ($bln != '')
-                                    <a onclick="sendexcel()" class="btn btn-success" style="margin-top: 31px;">Cetak</a>
-                                    <a href="/laporan/gaji" class="btn btn-danger" type="submit"
-                                        style="margin-top: 31px;">Reset</a>
-                                @endif
-
-                            </div>
-                        </div>
-                </div>
-
-            </form>
+            
         </div>
         <div class="card-body">
             <div class="col-12">

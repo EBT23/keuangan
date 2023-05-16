@@ -51,6 +51,9 @@
                 <i class="far fa-file-alt me-2 p-0"></i>Laporan Pengeluaran</a>
             <a href="{{ route('laporan.gaji') }}" class="nav-item nav-link">
                 <i class="far fa-file-alt me-2"></i>Laporan Gaji</a>
+                @else
+                 <a href="{{ route('laporan.gaji.name') }}" class="nav-item nav-link">
+                <i class="far fa-file-alt me-2"></i>Laporan Gaji</a>
             @endif
         </div>
 
