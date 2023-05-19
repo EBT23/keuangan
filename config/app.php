@@ -210,8 +210,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),

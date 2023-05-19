@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+
+
+
 
 class LaporanController extends Controller
 {
@@ -16,7 +19,7 @@ class LaporanController extends Controller
         $data['StartDate'] = "";
         $data['EndDate'] = "";
         $pemasukan =
-        DB::select("select p.*, d.nama_distributor from pemasukan p left join distributor d on d.id=p.distributor_id ");
+            DB::select("select p.*, d.nama_distributor from pemasukan p left join distributor d on d.id=p.distributor_id ");
 
         return view('laporanPemasukan', ['pemasukan' => $pemasukan], $data);
     }
@@ -26,11 +29,11 @@ class LaporanController extends Controller
         $data['StartDate'] = "";
         $data['EndDate'] = "";
         $pengeluaran =
-        DB::select("select p.*, jp.jenis_pengeluaran from pengeluaran p left join jenis_pengeluaran jp on jp.id=p.jenis_pengeluaran_id  ");
+            DB::select("select p.*, jp.jenis_pengeluaran from pengeluaran p left join jenis_pengeluaran jp on jp.id=p.jenis_pengeluaran_id  ");
 
         return view('laporanPengeluaran', ['pengeluaran' => $pengeluaran], $data);
     }
-   
+
     public function pemasukanSearch(Request $request)
     {
         $d['title'] = 'Laporan Pemasukan';
@@ -71,11 +74,33 @@ class LaporanController extends Controller
         $offer_customer_data = DB::select("select p.*, d.nama_distributor from pemasukan p left join distributor d on d.id=p.distributor_id where 1=1 $query");
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Distributor');
-        $sheet->setCellValue('B1', 'Keterangan');
-        $sheet->setCellValue('C1', 'Tanggal');
-        $sheet->setCellValue('D1', 'Nilai');
-        $rows = 2;
+
+        $sheet->mergeCells('A1:D1');
+        $sheet->getStyle('A1')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        $sheet->mergeCells('A2:D2');
+        $sheet->getStyle('A2')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        foreach (range('A1', 'D1') as $columnID) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($columnID)
+                ->setAutoSize(true);
+        }
+        $spreadsheet->getActiveSheet()->getStyle('A3:D3')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('d5d5d5');
+        $sheet->setCellValue(
+            'A1',
+            'PT.PANORAMA VARIA CITRA'
+        );
+        $sheet->setCellValue('A2', 'PEMASUKAN PADA TANGGAL ' . $request->StartDate . ' SAMPAI ' . $request->EndDate . '');
+
+        $sheet->setCellValue('A3', 'Distributor');
+        $sheet->setCellValue('B3', 'Keterangan');
+        $sheet->setCellValue('C3', 'Tanggal');
+        $sheet->setCellValue('D3', 'Nilai');
+        $rows = 4;
         // dd($offer_customer_data);
         foreach ($offer_customer_data as $empDetails) {
             $sheet->setCellValue('A' . $rows, $empDetails->nama_distributor);
@@ -104,11 +129,31 @@ class LaporanController extends Controller
         $offer_customer_data = DB::select("select p.*, jp.jenis_pengeluaran from pengeluaran p left join jenis_pengeluaran jp on jp.id=p.jenis_pengeluaran_id where 1=1 $query");
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Jenis Pengeluaran');
-        $sheet->setCellValue('B1', 'Keterangan');
-        $sheet->setCellValue('C1', 'Tanggal');
-        $sheet->setCellValue('D1', 'Nilai');
-        $rows = 2;
+        $sheet->mergeCells('A1:D1');
+        $sheet->getStyle('A1')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        $sheet->mergeCells('A2:D2');
+        $sheet->getStyle('A2')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        foreach (range('A1', 'D1') as $columnID) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($columnID)
+                ->setAutoSize(true);
+        }
+        $spreadsheet->getActiveSheet()->getStyle('A3:D3')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('d5d5d5');
+        $sheet->setCellValue(
+            'A1',
+            'PT.PANORAMA VARIA CITRA'
+        );
+        $sheet->setCellValue('A2', 'PENGELUARAN PADA TANGGAL ' . $request->StartDate . ' SAMPAI ' . $request->EndDate . '');
+        $sheet->setCellValue('A3', 'Jenis Pengeluaran');
+        $sheet->setCellValue('B3', 'Keterangan');
+        $sheet->setCellValue('C3', 'Tanggal');
+        $sheet->setCellValue('D3', 'Nilai');
+        $rows = 4;
         // dd($offer_customer_data);
         foreach ($offer_customer_data as $empDetails) {
             $sheet->setCellValue('A' . $rows, $empDetails->jenis_pengeluaran);
@@ -130,14 +175,37 @@ class LaporanController extends Controller
     }
     public function exportPemasukanById($id)
     {
-        $offer_customer_data = DB::select("select p.*, d.nama_distributor from pemasukan p left join distributor d on d.id=p.distributor_id where id = '$id'");
+        $offer_customer_data = DB::select("select p.*, d.nama_distributor from pemasukan p left join distributor d on d.id=p.distributor_id where p.id = '$id'");
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Distributor');
-        $sheet->setCellValue('B1', 'Keterangan');
-        $sheet->setCellValue('C1', 'Tanggal');
-        $sheet->setCellValue('D1', 'Nilai');
-        $rows = 2;
+
+        $sheet->mergeCells('A1:D1');
+        $sheet->getStyle('A1')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        $sheet->mergeCells('A2:D2');
+        $sheet->getStyle('A2')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        foreach (range('A1', 'D1') as $columnID) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($columnID)
+                ->setAutoSize(true);
+        }
+        $spreadsheet->getActiveSheet()->getStyle('A3:D3')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('d5d5d5');
+        $sheet->setCellValue(
+            'A1',
+            'PT.PANORAMA VARIA CITRA'
+        );
+        $sheet->setCellValue('A2', 'PEMASUKAN BY ID ' . $id . '');
+
+        $sheet->setCellValue('A3', 'Distributor');
+        $sheet->setCellValue('B3', 'Keterangan');
+        $sheet->setCellValue('C3', 'Tanggal');
+        $sheet->setCellValue('D3', 'Nilai');
+        $spreadsheet->getActiveSheet()->getRowDimension(1)->setRowHeight(-1);
+        $rows = 4;
         // dd($offer_customer_data);
         foreach ($offer_customer_data as $empDetails) {
             $sheet->setCellValue('A' . $rows, $empDetails->nama_distributor);
@@ -159,11 +227,32 @@ class LaporanController extends Controller
         $offer_customer_data = DB::select("select p.*, jp.jenis_pengeluaran from pengeluaran p left join jenis_pengeluaran jp on jp.id=p.jenis_pengeluaran_id where p.id = '$id'");
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Jenis Pengeluaran');
-        $sheet->setCellValue('B1', 'Keterangan');
-        $sheet->setCellValue('C1', 'Tanggal');
-        $sheet->setCellValue('D1', 'Nilai');
-        $rows = 2;
+
+        $sheet->mergeCells('A1:D1');
+        $sheet->getStyle('A1')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        $sheet->mergeCells('A2:D2');
+        $sheet->getStyle('A2')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        foreach (range('A1', 'D1') as $columnID) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($columnID)
+                ->setAutoSize(true);
+        }
+        $spreadsheet->getActiveSheet()->getStyle('A3:D3')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('d5d5d5');
+        $sheet->setCellValue(
+            'A1',
+            'PT.PANORAMA VARIA CITRA'
+        );
+        $sheet->setCellValue('A2', 'PENGELUARAN BY ID ' . $id . '');
+        $sheet->setCellValue('A3', 'Jenis Pengeluaran');
+        $sheet->setCellValue('B3', 'Keterangan');
+        $sheet->setCellValue('C3', 'Tanggal');
+        $sheet->setCellValue('D3', 'Nilai');
+        $rows = 4;
         // dd($offer_customer_data);
         foreach ($offer_customer_data as $empDetails) {
             $sheet->setCellValue('A' . $rows, $empDetails->jenis_pengeluaran);
@@ -202,7 +291,7 @@ class LaporanController extends Controller
         // dd($bulan);
         $d['bln'] = $bulan;
         $d['bulan'] =
-        DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users group by bulan");
+            DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users group by bulan");
         $d['gaji'] = DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users where 1=1 $query");
         // dd($d['gaji']);
         // $request->session()->put('date_start', $request->all());
@@ -214,17 +303,38 @@ class LaporanController extends Controller
         $offer_customer_data = DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users where p.bulan = '$request->bulan'");
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Nama');
-        $sheet->setCellValue('B1', 'Bulan');
-        $sheet->setCellValue('C1', 'Gapok');
-        $sheet->setCellValue('D1', 'Makan & Transport');
-        $sheet->setCellValue('E1', 'lembur');
-        $sheet->setCellValue('F1', 'Tunjangan');
-        $sheet->setCellValue('G1', 'Insentiv');
-        $sheet->setCellValue('H1', 'Pinjaman');
-        $sheet->setCellValue('I1', 'Jamkes');
-        $sheet->setCellValue('J1', 'Total');
-        $rows = 2;
+
+        $sheet->mergeCells('A1:J1');
+        $sheet->getStyle('A1')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        $sheet->mergeCells('A2:J2');
+        $sheet->getStyle('A2')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        foreach (range('A1', 'J1') as $columnID) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($columnID)
+                ->setAutoSize(true);
+        }
+        $spreadsheet->getActiveSheet()->getStyle('A3:J3')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('d5d5d5');
+        $sheet->setCellValue(
+            'A1',
+            'PT.PANORAMA VARIA CITRA'
+        );
+        $sheet->setCellValue('A2', 'GAJI PADA BULAN ' . $request->bulan . '');
+        $sheet->setCellValue('A3', 'Nama');
+        $sheet->setCellValue('B3', 'Bulan');
+        $sheet->setCellValue('C3', 'Gapok');
+        $sheet->setCellValue('D3', 'Makan & Transport');
+        $sheet->setCellValue('E3', 'lembur');
+        $sheet->setCellValue('F3', 'Tunjangan');
+        $sheet->setCellValue('G3', 'Insentiv');
+        $sheet->setCellValue('H3', 'Pinjaman');
+        $sheet->setCellValue('I3', 'Jamkes');
+        $sheet->setCellValue('J3', 'Total');
+        $rows = 4;
         // dd($offer_customer_data);
         foreach ($offer_customer_data as $empDetails) {
             $sheet->setCellValue('A' . $rows, $empDetails->name);
@@ -260,17 +370,37 @@ class LaporanController extends Controller
         $offer_customer_data = DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users where p.id = '$id' order by p.id_users asc");
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Id');
-        $sheet->setCellValue('B1', 'Bulan');
-        $sheet->setCellValue('C1', 'Gapok');
-        $sheet->setCellValue('D1', 'Makan & Transport');
-        $sheet->setCellValue('E1', 'lembur');
-        $sheet->setCellValue('F1', 'Tunjangan');
-        $sheet->setCellValue('G1', 'Insentiv');
-        $sheet->setCellValue('H1', 'Pinjaman');
-        $sheet->setCellValue('I1', 'Jamkes');
-        $sheet->setCellValue('J1', 'Total');
-        $rows = 2;
+        $sheet->mergeCells('A1:J1');
+        $sheet->getStyle('A1')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        $sheet->mergeCells('A2:J2');
+        $sheet->getStyle('A2')->getAlignment()->applyFromArray(
+            array('horizontal' => Alignment::HORIZONTAL_CENTER,)
+        );
+        foreach (range('A1', 'J1') as $columnID) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($columnID)
+                ->setAutoSize(true);
+        }
+        $spreadsheet->getActiveSheet()->getStyle('A3:J3')->getFill()
+            ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+            ->getStartColor()->setARGB('d5d5d5');
+        $sheet->setCellValue(
+            'A1',
+            'PT.PANORAMA VARIA CITRA'
+        );
+        $sheet->setCellValue('A2', 'GAJI BY ID ' . $id . '');
+        $sheet->setCellValue('A3', 'Id');
+        $sheet->setCellValue('B3', 'Bulan');
+        $sheet->setCellValue('C3', 'Gapok');
+        $sheet->setCellValue('D3', 'Makan & Transport');
+        $sheet->setCellValue('E3', 'lembur');
+        $sheet->setCellValue('F3', 'Tunjangan');
+        $sheet->setCellValue('G3', 'Insentiv');
+        $sheet->setCellValue('H3', 'Pinjaman');
+        $sheet->setCellValue('I3', 'Jamkes');
+        $sheet->setCellValue('J3', 'Total');
+        $rows = 4;
         // dd($offer_customer_data);
         foreach ($offer_customer_data as $empDetails) {
             $sheet->setCellValue('A' . $rows, $empDetails->name);
