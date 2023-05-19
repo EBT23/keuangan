@@ -36,8 +36,8 @@
                 <i class="fa fa-table me-2"></i>Pengaturan Gaji</a>
             <a href="{{ route('penggajian') }}" class="nav-item nav-link">
                 <i class="fa fa-table me-2"></i>Penggajian</a>
-            <a href="{{ route('penjab') }}" class="nav-item nav-link">
-                <i class="fa fa-chart-bar me-2"></i>PenJab</a>
+            <a href="{{ route('pinjaman') }}" class="nav-item nav-link">
+                <i class="fa fa-chart-bar me-2"></i>Pinjaman</a>
             <a href="{{ route('posisi') }}" class="nav-item nav-link">
                 <i class="fa fa-chart-bar me-2"></i>Posisi</a>
             <a href="{{ route('distributor') }}" class="nav-item nav-link">
@@ -51,8 +51,8 @@
                 <i class="far fa-file-alt me-2 p-0"></i>Laporan Pengeluaran</a>
             <a href="{{ route('laporan.gaji') }}" class="nav-item nav-link">
                 <i class="far fa-file-alt me-2"></i>Laporan Gaji</a>
-                @else
-                 <a href="{{ route('laporan.gaji.name') }}" class="nav-item nav-link">
+            @else
+            <a href="{{ route('laporan.gaji.name') }}" class="nav-item nav-link">
                 <i class="far fa-file-alt me-2"></i>Laporan Gaji</a>
             @endif
         </div>

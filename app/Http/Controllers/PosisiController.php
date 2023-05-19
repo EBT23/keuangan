@@ -11,7 +11,7 @@ class PosisiController extends Controller
 {
     public function posisi()
     {
-        $data['title'] = 'Posisi';
+        $data['title'] = 'Posisi';        
         $token = session('access_token');
         
         $response = Http::withToken("$token")->get('http://keuangan.dlhcode.com/api/posisi');

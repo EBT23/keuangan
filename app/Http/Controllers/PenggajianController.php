@@ -26,8 +26,11 @@ class PenggajianController extends Controller
         $jam_lembur = $request->lembur;
         $insentif = $request->insentiv;
         $kehadiran = $request->kehadiran;
-        $pinjaman= $request->pinjaman;
-                
+        // $pinjaman= $request->pinjaman;
+        
+        $pinjaman = DB::select("SELECT SUM(pinjaman.pinjaman) AS jml_pinjaman FROM `pinjaman` WHERE id_users = $nama_karyawan AND pinjaman.status = 0");
+        $pinjaman =$pinjaman[0];
+        $pinjaman = $pinjaman->jml_pinjaman;
         $users = DB::table('pengaturan_gaji')
                 ->join('users', 'users.id', '=', 'pengaturan_gaji.id_user')
                 ->join('posisi', 'posisi.id', '=', 'users.posisi_id')
@@ -70,7 +73,9 @@ class PenggajianController extends Controller
             'pinjaman'=>$pinjaman,
             'total' => $total,
         ]);
-
+        DB::table('pinjaman')
+              ->where('id_users', $nama_karyawan)
+              ->update(['status' => 1]);
         return redirect()->route('penggajian')
             ->with('success', 'Data berhasil disimpan.');
     }

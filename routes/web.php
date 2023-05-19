@@ -15,6 +15,7 @@ use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PengaturanGajiController;
+use App\Http\Controllers\PinjamanController;
 use App\Models\JenisPengeluaran;
 
 /*
@@ -52,6 +53,13 @@ Route::post('/tambah_distributor', [DistributorController::class, 'tambah_distri
 Route::post('/update_distributor/{id}', [DistributorController::class, 'update_distributor'])->name('update.distributor');
 Route::get('/edit_distributor/{id}', [DistributorController::class, 'edit_distributor'])->name('edit.distributor');
 Route::delete('/delete_distributor/{id}', [DistributorController::class, 'delete_distributor'])->name('delete.distributor');
+
+#Pinjaman
+Route::get('/pinjaman', [PinjamanController::class, 'pinjaman'])->name('pinjaman');
+Route::post('/tambah_pinjaman', [PinjamanController::class, 'tambah_pinjaman'])->name('tambah.pinjaman');
+Route::get('/edit_pinjaman/{id}', [PinjamanController::class, 'edit_pinjaman'])->name('edit.pinjaman');
+Route::post('/update_pinjaman/{id}', [PinjamanController::class, 'update_pinjaman'])->name('update.pinjaman');
+Route::delete('/delete_pinjaman/{id}', [PinjamanController::class, 'delete_pinjaman'])->name('delete.pinjaman');
 
 #POSISI
 Route::get('/posisi', [PosisiController::class, 'posisi'])->name('posisi');

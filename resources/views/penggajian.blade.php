@@ -66,11 +66,10 @@
                                 <input type="number" class="form-control" id="insentiv" name="insentiv"
                                     aria-describedby="insentiv">
                             </div>
-                            <div class="form-group">
+                          {{-- <div class="form-group">
                                 <label for="pinjaman">Pinjaman Karyawan</label>
-                                <input type="number" class="form-control" id="pinjaman" name="pinjaman"
-                                    aria-describedby="pinjaman">
-                            </div>
+                                <input type="number" class="form-control" id="pinjaman" name="pinjaman" aria-describedby="pinjaman">
+                            </div> --}}
                         </div>
                     </div>
 
