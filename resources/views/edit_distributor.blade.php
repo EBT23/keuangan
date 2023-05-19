@@ -55,8 +55,8 @@
                             <textarea class="form-control" name="alamat"  id="alamat" >{{ $distributor['alamat'] }}</textarea>
                         </div>
                         <div class="mb-3">
-                          <label for="penjab_id" class="form-label">Penjab</label>
-                          <input class="form-control" name="penjab_id"  id="penjab_id" value="{{ $distributor['penjab_id'] }}">
+                          <label for="penjab" class="form-label">Penjab</label>
+                          <input class="form-control" name="penjab"  id="penjab" value="{{ $distributor['penjab'] }}">
                         </div>
                     </div>
                 </div>

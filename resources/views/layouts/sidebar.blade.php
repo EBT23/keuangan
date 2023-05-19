@@ -15,11 +15,22 @@
                     class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
                 </div>
             </div>
+            @if (request()->user()->role_id == 1)
             <div class="ms-3">
                 <span>Admin</span>
             </div>
-        </div>
+            @elseif(request()->user()->role_id == 2)
+            <div class="ms-3">
+                <span>Karyawan</span>
+            </div>
+            @else
+            <div class="ms-3">
+                <span>Bos</span>
+            </div>
+            @endif
 
+        </div>
+        
         <div class="navbar-nav w-100 p-0">
             @if (request()->user()->role_id == 1)
             <a href="{{ route('index') }}" class="nav-item nav-link ">
