@@ -30,6 +30,7 @@ class DistributorController extends Controller
 
     public function tambah_distributor(Request $request)
     {
+        // dd($request);
         $token = session('access_token');
 
         $addDistributor = [
@@ -37,7 +38,7 @@ class DistributorController extends Controller
             'tlp' => $request->tlp,
             'area_cover' => $request->area_cover,
             'alamat' => $request->alamat,
-            'penjab_id' => $request->penjab_id,
+            'penjab' => $request->penjab,
             'updated_at' => now(),
             'created_at' => now(),
         ];
@@ -82,7 +83,7 @@ class DistributorController extends Controller
                 'tlp' => $request->tlp,
                 'area_cover' => $request->area_cover,
                 'alamat' => $request->alamat,
-                'penjab_id' => $request->penjab_id,
+                'penjab' => $request->penjab,
                 'updated_at' => now(),
             ],
         ]);
