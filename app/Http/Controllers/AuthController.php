@@ -18,24 +18,32 @@ class AuthController extends Controller
 
     public function login_post(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $session = User::where('email', $request->email)->first();
-            // dd($session);
-            Session::put('name', $session->name);
+        $client = new Client();
 
-            $request->session()->regenerate();
+        $response = $client->request('POST', 'http://keuangan.dlhcode.com/api/login', [
+            'form_params' => [
+                'email' => $request->email,
+                'password' => $request->password,
+
+            ]
+        ]);
+        $body = $response->getbody();
+        $data = json_decode($body, true);
+
+        if (isset($data['data'])) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+                $session = User::where('email', $request->email)->first();
+                // dd($session);
+                Session::put('name', $session->name);
+                $request->session()->regenerate();
+            }
+
+            session(['access_token' => $data['data']]);
             return redirect()->route('index');
+        } else {
+            return redirect()->back();
         }
-
-        return back()->withInput()->withErrors([
-            'password' => 'Wrong username or password',
-        ]);
     }
-   
 
     public function logout(Request $request)
     {
@@ -44,8 +52,8 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
-  
-  
+
+
 
 
 
@@ -54,8 +62,10 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('auth.register',
-        ['posisi' =>  DB::table('posisi')->get()]);
+        return view(
+            'auth.register',
+            ['posisi' =>  DB::table('posisi')->get()]
+        );
     }
 
 
@@ -69,9 +79,10 @@ class AuthController extends Controller
                 'password' => 'required',
                 'tgl_lahir' => 'required',
                 'posisi' => 'required',
-            ]);
+            ]
+        );
 
-            $user = [
+        $user = [
             'nama' => $request->nama,
             'keterangan' => $request->keterangan,
             'total_pengeluaran' => $request->total_pengeluaran,
@@ -81,7 +92,5 @@ class AuthController extends Controller
 
         DB::table('users')->insert($user);
         return view('auth.login');
-
-
     }
 }
