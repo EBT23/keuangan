@@ -1,4 +1,4 @@
-@extends('layouts.base',['title' => "$title - Admin"])
+@extends('layouts.base',['title' => "Dashboard - Admin"])
 <!-- Start wrapper-->
 
 @section('content') 
@@ -24,10 +24,42 @@
     <div class="card-body">
 
         <div class="col-12">
-            <div class="bg-light rounded h-100 p-4">
-                <h6 class="mb-4">Data {{ $title }}</h6>
-                
+            <div class="bg-secondary rounded h-100 p-4">
+                <h6 class="mb-4 text-white">Data Dashboard</h6>
+                 <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-4">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2"> Jumlah Pemasukan</p>
+                                <h6 class="mb-0">Rp.{{$pemasukan }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-4">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Jumlah Pengeluaran</p>
+                                <h6 class="mb-0">Rp.{{$pengeluaran }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-4">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-area fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Laba Bersih</p>
+                                <h6 class="mb-0">Rp.{{$laba_bersih }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
             </div>
+            </div>
+            
         </div>
     </div>
 
