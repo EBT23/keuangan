@@ -47,23 +47,17 @@
                     <div class="mb-3">
                         <label for="alamat" class="form-label">Alamat</label>
                         <input type="text" class="form-control" id="alamat" name="alamat">
+                    </div>
+                     <div class="mb-3">
+                        <label for="penjab" class="form-label">Penjab</label>
+                        <input type="text" class="form-control" id="penjab" name="penjab">
                       </div>
-                      <div class="mb-3">
-                    <label for="penjab_id" class="form-label">Penanggung Jawab</label>
-                    <select class="form-select" name="penjab_id" data-allow-clear="true">
-                        <option selected="">Pilih Penanggung Jawab</option>
-                        @foreach ($penjab as $item)
-                            <option value="{{ $item['id'] }}">
-                                {{ $item['nama_penjab'] }}
-                            </option>
-                        @endforeach
-                    </select>
                   </div>
                     </div>
+                    <button type="submit" class="btn btn-primary">
+                        Tambah
+                    </button>
                 </div>
-                <button type="submit" class="btn btn-primary">
-                    Tambah
-                </button>
         </form>
         </div>
         <div class="card-body">
@@ -104,7 +98,7 @@
                                             <td>{{ $dt['tlp'] }}</td>
                                             <td>{{ $dt['area_cover'] }}</td>
                                             <td>{{ $dt['alamat']  }}</td>
-                                            <td>{{ $dt['nama_penjab']  }}</td>
+                                            <td>{{ $dt['penjab']  }}</td>
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">
                                                     <a href="{{ route('edit.distributor', ['id' => $dt['id']]) }}" type="button"

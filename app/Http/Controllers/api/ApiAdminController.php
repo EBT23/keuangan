@@ -261,7 +261,7 @@ class ApiAdminController extends Controller
             'tlp' => 'required',
             'area_cover' => 'required',
             'alamat' => 'required',
-            'penjab_id' => 'required',
+            'penjab' => 'required',
         ]);
 
         $distributor = DB::table('distributor')->insert([
@@ -270,7 +270,7 @@ class ApiAdminController extends Controller
             'tlp' => $request->tlp,
             'area_cover' => $request->area_cover,
             'alamat' => $request->alamat,
-            'penjab_id' => $request->penjab_id,
+            'penjab' => $request->penjab,
         ]);
 
         return response()->json([
