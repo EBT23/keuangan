@@ -67,7 +67,7 @@ class LaporanController extends Controller
 
     public function exportPemasukan(Request $request)
     {
-        // dd($request->StartDate);
+        // dd(request()->user()->name);
         $StartDate = $request->StartDate ? "$request->StartDate" : "";
         $EndDate = $request->EndDate ? "$request->EndDate" : "";
         $query = $StartDate && $EndDate != "" ? "and tgl BETWEEN '$StartDate' AND '$EndDate'" : "";
@@ -94,12 +94,15 @@ class LaporanController extends Controller
             'A1',
             'PT.PANORAMA VARIA CITRA'
         );
-        $sheet->setCellValue('A2', 'PEMASUKAN PADA TANGGAL ' . $request->StartDate . ' SAMPAI ' . $request->EndDate . '');
+        $sheet->setCellValue(
+            'A2',
+            ' PEMASUKAN PADA TANGGAL ' . $request->StartDate . ' SAMPAI ' . $request->EndDate . ''
+        );
 
         $sheet->setCellValue('A3', 'Distributor');
         $sheet->setCellValue('B3', 'Keterangan');
         $sheet->setCellValue('C3', 'Tanggal');
-        $sheet->setCellValue('D3', 'Nilai');
+        $sheet->setCellValue('D3', 'Total Pemasukan');
         $rows = 4;
         // dd($offer_customer_data);
         foreach ($offer_customer_data as $empDetails) {
@@ -110,7 +113,7 @@ class LaporanController extends Controller
             $rows++;
         }
 
-        $fileName = "Laporan Pemasukan Tgl $request->StartDate - $request->EndDate";
+        $fileName = "" . request()->user()->name . " Laporan Pemasukan Tgl $request->StartDate - $request->EndDate";
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
@@ -152,7 +155,7 @@ class LaporanController extends Controller
         $sheet->setCellValue('A3', 'Jenis Pengeluaran');
         $sheet->setCellValue('B3', 'Keterangan');
         $sheet->setCellValue('C3', 'Tanggal');
-        $sheet->setCellValue('D3', 'Nilai');
+        $sheet->setCellValue('D3', 'Total Pengeluaran');
         $rows = 4;
         // dd($offer_customer_data);
         foreach ($offer_customer_data as $empDetails) {
@@ -163,7 +166,7 @@ class LaporanController extends Controller
             $rows++;
         }
 
-        $fileName = "Laporan Pengeluaran Tgl $request->StartDate - $request->EndDate";
+        $fileName = "" . request()->user()->name . " Laporan Pengeluaran Tgl $request->StartDate - $request->EndDate";
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
@@ -203,7 +206,7 @@ class LaporanController extends Controller
         $sheet->setCellValue('A3', 'Distributor');
         $sheet->setCellValue('B3', 'Keterangan');
         $sheet->setCellValue('C3', 'Tanggal');
-        $sheet->setCellValue('D3', 'Nilai');
+        $sheet->setCellValue('D3', 'Total Pemasukan');
         $spreadsheet->getActiveSheet()->getRowDimension(1)->setRowHeight(-1);
         $rows = 4;
         // dd($offer_customer_data);
@@ -215,7 +218,7 @@ class LaporanController extends Controller
             $rows++;
         }
 
-        $fileName = "Laporan By ID $id";
+        $fileName = "" . request()->user()->name . " Laporan By ID $id";
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -251,7 +254,7 @@ class LaporanController extends Controller
         $sheet->setCellValue('A3', 'Jenis Pengeluaran');
         $sheet->setCellValue('B3', 'Keterangan');
         $sheet->setCellValue('C3', 'Tanggal');
-        $sheet->setCellValue('D3', 'Nilai');
+        $sheet->setCellValue('D3', 'Total Pengeluaran');
         $rows = 4;
         // dd($offer_customer_data);
         foreach ($offer_customer_data as $empDetails) {
@@ -262,7 +265,7 @@ class LaporanController extends Controller
             $rows++;
         }
 
-        $fileName = "Laporan By ID $id";
+        $fileName = "" . request()->user()->name . " Laporan By ID $id";
 
         $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, "Xlsx");
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -351,7 +354,7 @@ class LaporanController extends Controller
         }
 
         // dd($name);
-        $fileName = "Laporan Penggajian Tahun&Bulan $request->bulan";
+        $fileName = "" . request()->user()->name . " Laporan Penggajian Tahun&Bulan $request->bulan";
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
@@ -416,7 +419,7 @@ class LaporanController extends Controller
             $rows++;
         }
         // dd($name);
-        $fileName = "Laporan Penggajian ID " . $id . "";
+        $fileName = "" . request()->user()->name . " Laporan Penggajian ID " . $id . "";
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $fileName . '.xlsx"');
