@@ -441,20 +441,20 @@ class ApiAdminController extends Controller
 
     //========== PENGGAJIAN ===========
 
-    public function penggajian()
+    public function penggajian($id)
     {
         $penggajian = DB::table('penggajian')
-            ->join('users', 'users.id', '=', 'penggajian.user_id')
+            ->join('users', 'users.id', '=', 'penggajian.id_users')
+            ->where('penggajian.id_users', '=', $id)
             ->select(
                 'penggajian.id',
                 'penggajian.bulan',
-                'penggajian.hari_kerja',
                 'penggajian.gapok',
                 'penggajian.makan_transport',
                 'penggajian.lembur',
-                'penggajian.tunjangan_jabatan',
-                'penggajian.insentif',
-                'penggajian.pinjaman_karyawan',
+                'penggajian.tunjangan',
+                'penggajian.insentiv',
+                'penggajian.pinjaman',
                 'penggajian.jamkes',
                 'users.name',
                 'penggajian.total'

@@ -60,7 +60,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/delete_posisi/{id}', [ApiAdminController::class, 'delete_posisi']);
     Route::get('/get_posisi_by_id/{id}', [ApiAdminController::class, 'get_posisiId']);
 
-    Route::get('/penggajian', [ApiAdminController::class, 'penggajian']);
+    Route::get('/penggajian/{id}', [ApiAdminController::class, 'penggajian']);
 
     Route::get('/karyawan', [ApiAdminController::class, 'karyawan']);
     Route::post('/tambah_karyawan', [ApiAdminController::class, 'tambah_karyawan']);
