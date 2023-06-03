@@ -1,12 +1,7 @@
 @extends('layouts.base',['title' => "Dashboard - Admin"])
 <!-- Start wrapper-->
-<<<<<<< HEAD
 @section('content') 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-=======
-
-@section('content')
->>>>>>> 6207b2e3ccc0e884559136b00350ae0302cafabe
 <!-- Spinner Start -->
 
 <div id="spinner"
