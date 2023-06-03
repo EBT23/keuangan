@@ -18,7 +18,6 @@
     @include('layouts.header')
     <!-- Navbar End -->
     <div class="card-body">
-
         <div class="col-12">
             <div class="bg-light rounded h-100 p-4">
                 @if (Session::has('success'))
@@ -191,15 +190,11 @@
                                 </td>
                             </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-    </div>
-
-</div>
 <!-- Content End -->
 
 <!-- Back to Top -->

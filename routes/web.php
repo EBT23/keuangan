@@ -40,9 +40,8 @@ Route::post('/login', [AuthController::class, 'login_post'])->name('login.post')
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'register_post'])->name('register.post');
 
-
+Route::middleware(['auth'])->group(function () {
 Route::get('logout', [AuthController::class, 'logout'])->name('keluar');
-
 
 Route::controller(DashboardController::class)->group( function (){
     Route::get('/dashboard','index')->name('index');
@@ -133,7 +132,7 @@ Route::get('/gaji/cetak', [LaporanController::class, 'exportgaji'])->name('gaji.
 Route::get('/gaji/cetakById/{id}', [LaporanController::class, 'exportgajiById'])->name('gaji.cetakById');
 
 Route::get('/gaji/name', [LaporanController::class, 'gajiName'])->name('laporan.gaji.name');
-
+});
 
 Route::get('/route-cache', function () {
     Artisan::call('route:cache');
@@ -155,3 +154,4 @@ Route::get('/optimize', function () {
     Artisan::call('optimize');
     return 'Routes cache cleared';
 });
+
