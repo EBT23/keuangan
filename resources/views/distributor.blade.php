@@ -99,18 +99,19 @@
                                             <td>{{ $dt['area_cover'] }}</td>
                                             <td>{{ $dt['alamat']  }}</td>
                                             <td>{{ $dt['penjab']  }}</td>
-                                            <td>
-                                                <div class="d-flex flex-wrap gap-2">
+                                            <td class="d-flex">
+                                                <span>
                                                     <a href="{{ route('edit.distributor', ['id' => $dt['id']]) }}" type="button"
-                                                        class="btn btn-outline-primary waves-effect waves-light">
-                                                        Edit</a>
+                                                        class="btn btn-outline-primary waves-effect waves-light m-md-1">Edit</a>
+                                                </span>
+                                                    <span>
                                                         <form action="{{ route('delete.distributor', ['id' => $dt['id']]) }}" method="POST">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
-                                                        <button onclick="return confirm('Anda yakin akan menghapus ini? ')" type="submit"
-                                                        class="btn btn-outline-danger waves-effect waves-light">Hapus</i></button>
-                                                    </form>
-                                                </div>
+                                                            {{ csrf_field() }}
+                                                            {{ method_field('DELETE') }}
+                                                            <button onclick="return confirm('Anda yakin akan menghapus ini? ')" type="submit"
+                                                            class="btn btn-outline-danger waves-effect waves-light mt-1">Hapus</i></button>
+                                                        </form>
+                                                    </span>
                                             </td>
                                         </tr>
                                         @endforeach   

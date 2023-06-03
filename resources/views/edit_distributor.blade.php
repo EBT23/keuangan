@@ -27,7 +27,7 @@
                 <h6 class="mb-4">{{ $title }}</h6>
                  <!-- Table Start -->
  <div class="container-fluid pt-4 px-4">
-        <div class="col-12">
+        <div class="col-6">
             <div class="card mb-5">
                 <div class="card-body my-3">
                     <h4 class="card-title">FORM EDIT DATA DISTRIBUTOR</h4>
@@ -60,9 +60,10 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary mt-3">
                     Simpan
                   </button>
+                  <a href="{{ route('distributor') }}" class="btn btn-secondary mt-3">Kembali</a>
             </form>
                 </div>
             </div>

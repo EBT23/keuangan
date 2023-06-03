@@ -86,6 +86,9 @@
                         </tr>
                     </table>
                 </div>
+                <div class="modal-footer">
+                    <a href="{{ route('penggajian') }}" class="btn btn-secondary">Kembali</a>
+                </div>
             </div>
         </div>
     </div>

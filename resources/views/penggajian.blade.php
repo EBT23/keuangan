@@ -96,19 +96,19 @@
                                 <td>{{ date('Y-F',strtotime($gj->bulan)) }}</td>
                                 <td>{{ $gj->name.'-'.$gj->no_identitas }}</td>
                                 <td>Rp. {{ number_format($gj->total) }}</td>
-                                <td>
-                                    <span class="row">
-                                        <div class="d-flex">
-                                            <a href="{{ route('detail_penggajian', $gj->id) }}"
-                                                class="btn btn-outline-primary waves-effect waves-light mr-3">Detail</a>
-                                            <form action="{{ route('delete_penggajian', $gj->id) }}" method="POST">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-                                                <button onclick="return confirm('Anda yakin akan menghapus ini? ')"
-                                                    type="submit"
-                                                    class="btn btn-outline-danger waves-effect waves-light">Hapus</i></button>
-                                            </form>
-                                        </div>
+                                <td class="d-flex" >
+                                    <span>
+                                        <a href="{{ route('detail_penggajian', $gj->id) }}"
+                                        class="btn btn-outline-primary waves-effect waves-light m-md-1">Detail</a>
+                                    </span>
+                                    <span>
+                                        <form action="{{ route('delete_penggajian', $gj->id) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button onclick="return confirm('Anda yakin akan menghapus ini? ')"
+                                                type="submit"
+                                                class="btn btn-outline-danger waves-effect waves-light mt-1">Hapus</i></button>
+                                        </form>
                                     </span>
                                 </td>
                             </tr>

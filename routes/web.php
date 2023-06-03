@@ -44,8 +44,9 @@ Route::post('/register', [AuthController::class, 'register_post'])->name('regist
 Route::get('logout', [AuthController::class, 'logout'])->name('keluar');
 
 
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
+Route::controller(DashboardController::class)->group( function (){
+    Route::get('/dashboard','index')->name('index');
+});
 
 #DISTRIBUTOR
 Route::get('/distributor', [DistributorController::class, 'distributor'])->name('distributor');

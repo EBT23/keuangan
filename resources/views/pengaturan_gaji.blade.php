@@ -97,10 +97,10 @@
                                 <td>{{ $pg->tunjangan_jabatan }}</td>
                                 <td>{{ $pg->uang_makan }}</td>
                                 <td>{{ $pg->lembur }}</td>
-                                <td>
+                                <td class="d-flex">
                                     <span>
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-outline-primary m-md-1 " data-bs-toggle="modal"
                                             data-bs-target="#exampleModal{{ $pg->id }}">
                                             Edit data
                                         </button>
@@ -184,7 +184,7 @@
                                                 {{ method_field('DELETE') }}
                                                 <button onclick="return confirm('Anda yakin akan menghapus ini? ')"
                                                     type="submit"
-                                                    class="btn btn-outline-danger waves-effect waves-light">Hapus</i></button>
+                                                    class="btn btn-outline-danger waves-effect waves-light mt-1 ">Hapus</i></button>
                                             </form>
                                         </div>
                                     </span>
