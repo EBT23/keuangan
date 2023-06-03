@@ -93,10 +93,10 @@
                                 <td>{{ $index+1}}</td>
                                 <td>{{ $pg->name.'-'.$pg->no_identitas }}</td>
                                 <td>{{ $pg->nama_posisi }}</td>
-                                <td>{{ $pg->gapok }}</td>
-                                <td>{{ $pg->tunjangan_jabatan }}</td>
-                                <td>{{ $pg->uang_makan }}</td>
-                                <td>{{ $pg->lembur }}</td>
+                                <td>Rp. {{ number_format($pg->gapok) }}</td>
+                                <td>Rp. {{ number_format($pg->tunjangan_jabatan) }}</td>
+                                <td>Rp. {{ number_format($pg->uang_makan) }}</td>
+                                <td>Rp. {{ number_format($pg->lembur) }}</td>
                                 <td class="d-flex">
                                     <span>
                                         <!-- Button trigger modal -->

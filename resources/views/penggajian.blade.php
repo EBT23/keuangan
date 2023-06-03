@@ -114,17 +114,6 @@
                                 </td>
                             </tr>
                             @endforeach
-
-                                        <form action="{{ route('delete_penggajian', $gj->id) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                            <button onclick="return confirm('Anda yakin akan menghapus ini? ')"
-                                                type="submit" class="btn btn-outline-danger">Hapus</i></button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-
                             </tbody>
                         </table>
                     </div>

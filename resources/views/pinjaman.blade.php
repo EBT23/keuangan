@@ -95,7 +95,7 @@
                                         <tr>
                                             <th scope="row">{{ $index+1 }}</th>
                                             <td>{{ $sp->name }}</td>
-                                            <td>{{ $sp->pinjaman }}</td>
+                                            <td>Rp. {{ number_format($sp->pinjaman) }}</td>
                                             <td>{{ $sp->tanggal }}</td>
                                             @if($sp->status == 1)
                                             <td>Lunas</td>

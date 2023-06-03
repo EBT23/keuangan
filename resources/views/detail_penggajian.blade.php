@@ -47,42 +47,42 @@
                         <tr>
                             <th scope="col" style="width: 400px;">Gaji Pokok</th>
                             <td style="width: 0px;">:</td>
-                            <td>{{ $penggajian[0]->gapok }}</td>
+                            <td>Rp. {{ number_format($penggajian[0]->gapok) }}</td>
                         </tr>
                         <tr>
                             <th scope="col" style="width: 400px;">Uang Makan</th>
                             <td style="width: 0px;">:</td>
-                            <td>{{ $penggajian[0]->makan_transport }}</td>
+                            <td>Rp. {{ number_format($penggajian[0]->makan_transport) }}</td>
                         </tr>
                         <tr>
                             <th scope="col" style="width: 400px;">Uang Lembur</th>
                             <td style="width: 0px;">:</td>
-                            <td>{{ $penggajian[0]->lembur }}</td>
+                            <td>Rp. {{ number_format($penggajian[0]->lembur) }}</td>
                         </tr>
                         <tr>
                             <th scope="col" style="width: 400px;">Tunjangan Jabatan</th>
                             <td style="width: 0px;">:</td>
-                            <td>{{ $penggajian[0]->tunjangan }}</td>
+                            <td>Rp. {{ number_format($penggajian[0]->tunjangan) }}</td>
                         </tr>
                         <tr>
                             <th scope="col" style="width: 400px;">Insentif</th>
                             <td style="width: 0px;">:</td>
-                            <td>{{ $penggajian[0]->insentiv }}</td>
+                            <td>Rp. {{ number_format($penggajian[0]->insentiv) }}</td>
                         </tr>
                         <tr>
                             <th scope="col" style="width: 400px;">Jaminan Kesehatan</th>
                             <td style="width: 0px;">:</td>
-                            <td>{{ $penggajian[0]->jamkes }}</td>
+                            <td>Rp. {{ number_format($penggajian[0]->jamkes) }}</td>
                         </tr>
                         <tr>
                             <th scope="col" style="width: 400px;">Pinjaman</th>
                             <td style="width: 0px;">:</td>
-                            <td>{{ $penggajian[0]->pinjaman }}</td>
+                            <td>Rp. {{ number_format($penggajian[0]->pinjaman) }}</td>
                         </tr>
                         <tr>
                             <th scope="col" style="width: 400px;">Total Gaji/ Take home pay</th>
                             <td style="width: 0px;">:</td>
-                            <td>{{ $penggajian[0]->total }}</td>
+                            <td>Rp. {{ number_format($penggajian[0]->total) }}</td>
                         </tr>
                     </table>
                 </div>

@@ -57,6 +57,8 @@
             <a href="{{ route('role') }}" class="nav-item nav-link">
                 <i class="far fa-file-alt me-2"></i>Role</a>
             @elseif (request()->user()->role_id == 3)
+            <a href="{{ route('index') }}" class="nav-item nav-link ">
+                <i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{ route('laporan.pemasukan') }}" class="nav-item nav-link">
                 <i class="far fa-file-alt me-2"></i>Laporan Pemasukan</a>
             <a href="{{ route('laporan.pengeluaran') }}" class="nav-item nav-link p-0">
