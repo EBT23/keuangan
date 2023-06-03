@@ -17,74 +17,75 @@
     <!-- Navbar Start -->
     @include('layouts.header')
     <!-- Navbar End -->
-    <div class="card-body">
-
-        <div class="col-12">
-            <div class="bg-light rounded h-100 p-4">
-                @if (Session::has('success'))
-                <div class="alert alert-success">
-                    {{ Session::get('success') }}
-                </div>
-                @elseif (Session::has('errors'))
-                <div class="alert alert-danger">
-                    {{ Session::get('errors') }}
-                </div>
-                @endif
-                <h6 class="mb-4">Data Penggajian</h6>
-                <form action="{{ route('tambah_penggajian') }}" method="post">
-                    @csrf
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="bulan">Bulan</label>
-                                <input type="month" class="form-control" id="bulan" name="bulan"
-                                    aria-describedby="bulan">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Nama Karyawan</label>
-                                <select class="form-control" id="nama_karyawan" name="nama_karyawan">
-                                    <option value="" selected disabled>Pilih Karyawan</option>
-                                    @foreach ( $users as $u )
-                                    <option value="{{ $u->id }}">{{ $u->name.'-'.$u->no_identitas }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="kehadiran">Kehadiran</label>
-                                <input type="number" class="form-control" id="kehadiran" name="kehadiran"
-                                    aria-describedby="kehadiran">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="lembur">Lembur/jam</label>
-                                <input type="number" class="form-control" id="lembur" name="lembur"
-                                    aria-describedby="lembur">
-                            </div>
-                            <div class="form-group">
-                                <label for="insentiv">Insentiv</label>
-                                <input type="number" class="form-control" id="insentiv" name="insentiv"
-                                    aria-describedby="insentiv">
-                            </div>
-                          {{-- <div class="form-group">
-                                <label for="pinjaman">Pinjaman Karyawan</label>
-                                <input type="number" class="form-control" id="pinjaman" name="pinjaman" aria-describedby="pinjaman">
-                            </div> --}}
-                        </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-12">
+                <div class="bg-light rounded h-100 p-4">
+                    @if (Session::has('success'))
+                    <div class="alert alert-success">
+                        {{ Session::get('success') }}
                     </div>
+                    @elseif (Session::has('errors'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('errors') }}
+                    </div>
+                    @endif
+                    <h6 class="mb-4">Data Penggajian</h6>
+                    <form action="{{ route('tambah_penggajian') }}" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="bulan">Bulan</label>
+                                    <input type="month" class="form-control" id="bulan" name="bulan"
+                                        aria-describedby="bulan">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Nama Karyawan</label>
+                                    <select class="form-control" id="nama_karyawan" name="nama_karyawan">
+                                        <option value="" selected disabled>Pilih Karyawan</option>
+                                        @foreach ( $users as $u )
+                                        <option value="{{ $u->id }}">{{ $u->name.'-'.$u->no_identitas }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kehadiran">Kehadiran</label>
+                                    <input type="number" class="form-control" id="kehadiran" name="kehadiran"
+                                        aria-describedby="kehadiran">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="lembur">Lembur/jam</label>
+                                    <input type="number" class="form-control" id="lembur" name="lembur"
+                                        aria-describedby="lembur">
+                                </div>
+                                <div class="form-group">
+                                    <label for="insentiv">Insentiv</label>
+                                    <input type="number" class="form-control" id="insentiv" name="insentiv"
+                                        aria-describedby="insentiv">
+                                </div>
+                                {{-- <div class="form-group">
+                                    <label for="pinjaman">Pinjaman Karyawan</label>
+                                    <input type="number" class="form-control" id="pinjaman" name="pinjaman"
+                                        aria-describedby="pinjaman">
+                                </div> --}}
+                            </div>
+                        </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
-                </form>
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    </form>
 
-                <div class="table-responsive">
-                    <table id="myTable" class="display">
-                        <thead>
-                            <tr>
-                                <th scope="col" width="10%">No</th>
-                                <th scope="col">Priode</th>
-                                <th scope="col">Nama Karyawan</th>
-                                <th scope="col">Total Gaji</th>
-                                <th scope="col"width="15%">Aksi</th>
+                    <div class="table-responsive">
+                        <table id="myTable" class="display">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="10%">No</th>
+                                    <th scope="col">Priode</th>
+                                    <th scope="col">Nama Karyawan</th>
+                                    <th scope="col">Total Gaji</th>
+                                    <th scope="col" width="15%">Aksi</th>
 
                             </tr>
                         </thead>
@@ -114,26 +115,34 @@
                             </tr>
                             @endforeach
 
-                        </tbody>
-                    </table>
+                                        <form action="{{ route('delete_penggajian', $gj->id) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button onclick="return confirm('Anda yakin akan menghapus ini? ')"
+                                                type="submit" class="btn btn-outline-danger">Hapus</i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- Content End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
+            <i class="bi bi-arrow-up"></i>
+        </a>
     </div>
 
-</div>
-<!-- Content End -->
-
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
-    <i class="bi bi-arrow-up"></i>
-</a>
-</div>
-
-@endsection
-<!--End wrapper-->
-<script>
-    $('#myModal').on('shown.bs.modal', function () {
+    @endsection
+    <!--End wrapper-->
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
     $('#myInput').trigger('focus')
 })
-</script>
+    </script>

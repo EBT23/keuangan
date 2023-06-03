@@ -1,16 +1,12 @@
 @extends('layouts.base',['title' => "$title - Admin"])
 <!-- Start wrapper-->
 
-@section('content') 
+@section('content')
 <!-- Spinner Start -->
 
-<div
-    id="spinner"
+<div id="spinner"
     class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div
-        class="spinner-border text-primary"
-        style="width: 3rem; height: 3rem;"
-        role="status">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 </div>
@@ -26,39 +22,37 @@
         <div class="card-body">
             <h4 class="card-title">FORM TAMBAH DATA DISTRIBUTOR</h4>
             <hr>
-        <form action="{{ route('tambah.distributor') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('tambah.distributor') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-            <div class="row">
-             <div class="col-6">
-              <div class="mb-3">
-                <label for="nama_distributor" class="form-label">Distributor</label>
-                <input type="text" class="form-control" name="nama_distributor" id="nama_distributor">
-              </div>
-              <div class="mb-3">
-                  <label for="tlp" class="form-label">No Telepon</label>
-                  <input type="number" class="form-control" name="tlp" id="tlp"></input>
-              </div>
-              <div class="mb-3">
-                  <label for="area_cover" class="form-label">Area Cover</label>
-                  <input type="text" class="form-control" name="area_cover" id="area_cover"></input>
-              </div>
-            </div>
-                 <div class="col-6">
-                    <div class="mb-3">
-                        <label for="alamat" class="form-label">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="nama_distributor" class="form-label">Distributor</label>
+                            <input type="text" class="form-control" name="nama_distributor" id="nama_distributor">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tlp" class="form-label">No Telepon</label>
+                            <input type="number" class="form-control" name="tlp" id="tlp"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="area_cover" class="form-label">Area Cover</label>
+                            <input type="text" class="form-control" name="area_cover" id="area_cover"></input>
+                        </div>
                     </div>
-                     <div class="mb-3">
-                        <label for="penjab" class="form-label">Penjab</label>
-                        <input type="text" class="form-control" id="penjab" name="penjab">
-                      </div>
-                  </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="alamat" class="form-label">Alamat</label>
+                            <input type="text" class="form-control" id="alamat" name="alamat">
+                        </div>
+                        <div class="mb-3">
+                            <label for="penjab" class="form-label">Penjab</label>
+                            <input type="text" class="form-control" id="penjab" name="penjab">
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">
-                        Tambah
-                    </button>
                 </div>
-        </form>
+                <button type="submit" class="btn btn-primary">
+                    Tambah
+                </button>
         </div>
         <div class="card-body">
             <div class="col-12">
@@ -119,16 +113,17 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-<!-- Content End -->
+    <!-- Content End -->
 
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
-    <i class="bi bi-arrow-up"></i>
-</a>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
 </div>
 
 @endsection
