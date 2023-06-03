@@ -102,7 +102,7 @@
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal{{ $pg->id }}">
-                                            Edit data
+                                            Edit
                                         </button>
 
                                         <!-- Modal -->
