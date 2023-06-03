@@ -2,10 +2,11 @@
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-light navbar-light">
         <a href="#" class="navbar-brand mx-4 mb-3">
-            <h6 class="text-primary">
-                {{-- <img src="{{ asset('img/logo-pvc.png') }}" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
-                <span class="brand-text font-weight-light">PT. PANORAMA VARIA CIPTA</span></i>
+            <h6 class="text-primary" align="center">
+                <img src="{{ asset('img/logo-pvc.png') }}" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8; justify-items: center;"
+                    width="80"><br>
+                <span style="font-weight: 25" class="brand-text font-weight-light">PT. PANORAMA VARIA CIPTA</span>
             </h6>
         </a>
         <div class="d-flex align-items-center ms-4 mb-4">
@@ -30,7 +31,7 @@
             @endif
 
         </div>
-        
+
         <div class="navbar-nav w-100 p-0">
             @if (request()->user()->role_id == 1)
             <a href="{{ route('index') }}" class="nav-item nav-link ">
