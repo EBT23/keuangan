@@ -32,7 +32,7 @@
              <div class="col-4">
               <div class="mb-3">
                 <label for="nama_penjab" class="form-label">Penanggung Jawab</label>
-                <input type="text" class="form-control" name="nama_penjab" id="nama_penjab" required>
+                <input type="text" class="form-control" name="nama_penjab" id="nama_penjab">
               </div>
             </div>
             </div>

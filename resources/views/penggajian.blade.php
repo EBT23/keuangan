@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Nama Karyawan</label>
-                                    <select class="form-control" id="nama_karyawan" name="nama_karyawan" required>
+                                    <select class="form-control" id="nama_karyawan" name="nama_karyawan">
                                         <option value="" selected disabled>Pilih Karyawan</option>
                                         @foreach ( $users as $u )
                                         <option value="{{ $u->id }}">{{ $u->name.'-'.$u->no_identitas }}</option>
@@ -52,19 +52,19 @@
                                 <div class="form-group">
                                     <label for="kehadiran">Kehadiran</label>
                                     <input type="number" class="form-control" id="kehadiran" name="kehadiran"
-                                        aria-describedby="kehadiran" required>
+                                        aria-describedby="kehadiran">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="lembur">Lembur/jam</label>
                                     <input type="number" class="form-control" id="lembur" name="lembur"
-                                        aria-describedby="lembur" required>
+                                        aria-describedby="lembur">
                                 </div>
                                 <div class="form-group">
                                     <label for="insentiv">Insentiv</label>
                                     <input type="number" class="form-control" id="insentiv" name="insentiv"
-                                        aria-describedby="insentiv" required>
+                                        aria-describedby="insentiv">
                                 </div>
                                 {{-- <div class="form-group">
                                     <label for="pinjaman">Pinjaman Karyawan</label>

@@ -49,17 +49,17 @@
                                                     <div class="mb-3">
                                                         <label for="pinjaman" class="form-label">Pinjaman</label>
                                                         <input type="text" class="form-control" id="pinjaman"
-                                                            name="pinjaman" value="{{ $pinjaman->pinjaman }}" required>
+                                                            name="pinjaman" value="{{ $pinjaman->pinjaman }}">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="tanggal" class="form-label">Tanggal</label>
                                                         <input type="text" class="form-control" id="tanggal"
-                                                            name="tanggal" value="{{ $pinjaman->tanggal }}" required>
+                                                            name="tanggal" value="{{ $pinjaman->tanggal }}">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="status_pinjaman" class="form-label">Tanggal</label>
                                                         <select class="form-select" name="status_pinjaman"
-                                                            id="status_pinjaman" required>
+                                                            id="status_pinjaman">
                                                             <option value="" selected disabled>Pilih Status</option>
                                                             <option {{ $pinjaman->status == 1 ? 'selected' : '' }}
                                                                 value="1">Lunas</option>

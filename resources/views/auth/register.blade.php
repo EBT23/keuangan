@@ -22,19 +22,19 @@
                               <h3>Sign Up</h3>
             </div>
             <div class="form-floating my-2">
-                <input type="text" class="form-control" id="nama" name="nama" required>
+                <input type="text" class="form-control" id="nama" name="nama">
                 <label for="nama">nama</label>
             </div>
             <div class="form-floating my-2">
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" name="email">
                 <label for="email">Email</label>
             </div>
             <div class="form-floating my-2">
-                <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" required>
+                <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir">
                 <label for="tgl_lahir" nam>Tanggal Lahir</label>
             </div>
             <div class="form-floating my-2">
-                <select class="form-select" id="posisi" name="posisi" aria-label="Floating label select example" required>
+                <select class="form-select" id="posisi" name="posisi" aria-label="Floating label select example">
                   <option selected>-Pilih-</option>
                   @foreach ($posisi as $d)
                     <option value="{{ $d->id }}">{{ $d->nama_posisi }}</option>
@@ -43,7 +43,7 @@
                 <label for="posisi">Pilih Posisi</label>
               </div>
               <div class="form-floating mb-4">
-                <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                 <label for="password" >Password</label>
             </div>
 
