@@ -28,7 +28,7 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="jenis_pengeluaran" class="form-label">Jenis Pengeluaran</label>
-                            <input class="form-control" name="jenis_pengeluaran" id="jenis_pengeluaran">
+                            <input class="form-control" name="jenis_pengeluaran" id="jenis_pengeluaran" required>
                         </div>
                     </div>
 

@@ -28,7 +28,7 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="jenis_pengeluaran_id" class="form-label">Jenis Pengeluaran</label>
-                            <select class="form-select" name="jenis_pengeluaran_id" data-allow-clear="true">
+                            <select class="form-select" name="jenis_pengeluaran_id" data-allow-clear="true" required>
                                 <option selected="">Jenis Pengeluaran:</option>
                                 @foreach ($jenis_pengeluaran as $item)
                                 <option value="{{ $item->id }}">
@@ -39,22 +39,22 @@
                         </div>
                         <div class="mb-3">
                             <label for="keterangan" class="form-label">Keterangan</label>
-                            <textarea class="form-control" name="keterangan" id="keterangan"></textarea>
+                            <textarea class="form-control" name="keterangan" id="keterangan" required></textarea>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="tgl" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control" id="tgl" name="tgl" id="tgl">
+                            <input type="date" class="form-control" id="tgl" name="tgl" id="tgl"required >
                         </div>
                         <div class="mb-3">
                             <label for="total_pengeluaran" class="form-label">Total Pengeluaran</label>
-                            <input class="form-control" name="total_pengeluaran" id="total_pengeluaran">
+                            <input class="form-control" name="total_pengeluaran" id="total_pengeluaran" required>
                         </div>
                         <div class="mb-3">
                             <label for="bukti_pengeluaran" class="form-label">Bukti Pengeluaran</label>
                             <input class="form-control form-control-sm" name="bukti_pengeluaran" id="bukti_pengeluaran"
-                                type="file">
+                                type="file" required>
                         </div>
                     </div>
                 </div>

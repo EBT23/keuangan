@@ -28,7 +28,7 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="karyawan" class="form-label">Karyawan</label>
-                            <select class="form-select" name="karyawan" data-allow-clear="true">
+                            <select class="form-select" name="karyawan" data-allow-clear="true" required>
                                 <option selected="">Pilih Karyawan</option>
                                 @foreach($data1 as $item)
                                 <option value="{{ $item->id }}">

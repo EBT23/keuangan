@@ -141,27 +141,27 @@
                                                                 <label for="gapok" class="form-label">Gaji Pokok</label>
                                                                 <input type="number" name="gapok"
                                                                     value="{{ $pg->gapok }}" class="form-control"
-                                                                    id="gapok">
+                                                                    id="gapok" required>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="tunjangan_jabatan"
                                                                     class="form-label">Tunjangan Jabatan</label>
                                                                 <input type="number" name="tunjangan_jabatan"
                                                                     value="{{ $pg->tunjangan_jabatan }}"
-                                                                    class="form-control" id="tunjangan_jabatan">
+                                                                    class="form-control" id="tunjangan_jabatan" required>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="uang_makan" class="form-label">Uang
                                                                     Makan / Hari</label>
                                                                 <input type="number" name="uang_makan"
                                                                     value="{{ $pg->uang_makan }}" class="form-control"
-                                                                    id="uang_makan">
+                                                                    id="uang_makan" required>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="lembur" class="form-label">Uang
                                                                     Lembur / Hari</label>
                                                                 <input type="number" name="lembur"
-                                                                    value="{{ $pg->lembur }}" class="form-control"
+                                                                    value="{{ $pg->lembur }}" class="form-control" required
                                                                     id="lembur">
                                                             </div>
                                                     </div>
@@ -203,10 +203,10 @@
 </a>
 </div>
 
-@endsection
 <!--End wrapper-->
 <script>
     $('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-})
+        $('#myInput').trigger('focus')
+    })
 </script>
+@endsection

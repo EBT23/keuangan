@@ -32,7 +32,7 @@
              <div class="col-6">
               <div class="mb-3">
                 <label for="nama_posisi" class="form-label">Posisi</label>
-                <input  type="text" class="form-control" name="nama_posisi" id="nama_posisi">
+                <input  type="text" class="form-control" name="nama_posisi" id="nama_posisi" required>
               </div>
             </div>
             </div>
