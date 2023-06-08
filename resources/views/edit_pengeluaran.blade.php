@@ -38,7 +38,7 @@
                                                         <label for="jenis_pengeluaran_id" class="form-label">Jenis
                                                             Pengeluaran</label>
                                                         <select class="form-select" name="jenis_pengeluaran_id"
-                                                            data-allow-clear="true">
+                                                            data-allow-clear="true" required>
                                                             <option selected="">Jenis Pengeluaran:</option>
                                                             @foreach ($jenis_pengeluaran as $item)
                                                             <option value="{{ $item->id }}">

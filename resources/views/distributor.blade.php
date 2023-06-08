@@ -28,25 +28,25 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="nama_distributor" class="form-label">Distributor</label>
-                            <input type="text" class="form-control" name="nama_distributor" id="nama_distributor">
+                            <input type="text" class="form-control" name="nama_distributor" id="nama_distributor" required>
                         </div>
                         <div class="mb-3">
                             <label for="tlp" class="form-label">No Telepon</label>
-                            <input type="number" class="form-control" name="tlp" id="tlp"></input>
+                            <input type="number" class="form-control" name="tlp" id="tlp" required>
                         </div>
                         <div class="mb-3">
                             <label for="area_cover" class="form-label">Area Cover</label>
-                            <input type="text" class="form-control" name="area_cover" id="area_cover"></input>
+                            <input type="text" class="form-control" name="area_cover" id="area_cover" required>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat">
+                            <input type="text" class="form-control" id="alamat" name="alamat" required>
                         </div>
                         <div class="mb-3">
                             <label for="penjab" class="form-label">Penjab</label>
-                            <input type="text" class="form-control" id="penjab" name="penjab">
+                            <input type="text" class="form-control" id="penjab" name="penjab" required>
                         </div>
                     </div>
                 </div>

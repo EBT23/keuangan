@@ -32,6 +32,20 @@ class KaryawanController extends Controller
     {
         $token = session('access_token');
 
+        $request->validate([
+            'nama' => 'required',
+            'email' => 'required|email',
+            'no_identitas' => 'required',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'no_rek' => 'required',
+            'posisi_id' => 'required',
+            'status' => 'required',
+            'domisili' => 'required',
+            'no_tlp' => 'required',
+        ]);
+
+
         $addKaryawan = [
             'name' => $request->name,
             'email' => $request->email,

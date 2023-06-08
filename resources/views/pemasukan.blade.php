@@ -32,7 +32,7 @@
              <div class="col-6">
                 <div class="mb-3">
                     <label for="distributor_id" class="form-label">Distributor</label>
-                    <select class="form-select" name="distributor_id" data-allow-clear="true">
+                    <select class="form-select" name="distributor_id" data-allow-clear="true" required>
                         <option selected="">Pilih Distributor</option>
                         @foreach ($data1 as $item)
                             <option value="{{ $item->id }}">
@@ -43,21 +43,21 @@
                   </div>
               <div class="mb-3">
                   <label for="keterangan" class="form-label">Keterangan</label>
-                  <textarea class="form-control" name="keterangan" id="keterangan"></textarea>
+                  <textarea class="form-control" name="keterangan" id="keterangan" required></textarea>
               </div>
             </div>
                  <div class="col-6" >
                     <div class="mb-3">
                         <label for="tgl" class="form-label">Tanggal</label>
-                        <input type="date" class="form-control" id="tgl" name="tgl" id="tgl">
+                        <input type="date" class="form-control" id="tgl" name="tgl" id="tgl" required>
                       </div>
                       <div class="mb-3">
                         <label for="total_pemasukan" class="form-label">Total Pemasukan</label>
-                        <input class="form-control" name="total_pemasukan" id="total_pemasukan">
+                        <input class="form-control" name="total_pemasukan" id="total_pemasukan" required>
                       </div>
                       <div class="mb-3">
                           <label for="bukti_pemasukan" class="form-label">Bukti Pemasukan</label>
-                          <input class="form-control form-control-sm" name="bukti_pemasukan" id="bukti_pemasukan" type="file">
+                          <input class="form-control form-control-sm" name="bukti_pemasukan" id="bukti_pemasukan" type="file" required >
                           </div>
                      </div>
                     </div>

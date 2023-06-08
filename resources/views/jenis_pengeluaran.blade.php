@@ -22,7 +22,7 @@
         <div class="card-body">
             <h4 class="card-title">FORM TAMBAH DATA JENIS PENGELUARAN</h4>
             <hr>
-            <form action="{{ route('tambah.jenis.pengeluaran') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('tambah.jenis.pengeluaran') }}" method="POST" enctype="multipart/form-data" @required(true)>
                 @csrf
                 <div class="row">
                     <div class="col-6">

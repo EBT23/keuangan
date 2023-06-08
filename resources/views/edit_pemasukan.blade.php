@@ -38,7 +38,7 @@
                                                         <label for="distributor_id" class="form-label">Nama
                                                             Distributor</label>
                                                         <select class="form-select" name="distributor_id"
-                                                            data-allow-clear="true">
+                                                            data-allow-clear="true" required>
                                                             <option selected="">Pilih Distributor</option>
                                                             @foreach ($distributor as $item)
                                                             <option value="{{ $item->id }}">

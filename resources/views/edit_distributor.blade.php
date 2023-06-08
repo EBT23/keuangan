@@ -32,31 +32,31 @@
                 <div class="card-body my-3">
                     <h4 class="card-title">FORM EDIT DATA DISTRIBUTOR</h4>
                     <hr>
-                    <form action="{{ route('update.distributor',['id' => $distributor['id']]) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('update.distributor',['id' => $distributor['id']]) }}" method="POST" enctype="multipart/form-data" required>
                         @csrf
                     <div class="row">
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="nama_distributor" class="form-label">Nama Distributor</label>
-                            <input class="form-control" name="nama_distributor" id="nama_distributor" value="{{ $distributor['nama_distributor'] }}">
+                            <input class="form-control" name="nama_distributor" id="nama_distributor" value="{{ $distributor['nama_distributor'] }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="tlp" class="form-label">No Telepon</label>
-                            <input type="number" class="form-control" name="tlp" id="tlp" value="{{ $distributor['tlp'] }}">
+                            <input type="number" class="form-control" name="tlp" id="tlp" value="{{ $distributor['tlp'] }}" required>
                         </div>
                         <div class="mb-3">
                         <label for="area_cover" class="form-label">Area Cover</label>
-                        <input type="text" class="form-control" name="area_cover" id="area_cover" value="{{ $distributor['area_cover'] }}">
+                        <input type="text" class="form-control" name="area_cover" id="area_cover" value="{{ $distributor['area_cover'] }}" required>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat</label>
-                            <textarea class="form-control" name="alamat"  id="alamat" >{{ $distributor['alamat'] }}</textarea>
+                            <textarea class="form-control" name="alamat"  id="alamat" required>{{ $distributor['alamat'] }}</textarea>
                         </div>
                         <div class="mb-3">
                           <label for="penjab" class="form-label">Penjab</label>
-                          <input class="form-control" name="penjab"  id="penjab" value="{{ $distributor['penjab'] }}">
+                          <input class="form-control" name="penjab"  id="penjab" value="{{ $distributor['penjab'] }}" required>
                         </div>
                     </div>
                 </div>

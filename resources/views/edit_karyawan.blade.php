@@ -78,7 +78,7 @@
                                                     <div class="mb-3">
                                                         <label for="posisi_id" class="form-label">Posisi</label>
                                                         <select class="form-control" name="posisi_id"
-                                                            data-allow-clear="true">
+                                                            data-allow-clear="true" required>
                                                             @foreach ($posisi as $item)
                                                             <option value="{{ $item['id'] }}">
                                                                 {{ $item['nama_posisi'] }}
