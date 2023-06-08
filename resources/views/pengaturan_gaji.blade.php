@@ -36,7 +36,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Nama Karyawan</label>
-                                <select class="form-control" id="nama_karyawan" name="nama_karyawan">
+                                <select class="form-control" id="nama_karyawan" name="nama_karyawan" required>
                                     <option value="" selected disabled>Pilih Karyawan</option>
                                     @foreach ( $users as $u )
                                     <option value="{{ $u->id }}">{{ $u->name.'-'.$u->no_identitas }}</option>
@@ -46,24 +46,24 @@
                             <div class="form-group">
                                 <label for="gapok">Gaji Pokok</label>
                                 <input type="number" class="form-control" id="gapok" name="gapok"
-                                    aria-describedby="gapok">
+                                    aria-describedby="gapok" required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="tunjangan_jabatan">Tunjangan Jabatan</label>
                                 <input type="number" class="form-control" id="tunjangan_jabatan"
-                                    name="tunjangan_jabatan" aria-describedby="tunjangan_jabatan">
+                                    name="tunjangan_jabatan" aria-describedby="tunjangan_jabatan"required>
                             </div>
                             <div class="form-group">
                                 <label for="uang_makan">Uang Makan / Hari</label>
                                 <input type="number" class="form-control" id="uang_makan" name="uang_makan"
-                                    aria-describedby="uang_makan">
+                                    aria-describedby="uang_makan"required>
                             </div>
                             <div class="form-group">
                                 <label for="lembur">Uang Lembur / jam</label>
                                 <input type="number" class="form-control" id="lembur" name="lembur"
-                                    aria-describedby="lembur">
+                                    aria-describedby="lembur"required>
                             </div>
                         </div>
                     </div>

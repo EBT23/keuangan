@@ -28,33 +28,36 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" name="name" id="name">
+                            <input type="text" class="form-control" name="name" id="name" required>
+                            @if($errors->has('name'))
+                                  <div class="error">{{ $errors->first('name') }}</div>
+                            @endif
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" id="email">
+                            <input type="email" class="form-control" name="email" id="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="no_identitas" class="form-label">No Identitas</label>
-                            <input type="number" class="form-control" name="no_identitas" id="no_identitas">
+                            <input type="number" class="form-control" name="no_identitas" id="no_identitas" required>
                         </div>
                         <div class="mb-3">
                             <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-                            <textarea class="form-control" name="tempat_lahir" id="tempat_lahir"></textarea>
+                            <textarea class="form-control" name="tempat_lahir" id="tempat_lahir" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
-                            <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" id="tgl_lahir">
+                            <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" id="tgl_lahir" required>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="no_rek" class="form-label">No Rekening</label>
-                            <input type="text" class="form-control" name="no_rek" id="no_rek">
+                            <input type="text" class="form-control" name="no_rek" id="no_rek" required>
                         </div>
                         <div class="mb-3">
                             <label for="posisi_id" class="form-label">Posisi</label>
-                            <select class="form-select" name="posisi_id" data-allow-clear="true">
+                            <select class="form-select" name="posisi_id" data-allow-clear="true" required>
                                 <option selected="">Pilih Posisi</option>
                                 @foreach ($posisi as $item)
                                 <option value="{{ $item['id'] }}">
@@ -65,7 +68,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
-                            <select class="form-select" name="status" data-allow-clear="true">
+                            <select class="form-select" name="status" data-allow-clear="true" required>
                                 <option selected="">Status :</option>
                                 <option value="Karyawan Tetap" {{ old('status')=='active' ? 'selected' : '' }}>Karyawan
                                     Tetap</option>
@@ -75,11 +78,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="domisili" class="form-label">Domisili</label>
-                            <textarea class="form-control" name="domisili" id="domisili"></textarea>
+                            <textarea class="form-control" name="domisili" id="domisili" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="no_tlp" class="form-label">No Handphone</label>
-                            <input type="number" class="form-control" id="no_tlp" name="no_tlp" id="no_tlp">
+                            <input type="number" class="form-control" id="no_tlp" name="no_tlp" id="no_tlp" required>
                         </div>
                     </div>
                 </div>
