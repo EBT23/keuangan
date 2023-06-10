@@ -131,12 +131,14 @@
                                             <td>{{ $kr['no_tlp'] }}</td>
                                             <td>{{ $kr['domisili'] }}</td>
                                             <td>{{ $kr['status'] }}</td>
-                                            <td>
-                                                <div class="d-flex flex-wrap gap-2">
+                                            <td class="d-flex">
+                                                <span>
                                                     <a href="{{ route('edit.karyawan', ['id' => $kr['user_id']]) }}"
                                                         type="button"
-                                                        class="btn btn-outline-primary waves-effect waves-light">
+                                                        class="btn btn-outline-primary waves-effect waves-light m-md-1">
                                                         Edit</a>
+                                                </span>
+                                                <span>
                                                     <form action="{{ route('delete.karyawan', ['id' => $kr['id']]) }}"
                                                         method="POST">
                                                         {{ csrf_field() }}
@@ -144,13 +146,13 @@
                                                         <button
                                                             onclick="return confirm('Anda yakin akan menghapus ini? ')"
                                                             type="submit"
-                                                            class="btn btn-outline-danger waves-effect waves-light">Hapus</i></button>
+                                                            class="btn btn-outline-danger waves-effect waves-light mt-1">Hapus</i></button>
                                                     </form>
+                                                </span>
                                                 </div>
                                             </td>
                                         </tr>
                                         @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
@@ -160,13 +162,11 @@
             </div>
         </div>
         <!-- Content End -->
-
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top">
             <i class="bi bi-arrow-up"></i>
         </a>
     </div>
-
     <script>
         let table = new DataTable('#myTable');
     </script>

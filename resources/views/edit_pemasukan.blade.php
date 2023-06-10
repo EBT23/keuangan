@@ -39,10 +39,9 @@
                                                             Distributor</label>
                                                         <select class="form-select" name="distributor_id"
                                                             data-allow-clear="true">
-                                                            <option selected="">Pilih Distributor</option>
+                                                            <option value="" selected disabled>Pilih Distributor</option>
                                                             @foreach ($distributor as $item)
-                                                            <option value="{{ $item->id }}">
-                                                                {{ $item->nama_distributor }}
+                                                                <option @if($pemasukan->distributor_id == $item->id) selected @endif value="{{ $item->id }}">{{ $item->nama_distributor}}</option>   
                                                             </option>
                                                             @endforeach
                                                         </select>

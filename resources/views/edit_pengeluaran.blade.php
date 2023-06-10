@@ -39,10 +39,9 @@
                                                             Pengeluaran</label>
                                                         <select class="form-select" name="jenis_pengeluaran_id"
                                                             data-allow-clear="true">
-                                                            <option selected="">Jenis Pengeluaran:</option>
+                                                            <option value="" selected disabled>Jenis Pengeluaran:</option>
                                                             @foreach ($jenis_pengeluaran as $item)
-                                                            <option value="{{ $item->id }}">
-                                                                {{ $item->jenis_pengeluaran }}
+                                                            <option @if($pengeluaran->jenis_pengeluaran_id == $item->id) selected @endif value="{{ $item->id }}">{{ $item->jenis_pengeluaran}}</option> 
                                                             </option>
                                                             @endforeach
                                                         </select>
