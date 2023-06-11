@@ -25,6 +25,9 @@ class RoleController extends Controller
 
     public function tambah_role(Request $request)
     {
+        $request->validate([
+            'role' => 'required',
+        ]);
         $token = session('access_token');
 
         $addRole = [

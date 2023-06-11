@@ -31,6 +31,13 @@ class DistributorController extends Controller
     public function tambah_distributor(Request $request)
     {
         // dd($request);
+        $request->validate([
+            'nama_distributor' => 'required',
+            'tlp' => 'required',
+            'area_cover' => 'required',
+            'alamat' => 'required',
+            'penjab' => 'required',
+        ]);
         $token = session('access_token');
 
         $addDistributor = [

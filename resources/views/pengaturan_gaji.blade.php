@@ -24,18 +24,16 @@
                 <div class="alert alert-success">
                     {{ Session::get('success') }}
                 </div>
-                @elseif (Session::has('errors'))
-                <div class="alert alert-danger">
-                    {{ Session::get('errors') }}
-                </div>
+                @else
+                
                 @endif
                 <h6 class="mb-4">Data Pengaturan Gaji</h6>
                 <form action="{{ route('tambah_pengaturan_gaji') }}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Nama Karyawan</label>
+                            <div class="form-group mb-3">
+                                <label for="nama_karyawan">Nama Karyawan</label>
                                 <select class="form-control" id="nama_karyawan" name="nama_karyawan">
                                     <option value="" selected disabled>Pilih Karyawan</option>
                                     @foreach ( $users as $u )
@@ -43,28 +41,37 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="gapok">Gaji Pokok</label>
-                                <input type="number" class="form-control" id="gapok" name="gapok"
-                                    aria-describedby="gapok">
+                            <div class="form-group mb-3">
+                                <label for="gapok" class="form-label">Gaji Pokok</label>
+                                <input class="form-control @error('gapok') is-invalid @enderror" value="{{ old('gapok') }}" name="gapok" id="gapok">
+                                @error('gapok')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror 
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="lembur" class="form-label">Lembur/ Jam</label>
+                                <input class="form-control @error('lembur') is-invalid @enderror" value="{{ old('lembur') }}"  name="lembur" id="lembur">
+                                @error('lembur')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror 
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="tunjangan_jabatan">Tunjangan Jabatan</label>
-                                <input type="number" class="form-control" id="tunjangan_jabatan"
-                                    name="tunjangan_jabatan" aria-describedby="tunjangan_jabatan">
+                            <div class="form-group mb-3">
+                                <label for="tunjangan_jabatan" class="form-label">Tunjangan Jabatan</label>
+                                <input class="form-control @error('tunjangan_jabatan') is-invalid @enderror" value="{{ old('tunjangan_jabatan') }}"  name="tunjangan_jabatan" id="tunjangan_jabatan">
+                                @error('tunjangan_jabatan')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror 
                             </div>
-                            <div class="form-group">
-                                <label for="uang_makan">Uang Makan / Hari</label>
-                                <input type="number" class="form-control" id="uang_makan" name="uang_makan"
-                                    aria-describedby="uang_makan">
+                            <div class="form-group mb-3">
+                                <label for="uang_makan" class="form-label">Uang Makan / Hari</label>
+                                <input class="form-control @error('uang_makan') is-invalid @enderror" value="{{ old('uang_makan') }}"  name="uang_makan" id="uang_makan">
+                                @error('uang_makan')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror 
                             </div>
-                            <div class="form-group">
-                                <label for="lembur">Uang Lembur / jam</label>
-                                <input type="number" class="form-control" id="lembur" name="lembur"
-                                    aria-describedby="lembur">
-                            </div>
+                           
                         </div>
                     </div>
 

@@ -25,6 +25,10 @@ class PosisiController extends Controller
 
     public function tambah_posisi(Request $request)
     {
+         $request->validate([
+            'nama_posisi' => 'required',
+         ]);
+         
         $token = session('access_token');
 
         $addPosisi = [

@@ -28,7 +28,7 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="karyawan" class="form-label">Karyawan</label>
-                            <select class="form-select" name="karyawan" data-allow-clear="true" required>
+                            <select class="form-select" name="karyawan" data-allow-clear="true">
                                 <option selected="">Pilih Karyawan</option>
                                 @foreach($data1 as $item)
                                 <option value="{{ $item->id }}">
@@ -39,14 +39,20 @@
                         </div>
                         <div class="mb-3">
                             <label for="pinjaman" class="form-label">Pinjaman</label>
-                            <input type="number" class="form-control" name="pinjaman" id="pinjaman" required>
+                            <input type="number" class="form-control @error('pinjaman') is-invalid @enderror" value="{{ old('pinjaman') }}" name="pinjaman" id="pinjaman">
+                            @error('pinjaman')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-6">
 
                         <div class="mb-3">
                             <label for="tanggal" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control" name="tanggal" id="tanggal" required>
+                            <input type="date" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}" name="tanggal" id="tanggal">
+                            @error('tanggal')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         </div>
                         <div class="mb-3">
                             <label for="status_pinjaman" class="form-label">Status Pinjaman</label>
@@ -70,10 +76,8 @@
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
                     </div>
-                    @elseif(Session::has('errors'))
-                    <div class="alert alert-danger">
-                        {{ Session::get('errors') }}
-                    </div>
+                    @else 
+
                     @endif
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">

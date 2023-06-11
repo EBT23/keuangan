@@ -32,7 +32,7 @@
              <div class="col-6">
                 <div class="mb-3">
                     <label for="distributor_id" class="form-label">Distributor</label>
-                    <select class="form-select" name="distributor_id" data-allow-clear="true" required>
+                    <select class="form-select" name="distributor_id" data-allow-clear="true">
                         <option selected="">Pilih Distributor</option>
                         @foreach ($data1 as $item)
                             <option value="{{ $item->id }}">
@@ -40,25 +40,40 @@
                             </option>
                         @endforeach
                     </select>
+                    @error('distributor_id')
+						<div class="text-danger">{{ $message }}</div>
+					@enderror
                   </div>
               <div class="mb-3">
                   <label for="keterangan" class="form-label">Keterangan</label>
-                  <textarea class="form-control" name="keterangan" id="keterangan" required></textarea>
+                  <textarea class="form-control  @error('keterangan') is-invalid @enderror" value="{{ old('keterangan') }}" name="keterangan" id="keterangan"></textarea>
+                  @error('keterangan')
+                    <div class="text-danger">{{ $message }}</div>
+                  @enderror
               </div>
             </div>
                  <div class="col-6" >
                     <div class="mb-3">
                         <label for="tgl" class="form-label">Tanggal</label>
-                        <input type="date" class="form-control" id="tgl" name="tgl" id="tgl" required>
-                      </div>
+                        <input type="date" class="form-control @error('tgl') is-invalid @enderror" value="{{ old('tgl') }}" id="tgl" name="tgl" id="tgl">
+                        @error('tgl')
+                        <div class="text-danger">{{ $message }}</div>
+                      @enderror  
+                    </div>
                       <div class="mb-3">
                         <label for="total_pemasukan" class="form-label">Total Pemasukan</label>
-                        <input class="form-control" name="total_pemasukan" id="total_pemasukan" required>
-                      </div>
+                        <input class="form-control @error('total_pemasukan') is-invalid @enderror" value="{{ old('total_pemasukan') }}" name="total_pemasukan" id="total_pemasukan">
+                        @error('total_pemasukan')
+                        <div class="text-danger">{{ $message }}</div>
+                      @enderror  
+                    </div>
                       <div class="mb-3">
                           <label for="bukti_pemasukan" class="form-label">Bukti Pemasukan</label>
-                          <input class="form-control form-control-sm" name="bukti_pemasukan" id="bukti_pemasukan" type="file" required>
-                          </div>
+                          <input class="form-control form-control-sm @error('bukti_pemasukan') is-invalid @enderror" value="{{ old('bukti_pemasukan') }}" name="bukti_pemasukan" id="bukti_pemasukan" type="file">
+                          @error('bukti_pemasukan')
+                            <div class="text-danger">{{ $message }}</div>
+                          @enderror
+                        </div>
                      </div>
                     </div>
                     <div class="">
@@ -73,10 +88,8 @@
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
                     </div>
-                    @elseif (Session::has('errors'))
-                    <div class="alert alert-danger">
-                        {{ Session::get('errors') }}
-                    </div>
+                    @else
+                    
                     @endif
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">

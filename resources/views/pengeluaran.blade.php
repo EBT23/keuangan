@@ -28,7 +28,7 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="jenis_pengeluaran_id" class="form-label">Jenis Pengeluaran</label>
-                            <select class="form-select" name="jenis_pengeluaran_id" data-allow-clear="true" required>
+                            <select class="form-select" name="jenis_pengeluaran_id" data-allow-clear="true">
                                 <option selected="">Jenis Pengeluaran:</option>
                                 @foreach ($jenis_pengeluaran as $item)
                                 <option value="{{ $item->id }}">
@@ -39,22 +39,34 @@
                         </div>
                         <div class="mb-3">
                             <label for="keterangan" class="form-label">Keterangan</label>
-                            <textarea class="form-control" name="keterangan" id="keterangan" required></textarea>
+                            <textarea class="form-control @error('keterangan') is-invalid @enderror" value="{{ old('keterangan') }}" name="keterangan" id="keterangan"></textarea>
+                            @error('keterangan')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror 
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="tgl" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control" id="tgl" name="tgl" id="tgl"required >
+                            <input type="date" class="form-control @error('tgl') is-invalid @enderror" value="{{ old('tgl') }}" id="tgl" name="tgl" id="tgl">
+                            @error('tgl')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror 
                         </div>
                         <div class="mb-3">
                             <label for="total_pengeluaran" class="form-label">Total Pengeluaran</label>
-                            <input class="form-control" name="total_pengeluaran" id="total_pengeluaran" required>
+                            <input class="form-control @error('total_pengeluaran') is-invalid @enderror" value="{{ old('total_pengeluaran') }}" name="total_pengeluaran" id="total_pengeluaran">
+                            @error('total_pengeluaran')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror 
                         </div>
                         <div class="mb-3">
                             <label for="bukti_pengeluaran" class="form-label">Bukti Pengeluaran</label>
-                            <input class="form-control form-control-sm" name="bukti_pengeluaran" id="bukti_pengeluaran"
-                                type="file" required>
+                            <input class="form-control form-control-sm @error('bukti_pengeluaran') is-invalid @enderror" value="{{ old('bukti_pengeluaran') }}" name="bukti_pengeluaran" id="bukti_pengeluaran"
+                                type="file">
+                                @error('bukti_pengeluaran')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror 
                         </div>
                     </div>
                 </div>

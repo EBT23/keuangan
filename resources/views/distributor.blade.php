@@ -28,25 +28,40 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="nama_distributor" class="form-label">Distributor</label>
-                            <input type="text" class="form-control" name="nama_distributor" id="nama_distributor">
+                            <input type="text" class="form-control @error('nama_distributor') is-invalid @enderror" value="{{ old('nama_distributor') }}" name="nama_distributor" id="nama_distributor">
+                            @error('nama_distributor')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
                         </div>
                         <div class="mb-3">
                             <label for="tlp" class="form-label">No Telepon</label>
-                            <input type="number" class="form-control" name="tlp" id="tlp"></input>
+                            <input type="number" class="form-control @error('tlp') is-invalid @enderror" value="{{ old('tlp') }}" name="tlp" id="tlp">
+                            @error('tlp')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
                         </div>
                         <div class="mb-3">
                             <label for="area_cover" class="form-label">Area Cover</label>
-                            <input type="text" class="form-control" name="area_cover" id="area_cover"></input>
+                            <input type="text" class="form-control @error('area_cover') is-invalid @enderror" value="{{ old('area_cover') }}" name="area_cover" id="area_cover">
+                            @error('area_cover')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="alamat" class="form-label">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat">
+                            <input type="text" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}" id="alamat" name="alamat">
+                            @error('alamat')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
                         </div>
                         <div class="mb-3">
                             <label for="penjab" class="form-label">Penjab</label>
-                            <input type="text" class="form-control" id="penjab" name="penjab">
+                            <input type="text" class="form-control @error('penjab') is-invalid @enderror" value="{{ old('penjab') }}" id="penjab" name="penjab">
+                            @error('penjab')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
                         </div>
                     </div>
                 </div>
@@ -61,10 +76,8 @@
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
                     </div>
-                    @elseif (Session::has('errors'))
-                    <div class="alert alert-danger">
-                        {{ Session::get('errors') }}
-                    </div>
+                    @else
+                    
                     @endif
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">

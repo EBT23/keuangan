@@ -32,7 +32,10 @@
              <div class="col-6">
               <div class="mb-3">
                 <label for="nama_posisi" class="form-label">Posisi</label>
-                <input  type="text" class="form-control" name="nama_posisi" id="nama_posisi" required>
+                <input  type="text" class="form-control @error('nama_posisi') is-invalid @enderror"" name="nama_posisi" id="nama_posisi">
+                @error('nama_posisi')
+                <div class="text-danger">{{ $message }}</div>
+              @enderror 
               </div>
             </div>
             </div>
@@ -48,10 +51,8 @@
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
                     </div>
-                    @elseif (Session::has('errors'))
-                    <div class="alert alert-danger">
-                        {{ Session::get('errors') }}
-                    </div>
+                    @else
+                    
                     @endif
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">

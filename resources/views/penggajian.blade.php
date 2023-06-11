@@ -25,10 +25,8 @@
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
                     </div>
-                    @elseif (Session::has('errors'))
-                    <div class="alert alert-danger">
-                        {{ Session::get('errors') }}
-                    </div>
+                    @else
+                    
                     @endif
                     <h6 class="mb-4">Data Penggajian</h6>
                     <form action="{{ route('tambah_penggajian') }}" method="post">
@@ -37,12 +35,15 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="bulan">Bulan</label>
-                                    <input type="month" class="form-control" id="bulan" name="bulan"
-                                        aria-describedby="bulan" required>
+                                    <input type="month" class="form-control @error('bulan') is-invalid @enderror" value="{{ old('bulan') }}" id="bulan" name="bulan"
+                                        aria-describedby="bulan">
+                                        @error('bulan')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Nama Karyawan</label>
-                                    <select class="form-control" id="nama_karyawan" name="nama_karyawan" required>
+                                    <select class="form-control" id="nama_karyawan" name="nama_karyawan">
                                         <option value="" selected disabled>Pilih Karyawan</option>
                                         @foreach ( $users as $u )
                                         <option value="{{ $u->id }}">{{ $u->name.'-'.$u->no_identitas }}</option>
@@ -51,20 +52,29 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="kehadiran">Kehadiran</label>
-                                    <input type="number" class="form-control" id="kehadiran" name="kehadiran"
-                                        aria-describedby="kehadiran" required>
+                                    <input type="number" class="form-control @error('kehadiran') is-invalid @enderror" value="{{ old('kehadiran') }}" id="kehadiran" name="kehadiran"
+                                        aria-describedby="kehadiran">
+                                        @error('kehadiran')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="lembur">Lembur/jam</label>
-                                    <input type="number" class="form-control" id="lembur" name="lembur"
-                                        aria-describedby="lembur" required>
+                                    <input type="number" class="form-control @error('lembur') is-invalid @enderror" value="{{ old('lembur') }}" id="lembur" name="lembur"
+                                        aria-describedby="lembur">
+                                        @error('lembur')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="insentiv">Insentiv</label>
-                                    <input type="number" class="form-control" id="insentiv" name="insentiv"
-                                        aria-describedby="insentiv" required>
+                                    <input type="number" class="form-control @error('insentiv') is-invalid @enderror" value="{{ old('insentiv') }}" id="insentiv" name="insentiv"
+                                        aria-describedby="insentiv">
+                                        @error('insentiv')
+                                            <div class="text-danger">{{ $message }}</div>
+                                    @enderror 
                                 </div>
                                 {{-- <div class="form-group">
                                     <label for="pinjaman">Pinjaman Karyawan</label>

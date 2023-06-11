@@ -21,6 +21,13 @@ class PenggajianController extends Controller
     }
     public function tambah_penggajian(Request $request)
     {
+        $request->validate([
+            'bulan' => 'required',
+            'lembur' => 'required',
+            'insentiv' => 'required',
+            'kehadiran' => 'required',
+        ]);
+
         $bulan = $request->bulan;
         $nama_karyawan = $request->nama_karyawan;
         $jam_lembur = $request->lembur;

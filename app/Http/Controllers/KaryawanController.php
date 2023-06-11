@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 
 class KaryawanController extends Controller
 {
@@ -30,6 +31,25 @@ class KaryawanController extends Controller
 
     public function tambah_karyawan(Request $request)
     {
+    //    $validator = Validator::make($request->all(), [
+    //         'name.required' => 'name is required',
+    //         'email.required' => 'email is unique',
+    //     ])->validate();
+
+        
+        $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'no_identitas' => 'required',
+                'tempat_lahir' => 'required',
+                'tgl_lahir' => 'required',
+                'no_rek' => 'required',
+                'posisi_id' => 'required',
+                'status' => 'required',
+                'domisili' => 'required',
+                'no_tlp' => 'required',
+        ]);
+
         $token = session('access_token');
 
         $addKaryawan = [
@@ -58,12 +78,14 @@ class KaryawanController extends Controller
             // lakukan sesuatu dengan data response
             return redirect()
                 ->route('karyawan')
+                
                 ->withSuccess('Data karyawan berhasil ditambahkan');
         } else {
             $errorMessage = $response->serverError() ? 'Server error' : 'Client error'; // pesan error
             $errorMessage .= ': ' . $response->body(); // tambahkan pesan error dari body response
             // lakukan sesuatu dengan pesan error
             return redirect()->route('karyawan')
+               
                 ->with('error', 'Data Karyawan gagal disimpan');
         }
     }

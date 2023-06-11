@@ -28,7 +28,10 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="jenis_pengeluaran" class="form-label">Jenis Pengeluaran</label>
-                            <input class="form-control" name="jenis_pengeluaran" id="jenis_pengeluaran" required>
+                            <input class="form-control @error('jenis_pengeluaran') is-invalid @enderror"" name="jenis_pengeluaran" id="jenis_pengeluaran">
+                            @error('jenis_pengeluaran')
+                            <div class="text-danger">{{ $message }}</div>
+                          @enderror 
                         </div>
                     </div>
 
@@ -41,7 +44,7 @@
         <div class="card-body">
             <div class="col-12">
                 <div class="bg-light rounded h-100 p-4">
-                    @if (Session::has('success'))
+                    {{-- @if (Session::has('success'))
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
                     </div>
@@ -49,7 +52,7 @@
                     <div class="alert alert-danger">
                         {{ Session::get('errors') }}
                     </div>
-                    @endif
+                    @endif --}}
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
                             <h6 class="mb-4">Data Jenis Pengeluaran</h6>

@@ -24,6 +24,14 @@ class PengaturanGajiController extends Controller
    }
    public function tambah_pengaturan_gaji(Request $request)
    {
+        $request->validate([
+            'nama_karyawan' => 'required',
+            'gapok' => 'required',
+            'tunjangan_jabatan' => 'required',
+            'uang_makan' => 'required',
+            'lembur' => 'required',
+        ]);
+
         $karyawan = $request->nama_karyawan;
         $gaji_pokok = $request->gapok;
         $tunjangan_jabatan = $request->tunjangan_jabatan;
