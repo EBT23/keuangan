@@ -17,7 +17,11 @@ class AuthController extends Controller
     }
 
     public function login_post(Request $request)
-    {
+    {   
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
         $client = new Client();
 
         $response = $client->request('POST', 'http://keuangan.dlhcode.com/api/login', [

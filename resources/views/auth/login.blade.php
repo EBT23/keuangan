@@ -17,16 +17,13 @@
     <form action="{{ route('login') }}" method="POST">
       <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
         @csrf
-        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-5">
           <div>
             @if (Session::has('success'))
             <div class="alert alert-success">
               {{ Session::get('success') }}
             </div>
-            @elseif (Session::has('errors'))
-            <div class="alert alert-danger">
-              {{ Session::get('errors') }}
-            </div>
+            @else
             @endif
           </div>
           <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3 card shadow">
@@ -39,12 +36,18 @@
               <h3 class="text-center">PT. Panorama Varia Cipta</h3>
             </div>
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+              <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" name="email" id="email" placeholder="name@example.com">
               <label for="email">Email address</label>
+              @error('email')
+                    <div class="text-danger">{{ $message }}</div>
+              @enderror 
             </div>
             <div class="form-floating mb-4">
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+              <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
               <label for="password">Password</label>
+              @error('password')
+                    <div class="text-danger">{{ $message }}</div>
+              @enderror 
             </div>
             <button type="submit" class="btn btn-primary py-3 w-100 mb-4">{{ __('Login') }}</button>
           </div>
