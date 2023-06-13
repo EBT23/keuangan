@@ -67,6 +67,7 @@
                                                             required>
                                                     </div>
                                                     <div class="mb-3">
+                                                        <img src="{{ asset('upload/pemasukan/' . $pemasukan->bukti_pemasukan . '') }}" alt="Bukti Pemasukan Sebelumnya"> <br>
                                                         <label for="bukti_pemasukan" class="form-label">Bukti
                                                             Pemasukan</label>
                                                         <input type="file" class="form-control" id="bukti_pemasukan"

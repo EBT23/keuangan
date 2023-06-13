@@ -126,7 +126,7 @@ class KaryawanController extends Controller
 
     public function edit_karyawan($id)
     {
-        $data['title'] = 'Edit Data Karyawan';
+        $data['title'] = 'Data Karyawan';
         $token = session('access_token');
         $client = new Client([
         'base_uri' => 'http://keuangan.dlhcode.com/api/',
