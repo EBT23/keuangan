@@ -6,7 +6,19 @@
         <i class="fa fa-bars"></i>
     </a>
     <div class="navbar-nav align-items-center ms-auto my-3">
+        <div class="dropdown">
+            <a class="btn btn-transfaren dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              Profile
+            </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
+            <li><a class="dropdown-item" href="{{ route('showchange.password') }}">Ganti Password</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{{ route('keluar') }}">Logout</a></li>
+          </ul>
+        </div>
         <img class="rounded-circle me-lg-2" src="{{ asset('img/user.jpg') }}" alt="" style="width: 40px; height: 40px;">
-        <a href="{{ route('keluar') }}" class="dropdown-item">Log Out</a>
+        {{-- <a href="" class="dropdown-item">Log Out</a> --}}
     </div>
 </nav>

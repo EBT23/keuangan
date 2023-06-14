@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User as ModelsUser;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -57,12 +59,39 @@ class AuthController extends Controller
         return redirect('/');
     }
 
+    public function showchangePassword()
+    {   
+        $data['title'] = 'Ganti Password';
 
+        return view('auth.change_password', $data);
+    }
 
+    public function changePassword(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
 
+        // Mendapatkan data pengguna yang sedang terautentikasi
+        $user = Auth::user();
 
+        // Memeriksa apakah password saat ini sesuai
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()
+            ->route('showchange.password')
+            ->with('danger', 'Password saat ini tidak cocok.');
+        }
 
-
+        // Mengubah password pengguna
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+        
+        return redirect()
+            ->route('showchange.password')
+            ->with('success', 'Password berhasil diperbarui.');
+    }
 
     public function register()
     {

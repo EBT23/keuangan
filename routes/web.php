@@ -42,9 +42,12 @@ Route::post('/register', [AuthController::class, 'register_post'])->name('regist
 
 Route::middleware(['auth'])->group(function () {
 Route::get('logout', [AuthController::class, 'logout'])->name('keluar');
+Route::get('/change-password',[AuthController::class,'showchangePassword'])->name('showchange.password');
+Route::post('/change-password',[AuthController::class,'changePassword'])->name('change.password');
 
 Route::controller(DashboardController::class)->group( function (){
     Route::get('/dashboard','index')->name('index');
+    Route::get('/profile','profile')->name('profile');
 });
 
 #DISTRIBUTOR

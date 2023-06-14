@@ -533,9 +533,9 @@ class ApiAdminController extends Controller
         $data = DB::table('users')
                 ->join('role', 'role.id', '=', 'users.role_id')
                 ->join('posisi', 'posisi.id', '=', 'users.posisi_id')
-                ->select('users.name','users.email','users.tempat_lahir','users.tgl_lahir','users.no_identitas',
-                        'users.status','users.no_tlp','users.domisili','role.*','posisi.*')
-                ->where('role.id','=','2')
+                ->select('users.id AS user_id','users.name','users.email','users.tempat_lahir','users.tgl_lahir','users.no_identitas',
+                        'users.status','users.no_tlp','users.domisili','role.role','posisi.nama_posisi')
+                ->where('users.role_id','=','2')
                 ->get();
 
             return response()->json([

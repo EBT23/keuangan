@@ -44,9 +44,6 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                    </div>
-                    <div class="col-6">
-
                         <div class="mb-3">
                             <label for="tanggal" class="form-label">Tanggal</label>
                             <input type="date" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}" name="tanggal" id="tanggal">
@@ -54,14 +51,17 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                         </div>
-                        <div class="mb-3">
+                    </div>
+                    <div class="col-6">
+
+                        {{-- <div class="mb-3">
                             <label for="status_pinjaman" class="form-label">Status Pinjaman</label>
                             <select class="form-select" name="status_pinjaman" id="status_pinjaman" required>
                                 <option selected>Pilih Status</option>
                                 <option value="1">Lunas</option>
                                 <option value="0">Hutang</option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="">
@@ -90,7 +90,7 @@
                                             <th scope="col">Nama Karyawan</th>
                                             <th scope="col">Pinjaman</th>
                                             <th scope="col">Tanggal</th>
-                                            <th scope="col">Status</th>
+                                            {{-- <th scope="col">Status</th> --}}
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
@@ -101,11 +101,11 @@
                                             <td>{{ $sp->name }}</td>
                                             <td>Rp. {{ number_format($sp->pinjaman) }}</td>
                                             <td>{{ $sp->tanggal }}</td>
-                                            @if($sp->status == 1)
+                                            {{-- @if($sp->status == 1)
                                             <td>Lunas</td>
                                             @else
                                             <td>Hutang</td>
-                                            @endif
+                                            @endif --}}
                                             <td>
                                                 <div class="d-flex flex-wrap gap-2">
                                                     <a href="{{ route('edit.pinjaman', $sp->id) }}" type="button"

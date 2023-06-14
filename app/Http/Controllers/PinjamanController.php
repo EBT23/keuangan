@@ -68,14 +68,14 @@ class PinjamanController extends Controller
             'karyawan' => 'required',
             'pinjaman' => 'required',
             'tanggal' => 'required',
-            'status_pinjaman' => 'required',
+            // 'status_pinjaman' => 'required',
         ]);
 
         $data = [
            'id_users' => $request->karyawan,
            'pinjaman' => $request->pinjaman,
            'tanggal' => $request->tanggal,
-           'status' => $request->status_pinjaman, 
+        //    'status' => $request->status_pinjaman, 
         ];
 
         DB::table('pinjaman')

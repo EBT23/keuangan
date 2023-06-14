@@ -20,14 +20,9 @@
     <div class="card-body">
         <div class="col-12">
             <div class="bg-light rounded h-100 p-4">
-                @if (Session::has('success'))
-                <div class="alert alert-success">
-                    {{ Session::get('success') }}
-                </div>
-                @else
-                
-                @endif
-                <h6 class="mb-4">Data Pengaturan Gaji</h6>
+               
+                <h4 class="card-title">FORM TAMBAH PENGATURAN GAJI</h4>
+                <hr>
                 <form action="{{ route('tambah_pengaturan_gaji') }}" method="post">
                     @csrf
                     <div class="row">
@@ -75,9 +70,15 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    <button type="submit" class="btn btn-primary mt-3 mb-3">Submit</button>
                 </form>
-
+                @if (Session::has('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @else
+                
+                @endif
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -136,9 +137,7 @@
                                                                     <option value="" disabled selected>Pilih Karyawan
                                                                     </option>
                                                                     @foreach ( $users as $u )
-                                                                    <option value="{{
-                                                                        $u->id }}">{{
-                                                                        $u->name.'-'.$u->no_identitas }}</option>
+                                                                    <option @if ($pg->id_user == $u->id) selected @endif value="{{ $u->id }}">{{ $u->name.'-'.$u->no_identitas }}</option>
                                                                     @endforeach
                                                                 </select>
                                                                 <input type="text" name="id" value="{{ $pg->id }}"

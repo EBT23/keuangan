@@ -17,7 +17,7 @@
     <form action="{{ route('login') }}" method="POST">
       <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
         @csrf
-        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-5">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
           <div>
             @if (Session::has('success'))
             <div class="alert alert-success">

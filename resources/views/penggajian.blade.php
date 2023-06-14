@@ -28,7 +28,8 @@
                     @else
                     
                     @endif
-                    <h6 class="mb-4">Data Penggajian</h6>
+                    <h4 class="card-title">FORM TAMBAH PENGGAJIAN</h4>
+                    <hr>
                     <form action="{{ route('tambah_penggajian') }}" method="post">
                         @csrf
                         <div class="row">

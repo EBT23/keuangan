@@ -24,7 +24,7 @@
                 <h6 class="mb-4 text-white">Data Dashboard</h6>
                  <div class="container-fluid pt-4 px-4">
                 <div class="row g-4">
-                    <div class="col-sm-6 col-xl-4">
+                    <div class="col-sm-4 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-4">
+                    <div class="col-sm-4 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
@@ -42,7 +42,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-xl-4">
+                    <div class="col-sm-4 col-xl-3">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-money-check-alt fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Jumlah Penggajian</p>
+                                <h6 class="mb-0">
+                                    Rp. {{ number_format($penggajian) }}
+                                   
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xl-3">
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-area fa-3x text-primary"></i>
                             <div class="ms-3">
@@ -69,20 +81,29 @@
                 type: 'line',
                 data: {
                     labels: data.labels,
-                    datasets: [{
-                        label: 'Pemasukan',
-                        backgroundColor: 'rgba(0, 123, 255, 0.5)',
-                        borderColor: 'rgba(0, 123, 255, 1)',
-                        borderWidth: 1,
-                        data: data.dataPemasukan,
-                    }, {
-                        label: 'Pengeluaran',
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        data: data.dataPengeluaran,
-                    }]
-                },
+                    datasets: [
+                        {
+                            label: 'Pemasukan',
+                            backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                            borderColor: 'rgba(0, 123, 255, 1)',
+                            borderWidth: 1,
+                            data: data.dataPemasukan,
+                    }, 
+                    {
+                            label: 'Pengeluaran',
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1,
+                            data: data.dataPengeluaran,
+                    }
+                    // {
+                    //         label: 'Penggajian',
+                    //         backgroundColor: 'rgba(0, 255, 46, 0.5)',
+                    //         borderColor: 'rgba(0, 255, 46, 1)',
+                    //         borderWidth: 1,
+                    //         data: data.dataPenggajian,
+                    // }
+                ]},
                 options: {
                     responsive: true,
                     scales: {

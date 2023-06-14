@@ -30,8 +30,8 @@
                     {{ Session::get('errors') }}
                 </div>
                 @endif
-                <h6 class="mb-4">Detail Penggajian</h6>
-
+                <h4 class="card-title">Detail Penggajian</h4>
+<hr>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tr>

@@ -18,13 +18,7 @@
     @include('layouts.header')
     <!-- Navbar End -->
     <div class="card">
-        @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-        @else
-        
-        @endif
+    
         <div class="card-body">
             <h4 class="card-title">FORM TAMBAH DATA KARYAWAN</h4>
             <hr>
@@ -132,10 +126,7 @@
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
                     </div>
-                    @elseif (Session::has('errors'))
-                    <div class="alert alert-danger">
-                        {{ Session::get('errors') }}
-                    </div>
+                    @else
                     @endif
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
@@ -170,7 +161,7 @@
                                             <td>{{ $kr['status'] }}</td>
                                             <td class="d-flex">
                                                 <span>
-                                                    <a href="{{ route('edit.karyawan', ['id' => $kr['user_id']]) }}"
+                                                    <a href="{{ route('edit.karyawan', ['id' => $kr['id']]) }}"
                                                         type="button"
                                                         class="btn btn-outline-primary waves-effect waves-light m-md-1">
                                                         Edit</a>
