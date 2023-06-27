@@ -246,10 +246,7 @@ class ApiAdminController extends Controller
     public function distributor()
     {
 
-        $distributor = DB::table('distributor')
-            ->join('penjab', 'penjab.id', '=', 'distributor.penjab_id')
-            ->select('distributor.id', 'distributor.nama_distributor', 'penjab.nama_penjab', 'distributor.tlp', 'distributor.area_cover', 'distributor.alamat')
-            ->get();
+        $distributor = DB::table('distributor')->get();
         return response()->json([
             'data' => $distributor
         ]);
@@ -533,7 +530,7 @@ class ApiAdminController extends Controller
         $data = DB::table('users')
                 ->join('role', 'role.id', '=', 'users.role_id')
                 ->join('posisi', 'posisi.id', '=', 'users.posisi_id')
-                ->select('users.id AS user_id','users.name','users.email','users.tempat_lahir','users.tgl_lahir','users.no_identitas',
+                ->select('users.id','users.name','users.email','users.tempat_lahir','users.tgl_lahir','users.no_identitas',
                         'users.status','users.no_tlp','users.domisili','role.role','posisi.nama_posisi')
                 ->where('users.role_id','=','2')
                 ->get();

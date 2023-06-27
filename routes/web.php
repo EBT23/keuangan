@@ -16,7 +16,6 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PengaturanGajiController;
 use App\Http\Controllers\PinjamanController;
-use App\Models\JenisPengeluaran;
 
 /*
 |--------------------------------------------------------------------------
