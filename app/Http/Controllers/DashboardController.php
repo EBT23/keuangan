@@ -73,9 +73,36 @@ class DashboardController extends Controller
         {   
             $data['title'] = 'My Profile';
 
-            $user = DB::table('users')->first();
+            $posisi = DB::table('posisi')->get();
+            $user = Auth::user();
 
-            return view('auth.profile', ['user' => $user], $data);
+            return view('auth.profile', compact('user','posisi'), $data);
         }
 
-}
+        public function updateProfile(Request $request, $id)
+        {
+            $user = Auth::user();
+    
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+                'no_identitas' => 'required',
+                'tgl_lahir' => 'required',
+                'no_tlp' => 'required',
+            ]);
+    
+            DB::table('users')
+                ->where('id', $id)
+                ->update([
+                    'name' => $validatedData['name'],
+                    'email' => $validatedData['email'],
+                    'no_identitas' => $validatedData['no_identitas'],
+                    'tgl_lahir' => $validatedData['tgl_lahir'],
+                    'no_tlp' => $validatedData['no_tlp'],
+            ]);
+    
+            return redirect()
+                ->route('profile')
+                ->with('success', 'Profil berhasil diperbarui.');
+        }
+    }

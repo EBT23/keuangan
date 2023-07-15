@@ -47,6 +47,7 @@ Route::post('/change-password',[AuthController::class,'changePassword'])->name('
 Route::controller(DashboardController::class)->group( function (){
     Route::get('/dashboard','index')->name('index');
     Route::get('/profile','profile')->name('profile');
+    Route::post('/update_profile/{id}','updateProfile')->name('update.profile');
 });
 
 #DISTRIBUTOR
