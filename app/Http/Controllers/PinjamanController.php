@@ -23,29 +23,28 @@ class PinjamanController extends Controller
      return view('pinjaman', ['data' => $data], ['data1' => $data1], $title);
     }
     public function tambah_pinjaman(Request $request)
-    {
-             // validasi input
-             $request->validate([
-                 'karyawan' => 'required',
-                 'pinjaman' => 'required',
-                 'tanggal' => 'required',
-                 'status_pinjaman' => 'required',
-             ]);
-     
-             $data = [
-                 'id_users' => $request->karyawan,
-                 'pinjaman' => $request->pinjaman,
-                 'tanggal' => $request->tanggal,
-                 'status' => $request->status_pinjaman,
- 
-             ];
- 
-             DB::table('pinjaman')->insert($data); 
-             
-     
-             return redirect()->route('pinjaman')
-                 ->with('success', 'Data berhasil disimpan.');
-    }
+{
+    // validasi input
+    $request->validate([
+        'id_users' => 'required',
+        'pinjaman' => 'required',
+        'tanggal' => 'required',
+    ]);
+
+    $data = [
+        'id_users' => $request->id_users,
+        'pinjaman' => $request->pinjaman,
+        'tanggal' => $request->tanggal,
+        'status' => 0,
+    ];
+
+    // dd($data);
+
+    DB::table('pinjaman')->insert($data);
+
+    return redirect()->route('pinjaman')
+        ->with('success', 'Data berhasil disimpan.');
+}
     public function edit_pinjaman($id)
     {
 

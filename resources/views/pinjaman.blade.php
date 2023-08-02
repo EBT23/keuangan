@@ -24,11 +24,12 @@
             <hr>
             <form action="{{ route('tambah.pinjaman') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+
                 <div class="row">
                     <div class="col-6">
                         <div class="mb-3">
-                            <label for="karyawan" class="form-label">Karyawan</label>
-                            <select class="form-select" name="karyawan" data-allow-clear="true">
+                            <label for="id_users" class="form-label">Karyawan</label>
+                            <select class="form-select" name="id_users" id="id_users" data-allow-clear="true">
                                 <option selected="">Pilih Karyawan</option>
                                 @foreach($data1 as $item)
                                 <option value="{{ $item->id }}">
@@ -39,14 +40,14 @@
                         </div>
                         <div class="mb-3">
                             <label for="pinjaman" class="form-label">Pinjaman</label>
-                            <input type="number" class="form-control @error('pinjaman') is-invalid @enderror" value="{{ old('pinjaman') }}" name="pinjaman" id="pinjaman">
+                            <input type="number" class="form-control @error('pinjaman') is-invalid @enderror"  name="pinjaman" id="pinjaman">
                             @error('pinjaman')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="tanggal" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control @error('tanggal') is-invalid @enderror" value="{{ old('tanggal') }}" name="tanggal" id="tanggal">
+                            <input type="date" class="form-control @error('tanggal') is-invalid @enderror"  name="tanggal" id="tanggal">
                             @error('tanggal')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror

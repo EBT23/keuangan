@@ -16,14 +16,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'DOhle',
-            'email' => 'dohle@example.com',
+            'name' => 'admin',
+            'email' => 'admin@example.com',
             'password' => bcrypt('12345678'),
             'no_identitas' => '756764875',
             'tempat_lahir' => 'kebumen',
             'tgl_lahir' => '2022-08-08',
             'no_rek' => '762876282',
-            'role_id' => '2',
+            'role_id' => '1',
             'posisi_id' => '6',
             'status' => 'null',
             'no_tlp' => '089764534253',

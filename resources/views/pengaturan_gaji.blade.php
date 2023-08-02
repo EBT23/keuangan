@@ -38,14 +38,14 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="gapok" class="form-label">Gaji Pokok</label>
-                                <input class="form-control @error('gapok') is-invalid @enderror" value="{{ old('gapok') }}" name="gapok" id="gapok">
+                                <input class="form-control @error('gapok') is-invalid @enderror" name="gapok" id="gapok">
                                 @error('gapok')
                                 <div class="text-danger">{{ $message }}</div>
                               @enderror 
                             </div>
                             <div class="form-group mb-3">
                                 <label for="lembur" class="form-label">Lembur/ Jam</label>
-                                <input class="form-control @error('lembur') is-invalid @enderror" value="{{ old('lembur') }}"  name="lembur" id="lembur">
+                                <input class="form-control @error('lembur') is-invalid @enderror"   name="lembur" id="lembur">
                                 @error('lembur')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror 
@@ -54,14 +54,14 @@
                         <div class="col-lg-6">
                             <div class="form-group mb-3">
                                 <label for="tunjangan_jabatan" class="form-label">Tunjangan Jabatan</label>
-                                <input class="form-control @error('tunjangan_jabatan') is-invalid @enderror" value="{{ old('tunjangan_jabatan') }}"  name="tunjangan_jabatan" id="tunjangan_jabatan">
+                                <input class="form-control @error('tunjangan_jabatan') is-invalid @enderror"   name="tunjangan_jabatan" id="tunjangan_jabatan">
                                 @error('tunjangan_jabatan')
                                 <div class="text-danger">{{ $message }}</div>
                               @enderror 
                             </div>
                             <div class="form-group mb-3">
                                 <label for="uang_makan" class="form-label">Uang Makan / Hari</label>
-                                <input class="form-control @error('uang_makan') is-invalid @enderror" value="{{ old('uang_makan') }}"  name="uang_makan" id="uang_makan">
+                                <input class="form-control @error('uang_makan') is-invalid @enderror"  name="uang_makan" id="uang_makan">
                                 @error('uang_makan')
                                 <div class="text-danger">{{ $message }}</div>
                               @enderror 
