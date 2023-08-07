@@ -98,14 +98,21 @@ class KaryawanController extends Controller
             'timeout' => 50.0,
         ]);
 
+        $password = $request->password;
+            if ($password) {
+                $password = bcrypt($password);
+            }
+
         $response = $client->request('PUT', "update_karyawan/$id", [
             'headers' => [
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/x-www-form-urlencoded',
             ],
             'json' => [
+               
                 'name' => $request->name,
                 'email' => $request->email,
+                'password' => $password,
                 'no_identitas' => $request->no_identitas,
                 'tempat_lahir' => $request->tempat_lahir,
                 'tgl_lahir' => $request->tgl_lahir,

@@ -61,6 +61,12 @@
                                                 value="{{ $karyawan['tgl_lahir'] }}"
                                                 aria-describedby="tgl_lahir" required>
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label">Password</label>
+                                            <input type="number" class="form-control" id="password"
+                                                name="password" id="password" value="{{ $karyawan['password'] }}"
+                                                aria-describedby="password">
+                                        </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="mb-3">
@@ -102,6 +108,7 @@
                                                 name="no_tlp" id="no_tlp" value="{{ $karyawan['no_tlp'] }}"
                                                 aria-describedby="no_tlp" required>
                                         </div>
+                                        
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-3">
