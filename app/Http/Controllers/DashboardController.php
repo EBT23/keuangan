@@ -15,25 +15,7 @@ class DashboardController extends Controller
 {
         public function index()
         {
-            $pemasukan = DB::select('SELECT SUM(total_pemasukan) As jumlah_pemasukan FROM pemasukan');
-            $pemasukan = $pemasukan[0];
-            $pemasukan = $pemasukan->jumlah_pemasukan;
-
-            $pengeluaran = DB::select('SELECT SUM(total_pengeluaran) As jumlah_pengeluaran FROM pengeluaran');
-            $pengeluaran = $pengeluaran[0];
-            $pengeluaran = $pengeluaran->jumlah_pengeluaran;
-
-            $penggajian = DB::select('SELECT SUM(total) As total FROM penggajian');
-            $penggajian = $penggajian[0];
-            $penggajian = $penggajian->total;
-
-            // $penggajian = DB::table('penggajian')
-            //     ->select(DB::raw('SUM(total) AS total, MONTH(bulan) AS bulan'))
-            //     ->groupBy('bulan')
-            //     ->orderBy('bulan')
-            //     ->get();
-
-            $laba_bersih = $pemasukan - $pengeluaran;
+            $tanggal = DB::select("SELECT DISTINCT date_format(pengeluaran.tgl, '%Y-%m') as tanggal FROM `pengeluaran` ORDER BY date_format(pengeluaran.tgl, '%Y-%m') ASC");
 
             $getPemasukan = Pemasukan::selectRaw('SUM(total_pemasukan) as total_pemasukan, MONTH(tgl)  as month, YEAR(tgl) as year ')
                 ->groupBy('month','year')
@@ -66,7 +48,60 @@ class DashboardController extends Controller
                 'dataPenggajian' => $dataPenggajian,
             ];
 
-            return view('index',compact('pemasukan', 'pengeluaran', 'laba_bersih','data','penggajian'));
+            return view('index',compact('data', 'tanggal'));
+        }
+
+        public function getDataAll()  {
+            $pemasukan = DB::select('SELECT SUM(total_pemasukan) As jumlah_pemasukan FROM pemasukan');
+            $pemasukan = $pemasukan[0];
+            $pemasukan = $pemasukan->jumlah_pemasukan;
+
+            $pengeluaran = DB::select('SELECT SUM(total_pengeluaran) As jumlah_pengeluaran FROM pengeluaran');
+            $pengeluaran = $pengeluaran[0];
+            $pengeluaran = $pengeluaran->jumlah_pengeluaran;
+
+            $penggajian = DB::select('SELECT SUM(total) As total FROM penggajian');
+            $penggajian = $penggajian[0];
+            $penggajian = $penggajian->total;
+
+            $laba_bersih = $pemasukan - $pengeluaran;
+
+            $data1 = [
+                'pemasukan' => $pemasukan, // Ganti dengan data yang sesuai
+                'pengeluaran' => $pengeluaran, // Ganti dengan data yang sesuai
+                'penggajian' => $penggajian, // Ganti dengan data yang sesuai
+                'laba_bersih' => $laba_bersih, // Ganti dengan data yang sesuai
+            ];
+            
+            return response()->json($data1);
+        }
+
+        public function getDataByYear($bulan_tahun)
+        {
+            // Lakukan perhitungan atau manipulasi data untuk menampilkan data dari semua bulan
+            // Misalnya, dapatkan pemasukan, pengeluaran, dan penggajian dari semua bulan
+            $pemasukan = DB::select("SELECT SUM(total_pemasukan) As jumlah_pemasukan FROM pemasukan WHERE date_format(pemasukan.tgl, '%Y-%m') = '$bulan_tahun'");
+            
+            $pemasukan = $pemasukan[0];
+            $pemasukan = $pemasukan->jumlah_pemasukan;
+            $pemasukan;
+
+            $pengeluaran = DB::select("SELECT SUM(total_pengeluaran) As jumlah_pengeluaran FROM pengeluaran WHERE date_format(pengeluaran.tgl, '%Y-%m') = '$bulan_tahun'");
+            $pengeluaran = $pengeluaran[0];
+            $pengeluaran = $pengeluaran->jumlah_pengeluaran;
+
+            $penggajian = DB::select("SELECT SUM(total) As total FROM penggajian WHERE date_format(penggajian.created_at, '%Y-%m') = '$bulan_tahun'");
+            $penggajian = $penggajian[0];
+            $penggajian = $penggajian->total;
+            $laba_bersih = $pemasukan - $pengeluaran;
+            $data1 = [
+                'pemasukan' => $pemasukan, // Ganti dengan data yang sesuai
+                'pengeluaran' => $pengeluaran, // Ganti dengan data yang sesuai
+                'penggajian' => $penggajian, // Ganti dengan data yang sesuai
+                'laba_bersih' => $laba_bersih, // Ganti dengan data yang sesuai
+            ];
+
+            return response()->json($data1);
         }
 
         public function profile()

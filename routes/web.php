@@ -48,6 +48,8 @@ Route::controller(DashboardController::class)->group( function (){
     Route::get('/dashboard','index')->name('index');
     Route::get('/profile','profile')->name('profile');
     Route::post('/update_profile/{id}','updateProfile')->name('update.profile');
+    Route::get('/getDataAll','getDataAll')->name('getDataAll');
+    Route::get('/getDataByYear/{tahun_bulan}','getDataByYear')->name('getDataByYear');
 });
 
 #DISTRIBUTOR
@@ -135,6 +137,10 @@ Route::get('/gaji/cetak', [LaporanController::class, 'exportgaji'])->name('gaji.
 Route::get('/gaji/cetakById/{id}', [LaporanController::class, 'exportgajiById'])->name('gaji.cetakById');
 
 Route::get('/gaji/name', [LaporanController::class, 'gajiName'])->name('laporan.gaji.name');
+
+Route::post('/cetak_laporan', [LaporanController::class, 'cetak_laporan'])->name('cetak_laporan');
+
+
 });
 
 Route::get('/route-cache', function () {
@@ -157,4 +163,3 @@ Route::get('/optimize', function () {
     Artisan::call('optimize');
     return 'Routes cache cleared';
 });
-

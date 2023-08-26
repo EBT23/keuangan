@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Sum;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -439,5 +440,13 @@ class LaporanController extends Controller
             DB::select("select p.*, u.name from penggajian p left join users u on u.id=p.id_users where u.name = '" . request()->user()->name . "'");
 
         return view('laporanGajiByName', ['gaji' => $gaji], $data);
+    }
+    public function cetak_laporan(Request $request) {
+        $dari_tanggal = $request->dari_tanggal;
+        $sampai_tanggal = $request->sampai_tanggal;
+        $pemasukan = DB::select("SELECT * FROM `pemasukan`, distributor WHERE distributor.id = pemasukan.distributor_id AND pemasukan.tgl BETWEEN '$dari_tanggal' AND '$sampai_tanggal'");
+        $pengeluaran = DB::select("SELECT * FROM `pengeluaran`, jenis_pengeluaran WHERE jenis_pengeluaran.id = pengeluaran.jenis_pengeluaran_id AND pengeluaran.tgl BETWEEN '$dari_tanggal' AND '$sampai_tanggal'");
+        $penggajian = DB::select("SELECT * FROM `penggajian`, users WHERE users.id = penggajian.id_users AND penggajian.created_at BETWEEN '$dari_tanggal' AND '$sampai_tanggal'");
+        return view('cetak_laporan', compact('dari_tanggal', 'sampai_tanggal', 'pemasukan', 'pengeluaran', 'penggajian'));
     }
 }
